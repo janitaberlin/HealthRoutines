@@ -303,3 +303,5 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .timer.is-done .focus-btn { color: var(--text); border-color: var(--border); }
 .timer.is-done .focus-btn[aria-pressed='true'] { background: var(--text); color: var(--bg); }
 .focus-tip { margin: -0.75rem 0 1.5rem; font-size: 0.88rem; }
+.impulse { margin: 0.5rem 0 0; padding: 0.85rem 1.1rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface-2); }
+.impulse-question { margin: 0.2rem 0 0; font-family: var(--font-head); font-size: 1.15rem; line-height: 1.3; }

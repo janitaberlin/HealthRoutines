@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { identity, principles, routines } from '../data/routines';
+import { identity, impulses, principles, routines } from '../data/routines';
 import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
@@ -9,6 +9,11 @@ import { url } from '../lib/url';
   <aside class="identity">
     <p class="identity-motto">{identity.motto}</p>
     <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
+  </aside>
+
+  <aside class="impulse">
+    <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
+    <p class="impulse-question" id="impulse-question">{impulses[0].question}</p>
   </aside>
 
   <section class="now" id="now">

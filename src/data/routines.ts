@@ -119,5 +119,34 @@ export const identity = {
     'Ich wähle Ruhe statt Hektik.',
     'Geld fließt zu mir, weil ich Wert erschaffe.',
     'Ich bin mutig genug, groß zu träumen.',
+    'Ich bin die Marke.',
+    'Ich zeige mich ganz.',
+    'Mein Einkommen wächst, wenn ich meinen eigenen Wert erkenne.',
+    'Menschen vertrauen mir wegen meiner Echtheit.',
+    'Ich gebe Menschen Orientierung und sie fühlen sich verstanden.',
+    'Ich verändere Menschen durch meine Präsenz.',
+    'Meine Marke darf schön, hochwertig und luxuriös sein.',
+    'Menschen kommen wegen meiner Ästhetik und bleiben wegen meiner Tiefe.',
+    'Ich verkaufe meine Perspektive, nicht nur Produkte.',
+    'Mein Rückzug ist Teil meiner Stärke.',
   ],
 };
+
+/**
+ * Täglicher Mindset-Impuls aus Janitas Astro- und Human-Design-Deutung
+ * (/mnt/project-files/coaching/mindset-profil.md). Reflexionsfragen, keine Tatsachen.
+ */
+export const impulses = [
+  { theme: 'Sichtbarkeit', question: 'Wo mache ich mich heute kleiner als nötig?' },
+  { theme: 'Echtheit', question: 'Was habe ich gelernt, das ich heute teilen könnte?' },
+  { theme: 'Vision', question: 'Welcher Schritt heute bringt mich meiner Bewegung näher?' },
+  { theme: 'Ganz oder gar nicht', question: 'Was ist der kleinste nächste Schritt, den ich ganz machen kann?' },
+  { theme: 'Rückzug', question: 'Wann gönne ich mir heute bewusst Ruhe, ohne sie mir verdienen zu müssen?' },
+  { theme: 'Wert', question: 'Wo darf ich heute meinen Wert klarer zeigen, auch beim Preis?' },
+  { theme: 'Orientierung', question: 'Wem kann ich heute mit meiner Perspektive Halt geben?' },
+  { theme: 'Energie', question: 'Wobei spüre ich heute: Das könnte Menschen bewegen?' },
+  { theme: 'Ästhetik', question: 'Was mache ich heute schön, einfach weil es mir guttut?' },
+  { theme: 'Sicherheit', question: 'Wo spiele ich gerade auf Nummer sicher, obwohl mein Wachstum woanders liegt?' },
+  { theme: 'Verkörperung', question: 'Wie würde die Frau aus meiner Vision diesen Tag angehen?' },
+  { theme: 'Abgeben', question: 'Was muss ich heute nicht selbst machen?' },
+];

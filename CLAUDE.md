@@ -16,6 +16,8 @@ Sprache mit dem Nutzer: Deutsch. Design wie Janitas RecipeBook (schwarz-weiß mi
 
 Alle Routinen stehen in `src/data/routines.ts`. Jeder Punkt hat eine feste `id`; abgehakte Tage hängen daran. Beim Umformulieren eines Punkts die `id` behalten, sonst verschwindet sein Verlauf. Neue Punkte bekommen eine neue, eindeutige id (Kleinbuchstaben, `-`).
 
+Mindset-Impulse und Affirmationen beruhen auf Janitas Astro-/Human-Design-Deutung (`/mnt/project-files/coaching/mindset-profil.md`); immer als Reflexion formulieren.
+
 Inhalte: keine erfundenen medizinischen Fakten. Supplemente nur aus `/mnt/project-files/health/supplemente-plan.md` (bzw. Janitas Angaben), mit Einnahmehinweis von dort.
 
 ## Code-Überblick
