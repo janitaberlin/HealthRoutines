@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import Spark from '../../components/Spark.astro';
 import { url } from '../../lib/url';
-import { lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
+import { schedule } from '../../data/schedule';
+import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
 ---
 <Base title="My Inner Compass" page="compass">
   <header class="compass-hero">
@@ -11,6 +12,29 @@ import { lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarV
     <p class="muted">Drei Minuten am Morgen. Nichts muss ausgefüllt werden.</p>
     <button type="button" class="ignite" data-ignite>Ignite my spark ✨</button>
   </header>
+
+  <p class="both">{bothText.map((t) => <span>{t}</span>)}</p>
+
+  <h2 class="part-title"><span>I</span> Meine Identität</h2>
+
+  <section class="compass-section compass-card" id="identity">
+    <p class="eyebrow">Remember Who You Are</p>
+    <label class="field-label">Wer bin ich?</label>
+    <textarea class="field field-signature" rows="1" data-field="identity.signature" data-default={identityDefaults.signature}></textarea>
+    <textarea class="field" rows="2" data-field="identity.design" data-default={identityDefaults.design} aria-label="Human Design (Reflexionsrahmen)"></textarea>
+    <details class="vision">
+      <summary>Meine Talente</summary>
+      <textarea class="field" rows="7" data-field="identity.talents" data-default={identityDefaults.talents}></textarea>
+    </details>
+    <label class="field-label">Was liebe ich?</label>
+    <textarea class="field" rows="7" data-field="identity.loves" data-default={identityDefaults.loves}></textarea>
+    <label class="field-label">Wofür stehe ich?</label>
+    <textarea class="field" rows="2" data-field="identity.stands" data-default={identityDefaults.stands}></textarea>
+    <label class="field-label">Wie möchte ich mich fühlen?</label>
+    <textarea class="field" rows="2" data-field="identity.feel" data-default={identityDefaults.feel}></textarea>
+    <label class="field-label">Was ist meine Großvision?</label>
+    <textarea class="field field-vision" rows="3" data-field="northstar.vision" data-default={northStarVision}></textarea>
+  </section>
 
   <section class="compass-section" id="my-life">
     <p class="eyebrow">My Life</p>
@@ -29,7 +53,6 @@ import { lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarV
 
   <section class="compass-section" id="north-star">
     <p class="eyebrow">My North Star</p>
-    <textarea class="field field-vision" rows="3" data-field="northstar.vision" data-default={northStarVision} aria-label="North-Star-Vision"></textarea>
     <div class="levels">
       {levels.map((l) => (
         <div class="level">
@@ -58,16 +81,26 @@ import { lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarV
     
   </section>
 
-  <section class="compass-section compass-card">
-    <p class="eyebrow">Remember Who You Are</p>
-    <textarea class="field field-signature" rows="1" data-field="identity.signature" data-default={identityDefaults.signature}></textarea>
-    <label class="field-label">Human Design (Reflexionsrahmen)</label>
-    <textarea class="field" rows="2" data-field="identity.design" data-default={identityDefaults.design}></textarea>
-    <label class="field-label">Meine Talente</label>
-    <textarea class="field" rows="7" data-field="identity.talents" data-default={identityDefaults.talents}></textarea>
-    <label class="field-label">Was ich liebe</label>
-    <textarea class="field" rows="7" data-field="identity.loves" data-default={identityDefaults.loves}></textarea>
+
+  <h2 class="part-title"><span>II</span> Mein Lebensrhythmus</h2>
+
+  <section class="compass-section" id="rhythm">
+    <p class="muted">Mein Alltag zu meiner Vision, Montag bis Freitag. Der genaue Tagesplan steht auf Heute.</p>
+    <ol class="rhythm">
+      {rhythm.map((r) => {
+        const blocks = r.blocks.map((t) => schedule.find((b) => b.title === t)).filter((b) => !!b);
+        return (
+          <li>
+            <p class="rhythm-q">{r.q}</p>
+            <p class="rhythm-a">{blocks.map((b) => `${b.from}–${b.to} ${b.title}`).join(' · ')}</p>
+            <p class="rhythm-note"><span>{r.area}</span>{r.note ? ` · ${r.note}` : ''}</p>
+          </li>
+        );
+      })}
+    </ol>
   </section>
+
+  <h2 class="part-title"><span>✦</span> Vertiefen, wenn ich Lust habe</h2>
 
   <section class="compass-section">
     <p class="eyebrow">My 10/10 Life</p>

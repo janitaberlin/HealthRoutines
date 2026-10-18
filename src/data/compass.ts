@@ -45,6 +45,18 @@ export const lifeAreas = [
 ];
 export const lifeOutro = 'Das sind keine vier konkurrierenden Ziele. Das sind vier Bestandteile desselben Lebens.';
 
+/** Janitas Grundsatz (18.10.2026): Identität und Rhythmus gehören zusammen. */
+export const bothText = ['Eine Vision allein gibt mir noch keinen Alltag.', 'Ein Zeitplan allein gibt mir noch keinen Sinn.', 'Ich brauche beides.'];
+
+/** Lebensrhythmus: Janitas Fragen, beantwortet mit Blöcken aus src/data/schedule.ts (Titel müssen passen). */
+export const rhythm = [
+  { q: 'Was mache ich morgens?', area: 'Body & Soul', blocks: ['Body & Beauty'] },
+  { q: 'Woran arbeite ich?', area: 'Create & Build', blocks: ['Creation', 'Founder Focus'] },
+  { q: 'Wann bewege ich mich?', area: 'Body & Soul', blocks: ['Body & Beauty', 'Walk'], note: 'Morgens Sport, mittags Walk' },
+  { q: 'Wann lasse ich mich inspirieren?', area: 'Learn & Inspire', blocks: ['Freedom', 'Wellness'], note: 'Etwas Schönes in der Pause, abends lesen' },
+  { q: 'Wann genieße ich mein Leben?', area: 'Live & Enjoy', blocks: ['Home & Love'], note: 'Und am Wochenende: nichts muss' },
+];
+
 export const identityDefaults = {
   signature: 'My energy is my signature.',
   talents: [
@@ -66,6 +78,8 @@ export const identityDefaults = {
     'Freude, Liebe, Leichtigkeit und die kleinen Momente',
   ].join('\n'),
   design: 'Generatorin · 6/2 · sakrale Autorität. Erfolg folgt der Freude.',
+  stands: 'I create. I lead. I live.\nFreude statt Leistungsdruck. Mein Leben nicht verwalten, sondern erschaffen.',
+  feel: 'Lebendig, gesund, schön, leicht und voller Energie.',
 };
 
 export const visionAreas = [

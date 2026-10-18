@@ -28,6 +28,12 @@ for (const el of document.querySelectorAll<HTMLTextAreaElement>('[data-field]'))
   el.closest('details')?.addEventListener('toggle', () => grow(el));
 }
 
+// Nach dem Laden der Schrift und bei Größenänderung neu messen.
+const growAll = () => document.querySelectorAll<HTMLTextAreaElement>('[data-field]').forEach(grow);
+window.addEventListener('load', growAll);
+window.addEventListener('resize', growAll);
+document.fonts?.ready.then(growAll);
+
 // North Star
 for (const box of document.querySelectorAll<HTMLElement>('[data-goal]')) {
   const i = Number(box.dataset.goal);

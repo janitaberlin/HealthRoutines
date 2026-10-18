@@ -383,3 +383,15 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .spark-life figure { margin: 0; }
 .spark-life img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
 .spark-life figcaption { margin-top: 0.2rem; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.both { margin: 1.5rem 0 0.5rem; text-align: center; font-family: var(--font-head); font-style: italic; font-size: 1.1rem; line-height: 1.5; }
+.both span { display: block; }
+.both span:last-child { font-style: normal; font-weight: 600; margin-top: 0.2rem; }
+.part-title { margin: 2.6rem 0 0; font-size: 1.6rem; font-weight: 500; text-align: center; }
+.part-title span { display: block; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--muted); }
+.part-title + .compass-section { border-top: 0; padding-top: 0.6rem; }
+.rhythm { list-style: none; padding: 0; margin: 0.8rem 0 0; counter-reset: r; }
+.rhythm li { padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+.rhythm-q { margin: 0; font-family: var(--font-head); font-size: 1.1rem; }
+.rhythm-a { margin: 0.2rem 0 0; font-variant-numeric: tabular-nums; }
+.rhythm-note { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--muted); }
+.rhythm-note span { letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem; }
