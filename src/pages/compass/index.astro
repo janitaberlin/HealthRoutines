@@ -1,7 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Spark from '../../components/Spark.astro';
-import { becomeHerQuestions, levels, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
+import { url } from '../../lib/url';
+import { lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
 ---
 <Base title="My Inner Compass" page="compass">
   <header class="compass-hero">
@@ -10,6 +11,21 @@ import { becomeHerQuestions, levels, northStarVision, goalStates, identityDefaul
     <p class="muted">Drei Minuten am Morgen. Nichts muss ausgefüllt werden.</p>
     <button type="button" class="ignite" data-ignite>Ignite my spark ✨</button>
   </header>
+
+  <section class="compass-section" id="my-life">
+    <p class="eyebrow">My Life</p>
+    <h2 class="compass-h2">{lifeIntro}</h2>
+    <div class="life-board">
+      {lifeAreas.map((a, i) => (
+        <article class="life-area">
+          <img src={url(`vision/${a.id}.jpg`)} alt={a.title} loading="lazy" />
+          <h3>{i + 1}. {a.title}</h3>
+          <p>{a.text}</p>
+        </article>
+      ))}
+    </div>
+    <p class="compass-reflect">{lifeOutro}</p>
+  </section>
 
   <section class="compass-section" id="north-star">
     <p class="eyebrow">My North Star</p>

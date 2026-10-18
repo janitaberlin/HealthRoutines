@@ -1,6 +1,7 @@
 ---
 /** Ritual „Ignite My Spark“: Remember → Feel → Create. Inhalt füllt src/scripts/spark.ts. */
-import { dailyQuestion } from '../data/compass';
+import { dailyQuestion, lifeAreas } from '../data/compass';
+import { url } from '../lib/url';
 ---
 <dialog class="spark" id="spark" aria-labelledby="spark-title">
   <form method="dialog" class="spark-close-form"><button class="spark-x" aria-label="Schließen">×</button></form>
@@ -10,6 +11,11 @@ import { dailyQuestion } from '../data/compass';
     <h2 id="spark-title" class="spark-title">Wer bin ich wirklich?</h2>
     <p class="spark-signature" id="spark-signature"></p>
     <p class="spark-design" id="spark-design"></p>
+    <div class="spark-life">
+      {lifeAreas.map((a) => (
+        <figure><img src={url(`vision/${a.id}.jpg`)} alt="" loading="lazy" /><figcaption>{a.title}</figcaption></figure>
+      ))}
+    </div>
     <ul class="spark-talents" id="spark-talents"></ul>
     <p class="spark-memory" id="spark-memory" hidden></p>
   </section>

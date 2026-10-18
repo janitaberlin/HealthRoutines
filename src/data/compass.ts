@@ -35,6 +35,16 @@ export const levels = [
   },
 ];
 
+/** My Life: Janitas Vision Board (Bilder und Texte von ihr, 18.10.2026). Bilder in public/vision/. */
+export const lifeIntro = 'Ich möchte leben, lernen, erschaffen, mich bewegen, inspiriert sein und Menschen inspirieren.';
+export const lifeAreas = [
+  { id: 'body-soul', title: 'Body & Soul', text: 'Aufwachen, Dankbarkeit, Bewegung, Körperbewusstsein. Ich möchte mich lebendig, gesund und schön fühlen.' },
+  { id: 'create-build', title: 'Create & Build', text: 'Ideen entwickeln, Geschäftskonzepte erschaffen, Marken aufbauen, Verkaufspsychologie anwenden. Ich möchte unternehmerisch wirken.' },
+  { id: 'learn-inspire', title: 'Learn & Inspire', text: 'Bücher lesen, Mindset-Themen erforschen, Erkenntnisse aufschreiben, Videos aufnehmen, Menschen inspirieren. Vielleicht irgendwann Bücher schreiben.' },
+  { id: 'live-enjoy', title: 'Live & Enjoy', text: 'Zeit mit meinem Mann, gutes Essen, Reisen, Begegnungen, Schönheit und spontane Erlebnisse. Das Leben genießen, das ich erschaffe.' },
+];
+export const lifeOutro = 'Das sind keine vier konkurrierenden Ziele. Das sind vier Bestandteile desselben Lebens.';
+
 export const identityDefaults = {
   signature: 'My energy is my signature.',
   talents: [
