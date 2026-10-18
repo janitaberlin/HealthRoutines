@@ -24,4 +24,4 @@ Inhalte: keine erfundenen medizinischen Fakten. Supplemente nur aus `/mnt/projec
 - `src/pages/index.astro` + `src/scripts/today.ts` – Heute
 - `src/lib/time.ts` + `src/pages/zeit/index.astro` + `src/scripts/time-page.ts` – Zeiterfassung (Stoppuhr Business/Job, Woche, 8 Wochen, Nachtragen); Bereiche in `CATEGORIES`, ids nie ändern
 - `src/pages/verlauf/index.astro` + `src/scripts/history.ts` – Verlauf und Sicherung
-- Gespeichert wird in `localStorage` (`routine-checks`, `time-sessions`, `time-running`), pro Gerät; die Sicherung im Verlauf enthält beides.
+- Gespeichert wird in `localStorage` (`routine-checks`, `routine-notes`, `time-sessions`, `time-running`), pro Gerät; die Sicherung im Verlauf enthält alles. Punkte mit `note: true` haben ein Notizfeld; Schreiben hakt sie ab.

@@ -55,3 +55,25 @@ export function saveRunning(running: Running | null): void {
     // Speicher nicht verfügbar.
   }
 }
+
+const NOTES_KEY = 'routine-notes';
+
+/** Notizen pro Tag: Datum → Punkt-id → Text. */
+export type Notes = Record<string, Record<string, string>>;
+
+export function loadNotes(): Notes {
+  try {
+    const data = JSON.parse(localStorage.getItem(NOTES_KEY) ?? '{}');
+    return data && typeof data === 'object' && !Array.isArray(data) ? data : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveNotes(notes: Notes): void {
+  try {
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}

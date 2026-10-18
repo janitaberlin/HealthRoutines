@@ -1,10 +1,11 @@
 import { identity, routines } from '../data/routines';
 import { addDays, dateKey, isChecked, parseKey, ratio, toggle } from '../lib/tracker';
-import { loadChecks, saveChecks } from './storage';
+import { loadChecks, loadNotes, saveChecks, saveNotes } from './storage';
 
 const today = dateKey(new Date());
 let day = today;
 let checks = loadChecks();
+let notes = loadNotes();
 const allIds = routines.flatMap((r) => r.items.map((i) => i.id));
 
 const label = document.getElementById('day-label')!;
@@ -34,6 +35,10 @@ function render(): void {
   for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-item]')) {
     btn.setAttribute('aria-pressed', String(isChecked(checks, day, btn.dataset.item!)));
   }
+  for (const field of document.querySelectorAll<HTMLTextAreaElement>('[data-note]')) {
+    if (document.activeElement !== field) field.value = notes[day]?.[field.dataset.note!] ?? '';
+    grow(field);
+  }
   for (const r of routines) {
     const ids = r.items.map((i) => i.id);
     const done = ids.filter((id) => isChecked(checks, day, id)).length;
@@ -46,6 +51,30 @@ function render(): void {
   const done = Math.round(share * allIds.length);
   totalText.textContent = done === allIds.length ? 'Alles erledigt 🎉' : `${done} von ${allIds.length} erledigt`;
 }
+
+function grow(field: HTMLTextAreaElement): void {
+  field.style.height = 'auto';
+  field.style.height = `${field.scrollHeight}px`;
+}
+
+// Notiz schreiben hakt den Punkt automatisch ab.
+document.addEventListener('input', (e) => {
+  const field = (e.target as HTMLElement).closest<HTMLTextAreaElement>('[data-note]');
+  if (!field) return;
+  const id = field.dataset.note!;
+  const text = field.value;
+  const dayNotes = { ...(notes[day] ?? {}) };
+  if (text.trim()) dayNotes[id] = text;
+  else delete dayNotes[id];
+  notes = { ...notes, [day]: dayNotes };
+  if (!Object.keys(dayNotes).length) delete notes[day];
+  saveNotes(notes);
+  if (text.trim() && !isChecked(checks, day, id)) {
+    checks = toggle(checks, day, id);
+    saveChecks(checks);
+  }
+  render();
+});
 
 document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;
@@ -67,6 +96,7 @@ document.addEventListener('click', (e) => {
 // Andere Tabs bzw. Rückkehr in die App am nächsten Tag berücksichtigen.
 window.addEventListener('storage', () => {
   checks = loadChecks();
+  notes = loadNotes();
   render();
 });
 document.addEventListener('visibilitychange', () => {

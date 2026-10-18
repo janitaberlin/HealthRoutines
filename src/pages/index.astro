@@ -11,6 +11,7 @@ import { identity, principles, routines } from '../data/routines';
   <section class="day-head">
     <button class="day-nav" type="button" data-shift="-1" aria-label="Vorheriger Tag">‹</button>
     <div class="day-title">
+      <p class="eyebrow">Daily Healthy Habits</p>
       <h1 id="day-label">Heute</h1>
       <p id="day-date" class="muted"></p>
     </div>
@@ -43,6 +44,9 @@ import { identity, principles, routines } from '../data/routines';
                   {item.hint && <small>{item.hint}</small>}
                 </span>
               </button>
+              {item.note && (
+                <textarea class="note" data-note={item.id} rows="1" placeholder="Notiz …" aria-label={item.text}></textarea>
+              )}
             </li>
           ))}
         </ul>

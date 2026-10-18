@@ -1,7 +1,7 @@
 import { routines } from '../data/routines';
 import { addDays, countDone, dateKey, mergeChecks, parseChecks, parseKey, ratio, streak } from '../lib/tracker';
 import { mergeSessions, parseSessions } from '../lib/time';
-import { loadChecks, loadSessions, saveChecks, saveSessions } from './storage';
+import { loadChecks, loadNotes, loadSessions, saveChecks, saveNotes, saveSessions } from './storage';
 
 const WEEKS = 5;
 const WEEKDAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
@@ -91,7 +91,7 @@ function render(): void {
 const status = document.getElementById('backup-status')!;
 
 document.getElementById('export')!.addEventListener('click', () => {
-  const backup = { checks, sessions: loadSessions() };
+  const backup = { checks, sessions: loadSessions(), notes: loadNotes() };
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -122,6 +122,12 @@ document.getElementById('import')!.addEventListener('change', async (e) => {
   checks = mergeChecks(checks, imported);
   saveChecks(checks);
   saveSessions(mergeSessions(loadSessions(), importedSessions));
+  const importedNotes = isNew ? (data as { notes?: unknown }).notes : null;
+  if (importedNotes && typeof importedNotes === 'object' && !Array.isArray(importedNotes)) {
+    const current = loadNotes();
+    for (const [d, n] of Object.entries(importedNotes as Record<string, Record<string, string>>)) current[d] = { ...n, ...(current[d] ?? {}) };
+    saveNotes(current);
+  }
   status.textContent = `${days} Tage und ${importedSessions.length} Zeiteinträge übernommen.`;
   render();
 });

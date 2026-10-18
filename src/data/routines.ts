@@ -7,6 +7,8 @@ export interface RoutineItem {
   text: string;
   /** Kleiner Hinweis unter dem Punkt, z. B. Zeitpunkt oder Abstand. */
   hint?: string;
+  /** Zeigt ein Notizfeld, z. B. für Dankbarkeit; Text wird pro Tag gespeichert. */
+  note?: boolean;
 }
 
 export interface Routine {
@@ -26,7 +28,7 @@ export const routines: Routine[] = [
     icon: '☀︎',
     items: [
       { id: 'tee-morgen', text: 'Tee' },
-      { id: 'dankbar', text: 'Ich bin dankbar für …' },
+      { id: 'dankbar', text: 'Ich bin dankbar für …', note: true },
       { id: 'sport-morgen', text: '15 Min. Sport oder Sportkurs' },
       { id: 'tageslicht', text: 'Tageslicht tanken', hint: 'kurz raus oder ans offene Fenster' },
       { id: 'outfit', text: 'Shower & Getting ready', hint: 'Outfit an, Make-up, Haare' },
@@ -63,13 +65,15 @@ export const routines: Routine[] = [
   },
   {
     id: 'abend',
-    title: 'Abendroutine',
+    title: 'Wellness',
     subtitle: 'Evening Ritual',
     icon: '☾',
     items: [
       { id: 'abendbeutel', text: 'Self Care: Pflege- und Gesundheitsroutine', hint: 'Bademantel, Haare hoch' },
       { id: 'handy-weg', text: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Lesen' },
+      { id: 'energie-plus', text: 'Was hat mir heute Energie gegeben?', note: true },
+      { id: 'energie-minus', text: 'Was hat mir heute Energie genommen?', note: true },
     ],
   },
 ];

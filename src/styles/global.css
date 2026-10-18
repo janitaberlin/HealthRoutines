@@ -264,3 +264,18 @@ button { font: inherit; color: inherit; }
 .principle { background: var(--surface-2); padding-bottom: 1rem; }
 .principle-list { margin: 0.6rem 0 0; padding-left: 1.2rem; }
 .principle-list li + li { margin-top: 0.3rem; }
+.eyebrow { margin: 0; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.note {
+  display: block;
+  width: calc(100% - 2.45rem);
+  margin: -0.35rem 0 0.75rem 2.45rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  resize: none;
+  overflow: hidden;
+}
