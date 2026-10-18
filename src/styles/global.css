@@ -261,3 +261,6 @@ button { font: inherit; color: inherit; }
 .menu-btn--primary { border-color: var(--accent); background: var(--accent); color: var(--bg); }
 .chart-note { margin: -0.4rem 0 0.75rem; font-size: 0.9rem; }
 .legend { flex-wrap: wrap; }
+.principle { background: var(--surface-2); padding-bottom: 1rem; }
+.principle-list { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+.principle-list li + li { margin-top: 0.3rem; }

@@ -28,8 +28,7 @@ export const routines: Routine[] = [
       { id: 'tee-morgen', text: 'Tee' },
       { id: 'sport-morgen', text: '15 Min. Sport oder Sportkurs' },
       { id: 'tageslicht', text: 'Tageslicht tanken', hint: 'kurz raus oder ans offene Fenster' },
-      { id: 'outfit', text: 'Lieblingsoutfit anziehen' },
-      { id: 'fruehstueck', text: 'Gutes Frühstück mit Eiweiß' },
+      { id: 'outfit', text: 'Shower & Getting ready', hint: 'Outfit an, Make-up, Haare' },
     ],
   },
   {
@@ -58,16 +57,7 @@ export const routines: Routine[] = [
     subtitle: 'Freedom',
     icon: '↗',
     items: [
-      { id: 'spaziergang', text: 'Spaziergang an der frischen Luft' },
-    ],
-  },
-  {
-    id: 'home-love',
-    title: 'Home & Love',
-    icon: '♡',
-    items: [
-      { id: 'johannes', text: 'Bewusste Zeit mit Johannes', hint: 'kochen, essen, reden, kuscheln' },
-      { id: 'schoenes', text: 'Etwas Schönes für zu Hause', hint: 'Blumen, Musik oder Kerzen' },
+      { id: 'walk-mittag', text: 'Mittags 1 Std. Walk', hint: '5k Steps' },
     ],
   },
   {
@@ -85,6 +75,14 @@ export const routines: Routine[] = [
   },
 ];
 
+/** Feste Grundsätze ohne Haken: selbstverständlich, aber wichtig. */
+export const principles = {
+  title: 'Home & Love',
+  icon: '♡',
+  text: 'Selbstverständlich, aber wichtig.',
+  items: ['Bewusste Zeit mit Johannes: kochen, essen, reden, kuscheln', 'Etwas Schönes für zu Hause: Blumen, Musik oder Kerzen'],
+};
+
 /** Janitas Founder-Identität; oben auf „Heute“ steht jeden Tag ein anderer Satz. */
 export const identity = {
   motto: 'I create. I lead. I live.',
@@ -97,5 +95,27 @@ export const identity = {
     'Ich gestalte mein Leben bewusst, statt es auf später zu verschieben.',
     'Ich wähle heute den größten Hebel.',
     'Regeneration ist Teil meiner langfristigen Leistungsfähigkeit.',
+    'Ich entwickle Menschen und Systeme.',
+    'Ich baue schon heute Elemente meines Traumlebens ein.',
+    'Meine Zeit gehört mir.',
+    'Selbstbestimmung ist mein größter Luxus.',
+    'Erfolg, Freiheit, Gesundheit, Schönheit und Liebe dürfen gleichzeitig stattfinden.',
+    'Ich handle aus Inspiration, nicht aus Pflicht.',
+    'Ich führe mit Vision, mein Team setzt um.',
+    'Ich vertraue meiner Kreativität.',
+    'Mathilde wächst, weil ich klar entscheide, was wirklich zählt.',
+    'Ich darf es mir leicht machen.',
+    'Ich muss heute nichts beweisen.',
+    'Mein Körper ist mein Zuhause, ich behandle ihn liebevoll.',
+    'Ich darf Pausen machen, ohne mich schuldig zu fühlen.',
+    'Ich umgebe mich mit Schönheit und Menschen, die mich inspirieren.',
+    'Ich lebe einen 10/10-Tag, nicht irgendwann, sondern heute.',
+    'Was ich nicht selbst machen muss, gebe ich ab.',
+    'Ich bin die Frau, die ihre Vision lebt.',
+    'Genug zu tun ist kein Grund, nicht zu leben.',
+    'Ich wachse an schwierigen Tagen, durch die Art, wie ich mit mir umgehe.',
+    'Ich wähle Ruhe statt Hektik.',
+    'Geld fließt zu mir, weil ich Wert erschaffe.',
+    'Ich bin mutig genug, groß zu träumen.',
   ],
 };

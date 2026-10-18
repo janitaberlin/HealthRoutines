@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { identity, routines } from '../data/routines';
+import { identity, principles, routines } from '../data/routines';
 ---
 <Base title="Janita's Health Routines" page="heute">
   <aside class="identity">
@@ -48,6 +48,18 @@ import { identity, routines } from '../data/routines';
         </ul>
       </section>
     ))}
+    <section class="routine principle">
+      <header class="routine-head">
+        <span class="routine-icon" aria-hidden="true">{principles.icon}</span>
+        <div class="routine-name">
+          <h2>{principles.title}</h2>
+          <p class="routine-sub">{principles.text}</p>
+        </div>
+      </header>
+      <ul class="principle-list">
+        {principles.items.map((p) => <li>{p}</li>)}
+      </ul>
+    </section>
   </div>
 
   <script>
