@@ -73,7 +73,6 @@ export const routines: Routine[] = [
       { id: 'handy-weg', text: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Lesen' },
       { id: 'energie-plus', text: 'Was hat mir heute Energie gegeben?', note: true },
-      { id: 'energie-minus', text: 'Was hat mir heute Energie genommen?', note: true },
     ],
   },
 ];
