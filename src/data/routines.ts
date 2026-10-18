@@ -119,6 +119,8 @@ export const identity = {
     'Ich wähle Ruhe statt Hektik.',
     'Geld fließt zu mir, weil ich Wert erschaffe.',
     'Ich bin mutig genug, groß zu träumen.',
+    'Erfolg folgt der Freude.',
+    'Ich verwalte mein Leben nicht, ich erschaffe es.',
     'Ich bin die Marke.',
     'Ich zeige mich ganz.',
     'Mein Einkommen wächst, wenn ich meinen eigenen Wert erkenne.',
