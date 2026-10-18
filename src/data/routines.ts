@@ -22,7 +22,8 @@ export const routines: Routine[] = [
     title: 'Morgenroutine',
     icon: '☀︎',
     items: [
-      { id: 'wasser-morgen', text: 'Großes Glas Wasser' },
+      { id: 'tee-morgen', text: 'Tee' },
+      { id: 'sport-morgen', text: '15 Min. Sport oder Sportkurs' },
       { id: 'tageslicht', text: 'Tageslicht tanken', hint: 'kurz raus oder ans offene Fenster' },
       { id: 'fruehstueck', text: 'Frühstück mit Eiweiß' },
     ],
@@ -42,7 +43,6 @@ export const routines: Routine[] = [
     icon: '↗',
     items: [
       { id: 'spaziergang', text: 'Spaziergang' },
-      { id: 'training', text: 'Training, Yoga oder Dehnen' },
     ],
   },
   {
@@ -53,6 +53,7 @@ export const routines: Routine[] = [
       { id: 'wasser-tag', text: 'Genug getrunken über den Tag' },
       { id: 'handy-weg', text: 'Handy 30 Min. vor dem Schlafen weg' },
       { id: 'reflexion', text: '3 Dinge, die heute gut waren' },
+      { id: 'lesen', text: 'Lesen' },
     ],
   },
 ];
