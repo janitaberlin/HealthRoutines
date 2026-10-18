@@ -143,7 +143,12 @@ button { font: inherit; color: inherit; }
 .routine.is-done { background: var(--surface-2); }
 .routine h3 { margin: 0; font-size: 1.15rem; }
 .routine-head { display: flex; align-items: center; gap: 0.6rem; }
-.routine-head h2 { flex: 1; margin: 0; font-size: 1.3rem; }
+.routine-name { flex: 1; min-width: 0; }
+.routine-head h2 { margin: 0; font-size: 1.3rem; }
+.routine-sub { margin: 0; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.identity { margin: 0.75rem 0 0.25rem; padding: 1rem 1.1rem; border-radius: 18px; background: var(--accent); color: var(--bg); text-align: center; }
+.identity-motto { margin: 0; font-family: var(--font-head); font-size: 1.3rem; font-weight: 600; letter-spacing: 0.01em; }
+.identity-sentence { margin: 0.3rem 0 0; font-size: 0.95rem; opacity: 0.85; }
 .routine-icon { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--accent-soft); font-size: 1.05rem; }
 .routine-count { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
 

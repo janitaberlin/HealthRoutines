@@ -1,4 +1,4 @@
-import { routines } from '../data/routines';
+import { identity, routines } from '../data/routines';
 import { addDays, dateKey, isChecked, parseKey, ratio, toggle } from '../lib/tracker';
 import { loadChecks, saveChecks } from './storage';
 
@@ -19,7 +19,14 @@ function dayName(key: string): string {
   return parseKey(key).toLocaleDateString('de-DE', { weekday: 'long' });
 }
 
+/** Jeden Tag ein anderer Identitätssatz, fortlaufend über die Tage. */
+function identitySentence(key: string): string {
+  const dayNumber = Math.floor(parseKey(key).getTime() / 86_400_000);
+  return identity.sentences[dayNumber % identity.sentences.length];
+}
+
 function render(): void {
+  document.getElementById('identity-sentence')!.textContent = identitySentence(day);
   label.textContent = dayName(day);
   dateText.textContent = parseKey(day).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
   nextBtn.disabled = day >= today;

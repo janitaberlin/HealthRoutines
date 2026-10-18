@@ -1,8 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
-import { routines } from '../data/routines';
+import { identity, routines } from '../data/routines';
 ---
 <Base title="Janita's Health Routines" page="heute">
+  <aside class="identity">
+    <p class="identity-motto">{identity.motto}</p>
+    <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
+  </aside>
+
   <section class="day-head">
     <button class="day-nav" type="button" data-shift="-1" aria-label="Vorheriger Tag">‹</button>
     <div class="day-title">
@@ -22,7 +27,10 @@ import { routines } from '../data/routines';
       <section class="routine" data-routine={r.id}>
         <header class="routine-head">
           <span class="routine-icon" aria-hidden="true">{r.icon}</span>
-          <h2>{r.title}</h2>
+          <div class="routine-name">
+            <h2>{r.title}</h2>
+            {r.subtitle && <p class="routine-sub">{r.subtitle}</p>}
+          </div>
           <span class="routine-count" data-count></span>
         </header>
         <ul class="items">
