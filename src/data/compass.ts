@@ -13,6 +13,28 @@ export const dailyQuestion = 'Was kann ich heute tun, um das Leben, für das ich
 /** Ziele monatlich überprüfen. */
 export const reviewDays = 30;
 
+/** Drei Ebenen (Janita 18.10.2026): WHY klar, WHAT bewusst noch offen, HOW die tägliche Arbeit. */
+export const levels = [
+  {
+    id: 'why',
+    label: 'Why',
+    hint: 'Mein 10/10-Leben',
+    text: 'Freiheit, Lebendigkeit, Selbstbestimmung, Liebe, Gesundheit, finanzielle Unabhängigkeit und die Möglichkeit, durch mein Sein zu wirken.',
+  },
+  {
+    id: 'what',
+    label: 'What',
+    hint: 'Noch offen, und das ist okay',
+    text: 'Ein erfolgreiches Unternehmen, eine Personal Brand oder eine andere Form unternehmerischer Tätigkeit, die mir dieses Leben ermöglicht.',
+  },
+  {
+    id: 'how',
+    label: 'How',
+    hint: 'Die tägliche Arbeit',
+    text: 'Die tägliche Arbeit, die ich dafür tatsächlich leisten möchte.',
+  },
+];
+
 export const identityDefaults = {
   signature: 'My energy is my signature.',
   talents: [

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Spark from '../../components/Spark.astro';
-import { becomeHerQuestions, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
+import { becomeHerQuestions, levels, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
 ---
 <Base title="My Inner Compass" page="compass">
   <header class="compass-hero">
@@ -14,6 +14,14 @@ import { becomeHerQuestions, northStarVision, goalStates, identityDefaults, libr
   <section class="compass-section" id="north-star">
     <p class="eyebrow">My North Star</p>
     <textarea class="field field-vision" rows="3" data-field="northstar.vision" data-default={northStarVision} aria-label="North-Star-Vision"></textarea>
+    <div class="levels">
+      {levels.map((l) => (
+        <div class="level">
+          <p class="level-label">{l.label} <span>· {l.hint}</span></p>
+          <textarea class="field" rows="2" data-field={`level.${l.id}`} data-default={l.text}></textarea>
+        </div>
+      ))}
+    </div>
     <h2 class="compass-h2">Drei Lebensziele</h2>
     <p class="muted">Einmal bewusst festlegen, dann einmal im Monat überprüfen. Morgens wird nichts neu verhandelt.</p>
     {[0, 1, 2].map((i) => (
