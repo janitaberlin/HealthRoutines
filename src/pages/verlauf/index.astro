@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Verlauf" page="verlauf">
+  <h1 class="page-title">Verlauf</h1>
+  <p class="muted">Die letzten 5 Wochen. Je dunkler ein Tag, desto mehr war erledigt.</p>
+
+  <section class="overview" id="overview"></section>
+
+  <h2 class="section-title">Pro Routine</h2>
+  <div id="routine-stats" class="routine-stats"></div>
+
+  <section class="backup">
+    <h2 class="section-title">Sicherung</h2>
+    <p class="muted">Deine Haken werden auf diesem Gerät gespeichert. Mit einer Sicherung kannst du sie auf ein anderes Gerät mitnehmen.</p>
+    <div class="backup-actions">
+      <button class="menu-btn" type="button" id="export">Sicherung herunterladen</button>
+      <label class="menu-btn">
+        Sicherung einspielen
+        <input type="file" id="import" accept="application/json,.json" hidden />
+      </label>
+    </div>
+    <p id="backup-status" class="muted" aria-live="polite"></p>
+  </section>
+
+  <script>
+    import '../../scripts/history';
+  </script>
+</Base>

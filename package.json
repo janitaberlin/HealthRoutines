@@ -1,0 +1,20 @@
+{
+  "name": "janitas-health-routines",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run --passWithNoTests",
+    "icons": "node scripts/icons.mjs"
+  },
+  "dependencies": {
+    "astro": "5.18.2"
+  },
+  "devDependencies": {
+    "sharp": "0.34.5",
+    "typescript": "5.9.3",
+    "vitest": "3.2.7"
+  }
+}

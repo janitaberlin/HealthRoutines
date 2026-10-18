@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import { routines } from '../data/routines';
+---
+<Base title="Janita's Health Routines" page="heute">
+  <section class="day-head">
+    <button class="day-nav" type="button" data-shift="-1" aria-label="Vorheriger Tag">‹</button>
+    <div class="day-title">
+      <h1 id="day-label">Heute</h1>
+      <p id="day-date" class="muted"></p>
+    </div>
+    <button class="day-nav" type="button" data-shift="1" aria-label="Nächster Tag">›</button>
+  </section>
+
+  <div class="day-progress" aria-live="polite">
+    <div class="bar"><span id="total-bar"></span></div>
+    <p id="total-text" class="muted"></p>
+  </div>
+
+  <div class="routines">
+    {routines.map((r) => (
+      <section class="routine" data-routine={r.id}>
+        <header class="routine-head">
+          <span class="routine-icon" aria-hidden="true">{r.icon}</span>
+          <h2>{r.title}</h2>
+          <span class="routine-count" data-count></span>
+        </header>
+        <ul class="items">
+          {r.items.map((item) => (
+            <li>
+              <button class="item" type="button" data-item={item.id} aria-pressed="false">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="item-text">
+                  {item.text}
+                  {item.hint && <small>{item.hint}</small>}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <script>
+    import '../scripts/today';
+  </script>
+</Base>
