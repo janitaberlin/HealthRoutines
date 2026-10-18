@@ -129,6 +129,14 @@ export const identity = {
     'Menschen kommen wegen meiner Ästhetik und bleiben wegen meiner Tiefe.',
     'Ich verkaufe meine Perspektive, nicht nur Produkte.',
     'Mein Rückzug ist Teil meiner Stärke.',
+    'Ich werde für meine Klarheit und Präsenz bezahlt, nicht fürs Tun.',
+    'Ich führe durch mein Sein, nicht durch Druck.',
+    'Ich lebe, was ich lehre.',
+    'Ich folge meinem inneren Ja.',
+    'Ich bringe Menschen zurück in ihre Wahrheit.',
+    'Ich muss mich nicht beweisen.',
+    'Ich mache Tiefe leicht.',
+    'Ich beende, was ich beginne, eins nach dem anderen.',
   ],
 };
 
@@ -149,4 +157,10 @@ export const impulses = [
   { theme: 'Sicherheit', question: 'Wo spiele ich gerade auf Nummer sicher, obwohl mein Wachstum woanders liegt?' },
   { theme: 'Verkörperung', question: 'Wie würde die Frau aus meiner Vision diesen Tag angehen?' },
   { theme: 'Abgeben', question: 'Was muss ich heute nicht selbst machen?' },
+  { theme: 'Inneres Ja', question: 'Worauf antwortet mein Bauch heute mit einem klaren Ja?' },
+  { theme: 'Frustration', question: 'Wo spüre ich Frust, und mache ich dort etwas ohne inneres Ja?' },
+  { theme: 'Zyklen', question: 'Was schließe ich ab, bevor ich etwas Neues beginne?' },
+  { theme: 'Aussprechen', question: 'Was kreist in meinem Kopf, das ich heute laut aussprechen sollte?' },
+  { theme: 'Self-Coaching', question: 'Was würde ich einer Kundin in genau meiner Situation sagen?' },
+  { theme: 'Präsenz', question: 'Wofür werde ich bezahlt, wenn nicht fürs Tun?' },
 ];
