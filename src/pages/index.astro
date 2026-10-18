@@ -4,12 +4,27 @@ import { identity, impulses, principles, routines } from '../data/routines';
 import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
+import Spark from '../components/Spark.astro';
+import { northStarVision } from '../data/compass';
 ---
 <Base title="Janita's Health Routines" page="heute">
   <aside class="identity">
     <p class="identity-motto">{identity.motto}</p>
     <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
   </aside>
+
+  <button type="button" class="ignite" data-ignite>Ignite my spark ✨</button>
+  <p class="today-action" id="today-action" hidden>One inspired action · <strong></strong></p>
+
+  <section class="north-star">
+    <div class="north-star-head">
+      <p class="eyebrow">My North Star</p>
+      <a href={url('compass/#north-star')} class="muted small-link">bearbeiten</a>
+    </div>
+    <p class="north-star-vision" id="north-star-vision">{northStarVision}</p>
+    <ol class="north-star-list" id="north-star-list"></ol>
+    <p class="muted" id="north-star-empty"><a href={url('compass/#north-star')}>Deine drei wichtigsten Lebensziele festlegen</a></p>
+  </section>
 
   <aside class="impulse">
     <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
@@ -93,8 +108,12 @@ import { url } from '../lib/url';
     </section>
   </div>
 
+  <Spark />
+
   <script>
     import '../scripts/today';
     import '../scripts/now';
+    import '../scripts/spark';
+    import '../scripts/north-star';
   </script>
 </Base>

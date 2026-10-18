@@ -1,3 +1,4 @@
+import { parseCompass, type Compass } from '../lib/compass';
 import { isCategory, parseSessions, type Running, type Session } from '../lib/time';
 import { parseChecks, type Checks } from '../lib/tracker';
 
@@ -73,6 +74,24 @@ export function loadNotes(): Notes {
 export function saveNotes(notes: Notes): void {
   try {
     localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}
+
+const COMPASS_KEY = 'inner-compass';
+
+export function loadCompass(): Compass {
+  try {
+    return parseCompass(localStorage.getItem(COMPASS_KEY));
+  } catch {
+    return parseCompass(null);
+  }
+}
+
+export function saveCompass(compass: Compass): void {
+  try {
+    localStorage.setItem(COMPASS_KEY, JSON.stringify(compass));
   } catch {
     // Speicher nicht verfügbar.
   }

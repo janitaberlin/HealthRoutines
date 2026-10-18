@@ -4,7 +4,7 @@ import { url } from '../lib/url';
 
 interface Props {
   title: string;
-  page: 'heute' | 'zeit' | 'verlauf';
+  page: 'heute' | 'compass' | 'zeit' | 'verlauf';
 }
 const { title, page } = Astro.props;
 const appName = "Janita's Health Routines";
@@ -56,6 +56,7 @@ const pageTitle = title === appName ? title : `${title} · ${appName}`;
     </header>
     <nav class="book-switch" aria-label="Ansicht">
       <a class="book-btn" href={url('')} aria-current={page === 'heute' ? 'page' : undefined}>Heute</a>
+      <a class="book-btn" href={url('compass/')} aria-current={page === 'compass' ? 'page' : undefined}>Compass</a>
       <a class="book-btn" href={url('zeit/')} aria-current={page === 'zeit' ? 'page' : undefined}>Zeit</a>
       <a class="book-btn" href={url('verlauf/')} aria-current={page === 'verlauf' ? 'page' : undefined}>Verlauf</a>
     </nav>

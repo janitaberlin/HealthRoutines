@@ -1,0 +1,32 @@
+---
+/** Ritual „Ignite My Spark“: Remember → Feel → Create. Inhalt füllt src/scripts/spark.ts. */
+---
+<dialog class="spark" id="spark" aria-labelledby="spark-title">
+  <form method="dialog" class="spark-close-form"><button class="spark-x" aria-label="Schließen">×</button></form>
+  <p class="eyebrow" id="spark-step-label">1 / 3 · Remember</p>
+
+  <section class="spark-step" data-step="1">
+    <h2 id="spark-title" class="spark-title">Wer bin ich wirklich?</h2>
+    <p class="spark-signature" id="spark-signature"></p>
+    <p class="spark-design" id="spark-design"></p>
+    <ul class="spark-talents" id="spark-talents"></ul>
+    <p class="spark-memory" id="spark-memory" hidden></p>
+  </section>
+
+  <section class="spark-step" data-step="2" hidden>
+    <h2 class="spark-title">Was bringt mich zum Strahlen?</h2>
+    <p class="spark-question" id="spark-question"></p>
+    <p class="muted">Kurz spüren. Keine richtige Antwort.</p>
+  </section>
+
+  <section class="spark-step" data-step="3" hidden>
+    <h2 class="spark-title">Bring it to life.</h2>
+    <p class="muted">Nicht zehn Aufgaben. Nicht noch ein Plan. One inspired action.</p>
+    <textarea id="spark-action" class="note spark-action" rows="2" placeholder="Meine eine Handlung heute …"></textarea>
+  </section>
+
+  <div class="spark-nav">
+    <button type="button" class="menu-btn" id="spark-back" hidden>Zurück</button>
+    <button type="button" class="menu-btn menu-btn--primary" id="spark-next">Weiter</button>
+  </div>
+</dialog>
