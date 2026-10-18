@@ -40,9 +40,9 @@ export const routines: Routine[] = [
     subtitle: 'Inspired Action',
     icon: '✦',
     items: [
-      { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', hint: 'z. B. Bewegung, Schönheit, Nähe, ein Moment für mich' },
-      { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde' },
-      { id: 'fokus-abgeben', text: 'Was muss nicht mehr von mir erledigt werden?', hint: 'delegieren, automatisieren, vereinfachen oder streichen' },
+      { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', note: true, hint: 'z. B. Bewegung, Schönheit, Nähe, ein Moment für mich' },
+      { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde' },
+      { id: 'fokus-abgeben', text: 'Was muss nicht mehr von mir erledigt werden?', note: true, hint: 'delegieren, automatisieren, vereinfachen oder streichen' },
     ],
   },
   {
