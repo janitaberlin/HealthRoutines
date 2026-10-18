@@ -21,6 +21,38 @@ let sessions = loadSessions();
 let running = loadRunning();
 let monday = weekStart(todayKey());
 
+const FOCUS_KEY = 'focus-minutes';
+let focusPref = (() => {
+  try {
+    return Number(localStorage.getItem(FOCUS_KEY) ?? '0') || 0;
+  } catch {
+    return 0;
+  }
+})();
+/** Merkt sich, für welchen Start schon das Signal kam. */
+let signalled = 0;
+
+/** Kurzer, sanfter Dreiklang als Pausen-Signal. */
+function chime(): void {
+  try {
+    const ctx = new AudioContext();
+    [660, 880, 990].forEach((f, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime + i * 0.25);
+      gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + i * 0.25 + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.25 + 0.6);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(ctx.currentTime + i * 0.25);
+      osc.stop(ctx.currentTime + i * 0.25 + 0.7);
+    });
+    navigator.vibrate?.([200, 100, 200]);
+  } catch {
+    // Ton nicht möglich – Hinweis steht trotzdem auf der Seite.
+  }
+}
+
 const clock = document.getElementById('timer-clock')!;
 const timerLabel = document.getElementById('timer-label')!;
 const stopBtn = document.getElementById('timer-stop') as HTMLButtonElement;
@@ -38,6 +70,25 @@ function renderTimer(): void {
   timerLabel.textContent = running ? `${label(running.cat)} läuft` : 'Stoppuhr';
   clock.textContent = formatClock(running ? Date.now() - running.start : 0);
   document.querySelector('.timer')!.classList.toggle('is-running', isRunning);
+  const focusText = document.getElementById('timer-focus')!;
+  const timer = document.querySelector('.timer')!;
+  if (running?.focus) {
+    const left = running.start + running.focus * 60_000 - Date.now();
+    focusText.hidden = false;
+    focusText.textContent = left > 0 ? `Fokus-Block: noch ${formatClock(left)}` : 'Fokus-Block geschafft. Zeit für eine Pause!';
+    timer.classList.toggle('is-done', left <= 0);
+    if (left <= 0 && signalled !== running.start) {
+      signalled = running.start;
+      // Nur klingeln, wenn das Ende gerade erst erreicht wurde, nicht beim späteren Öffnen.
+      if (left > -5_000) chime();
+    }
+  } else {
+    focusText.hidden = true;
+    timer.classList.remove('is-done');
+  }
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-focus]')) {
+    b.setAttribute('aria-pressed', String(Number(b.dataset.focus) === focusPref));
+  }
   const today = totals(withRunning(), [todayKey()]);
   document.getElementById('timer-today')!.textContent =
     'Heute: ' + CATEGORIES.map((c) => `${c.label} ${formatMinutes(today[c.id])}`).join(' · ');
@@ -162,14 +213,35 @@ function stop(): void {
   saveRunning(null);
 }
 
+function begin(cat: Category): void {
+  stop();
+  running = { cat, start: Date.now(), ...(focusPref ? { focus: focusPref } : {}) };
+  saveRunning(running);
+  render();
+}
+
 document.addEventListener('click', (e) => {
   const t = e.target as HTMLElement;
   const start = t.closest<HTMLButtonElement>('[data-start]');
   if (start) {
     stop();
-    running = { cat: start.dataset.start as Category, start: Date.now() };
-    saveRunning(running);
-    render();
+    begin(start.dataset.start as Category);
+    return;
+  }
+  const focus = t.closest<HTMLButtonElement>('[data-focus]');
+  if (focus) {
+    focusPref = Number(focus.dataset.focus);
+    try {
+      localStorage.setItem(FOCUS_KEY, String(focusPref));
+    } catch {
+      // Speicher nicht verfügbar.
+    }
+    // Auch für eine schon laufende Stoppuhr übernehmen.
+    if (running) {
+      running = { ...running, focus: focusPref || undefined };
+      saveRunning(running);
+    }
+    renderTimer();
     return;
   }
   if (t.closest('#timer-stop')) {
@@ -217,6 +289,13 @@ window.addEventListener('storage', () => {
   running = loadRunning();
   render();
 });
+// Start über die „Jetzt dran“-Karte auf der Startseite (?start=business).
+const startParam = new URLSearchParams(location.search).get('start');
+if (startParam && CATEGORIES.some((c) => c.id === startParam)) {
+  if (running?.cat !== startParam) begin(startParam as Category);
+  history.replaceState(history.state, '', location.pathname);
+}
+
 setInterval(renderTimer, 1000);
 setInterval(renderWeek, 60_000);
 render();

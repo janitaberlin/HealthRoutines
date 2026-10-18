@@ -14,8 +14,17 @@ import { CATEGORIES } from '../../lib/time';
       ))}
       <button class="timer-btn timer-stop" type="button" id="timer-stop" hidden>■ Stopp</button>
     </div>
+    <p class="timer-focus" id="timer-focus" hidden></p>
+    <div class="focus-choice" role="group" aria-label="Fokus-Block">
+      <span>Fokus-Block:</span>
+      {[0, 25, 50, 90].map((m) => (
+        <button type="button" class="focus-btn" data-focus={m} aria-pressed="false">{m ? `${m} Min.` : 'Aus'}</button>
+      ))}
+    </div>
     <p class="muted timer-today" id="timer-today"></p>
   </section>
+
+  <p class="muted focus-tip">25 Min. helfen, wenn der Anfang schwerfällt oder du müde bist. 90 Min. passen für tiefe, kreative Arbeit. Danach Pause machen.</p>
 
   <section class="week">
     <div class="week-head">

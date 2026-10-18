@@ -19,6 +19,8 @@ export interface Session {
 export interface Running {
   cat: Category;
   start: number;
+  /** Fokus-Block in Minuten (25/50/90); danach erinnert die App an eine Pause. */
+  focus?: number;
 }
 
 const CATEGORY_IDS: string[] = CATEGORIES.map((c) => c.id);
