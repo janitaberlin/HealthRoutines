@@ -5,6 +5,7 @@ Meine täglichen Health-Routinen zum Abhaken, mit Verlauf und Serien.
 Live: https://janitaberlin.github.io/HealthRoutines/
 
 - **Heute:** Punkte antippen zum Abhaken, mit ‹ › auch vergangene Tage nachtragen.
+- **Zeit:** Stoppuhr für Business und Job, Wochensumme, Diagramme pro Tag und für 8 Wochen, Zeit nachtragen.
 - **Verlauf:** Kalender der letzten 5 Wochen, Serien („Tage am Stück“), pro Punkt die letzten 7 Tage.
 - Haken werden im Browser des Geräts gespeichert; „Sicherung“ im Verlauf nimmt sie auf ein anderes Gerät mit.
 

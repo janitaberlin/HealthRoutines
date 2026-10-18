@@ -1,6 +1,7 @@
 import { routines } from '../data/routines';
 import { addDays, countDone, dateKey, mergeChecks, parseChecks, parseKey, ratio, streak } from '../lib/tracker';
-import { loadChecks, saveChecks } from './storage';
+import { mergeSessions, parseSessions } from '../lib/time';
+import { loadChecks, loadSessions, saveChecks, saveSessions } from './storage';
 
 const WEEKS = 5;
 const WEEKDAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
@@ -90,7 +91,8 @@ function render(): void {
 const status = document.getElementById('backup-status')!;
 
 document.getElementById('export')!.addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(checks, null, 2)], { type: 'application/json' });
+  const backup = { checks, sessions: loadSessions() };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `health-routines-${today}.json`;
@@ -101,15 +103,26 @@ document.getElementById('export')!.addEventListener('click', () => {
 document.getElementById('import')!.addEventListener('change', async (e) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
-  const imported = parseChecks(await file.text());
+  const text = await file.text();
+  // Neue Sicherungen enthalten { checks, sessions }, alte nur die Haken.
+  let data: unknown = null;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    // unten als leer behandelt
+  }
+  const isNew = !!data && typeof data === 'object' && 'checks' in data;
+  const imported = parseChecks(isNew ? JSON.stringify((data as { checks: unknown }).checks) : text);
+  const importedSessions = isNew ? parseSessions(JSON.stringify((data as { sessions?: unknown }).sessions ?? [])) : [];
   const days = Object.keys(imported).length;
-  if (!days) {
-    status.textContent = 'Die Datei enthält keine Haken.';
+  if (!days && !importedSessions.length) {
+    status.textContent = 'Die Datei enthält keine Daten.';
     return;
   }
   checks = mergeChecks(checks, imported);
   saveChecks(checks);
-  status.textContent = `${days} Tage übernommen.`;
+  saveSessions(mergeSessions(loadSessions(), importedSessions));
+  status.textContent = `${days} Tage und ${importedSessions.length} Zeiteinträge übernommen.`;
   render();
 });
 

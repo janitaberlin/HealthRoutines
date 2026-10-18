@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES } from '../../lib/time';
+---
+<Base title="Zeit" page="zeit">
+  <h1 class="page-title">Zeit</h1>
+
+  <section class="timer" aria-live="polite">
+    <p class="timer-label" id="timer-label">Stoppuhr</p>
+    <p class="timer-clock" id="timer-clock">0:00:00</p>
+    <div class="timer-buttons">
+      {CATEGORIES.map((c) => (
+        <button class="timer-btn" type="button" data-start={c.id}>▶ {c.label}</button>
+      ))}
+      <button class="timer-btn timer-stop" type="button" id="timer-stop" hidden>■ Stopp</button>
+    </div>
+    <p class="muted timer-today" id="timer-today"></p>
+  </section>
+
+  <section class="week">
+    <div class="week-head">
+      <button class="day-nav" type="button" data-week="-1" aria-label="Vorherige Woche">‹</button>
+      <h2 id="week-label">Diese Woche</h2>
+      <button class="day-nav" type="button" data-week="1" aria-label="Nächste Woche">›</button>
+    </div>
+    <div class="week-totals" id="week-totals"></div>
+    <div class="chart" id="week-chart" role="img" aria-label="Stunden pro Tag"></div>
+    <div class="legend">
+      <span>Stunden pro Tag:</span>
+      {CATEGORIES.map((c) => <span><i class={`swatch swatch-${c.id}`}></i>{c.label}</span>)}
+    </div>
+  </section>
+
+  <h2 class="section-title">Letzte 8 Wochen</h2>
+  <p class="muted chart-note">Stunden pro Woche, beschriftet mit dem Montag.</p>
+  <div class="chart chart-weeks" id="weeks-chart" role="img" aria-label="Stunden pro Woche"></div>
+
+  <h2 class="section-title">Einträge dieser Woche</h2>
+  <ul class="entries" id="entries"></ul>
+
+  <details class="add-entry">
+    <summary class="menu-btn">Zeit nachtragen</summary>
+    <form id="add-form" class="add-form">
+      <label>Bereich
+        <select name="cat">
+          {CATEGORIES.map((c) => <option value={c.id}>{c.label}</option>)}
+        </select>
+      </label>
+      <label>Datum <input type="date" name="date" required /></label>
+      <label>Von <input type="time" name="from" required /></label>
+      <label>Bis <input type="time" name="to" required /></label>
+      <button class="menu-btn menu-btn--primary" type="submit">Speichern</button>
+      <p class="muted" id="add-status" aria-live="polite"></p>
+    </form>
+  </details>
+
+  <script>
+    import '../../scripts/time-page';
+  </script>
+</Base>
