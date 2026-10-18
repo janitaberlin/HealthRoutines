@@ -26,6 +26,7 @@ export const routines: Routine[] = [
     icon: '☀︎',
     items: [
       { id: 'tee-morgen', text: 'Tee' },
+      { id: 'dankbar', text: 'Ich bin dankbar für …' },
       { id: 'sport-morgen', text: '15 Min. Sport oder Sportkurs' },
       { id: 'tageslicht', text: 'Tageslicht tanken', hint: 'kurz raus oder ans offene Fenster' },
       { id: 'outfit', text: 'Shower & Getting ready', hint: 'Outfit an, Make-up, Haare' },
@@ -66,10 +67,8 @@ export const routines: Routine[] = [
     subtitle: 'Evening Ritual',
     icon: '☾',
     items: [
-      { id: 'wasser-tag', text: 'Genug getrunken über den Tag' },
-      { id: 'abendbeutel', text: 'Abendbeutel: Pflege- und Gesundheitsroutine', hint: 'Bademantel, Haare hoch' },
-      { id: 'handy-weg', text: 'Handy 30 Min. vor dem Schlafen weg' },
-      { id: 'reflexion', text: '3 Dinge, die heute gut waren' },
+      { id: 'abendbeutel', text: 'Self Care: Pflege- und Gesundheitsroutine', hint: 'Bademantel, Haare hoch' },
+      { id: 'handy-weg', text: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Lesen' },
     ],
   },
