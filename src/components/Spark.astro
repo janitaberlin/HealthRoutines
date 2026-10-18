@@ -1,5 +1,6 @@
 ---
 /** Ritual „Ignite My Spark“: Remember → Feel → Create. Inhalt füllt src/scripts/spark.ts. */
+import { dailyQuestion } from '../data/compass';
 ---
 <dialog class="spark" id="spark" aria-labelledby="spark-title">
   <form method="dialog" class="spark-close-form"><button class="spark-x" aria-label="Schließen">×</button></form>
@@ -21,6 +22,7 @@
 
   <section class="spark-step" data-step="3" hidden>
     <h2 class="spark-title">Bring it to life.</h2>
+    <p class="spark-daily">{dailyQuestion}</p>
     <p class="muted">Nicht zehn Aufgaben. Nicht noch ein Plan. One inspired action.</p>
     <textarea id="spark-action" class="note spark-action" rows="2" placeholder="Meine eine Handlung heute …"></textarea>
   </section>

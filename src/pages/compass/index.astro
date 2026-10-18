@@ -15,7 +15,7 @@ import { becomeHerQuestions, northStarVision, goalStates, identityDefaults, libr
     <p class="eyebrow">My North Star</p>
     <textarea class="field field-vision" rows="3" data-field="northstar.vision" data-default={northStarVision} aria-label="North-Star-Vision"></textarea>
     <h2 class="compass-h2">Drei Lebensziele</h2>
-    <p class="muted">Vision und Ziele stehen jeden Tag auf der Startseite. Ziele dürfen sich verändern.</p>
+    <p class="muted">Einmal bewusst festlegen, dann einmal im Monat überprüfen. Morgens wird nichts neu verhandelt.</p>
     {[0, 1, 2].map((i) => (
       <div class="goal" data-goal={i}>
         <textarea class="field" rows="2" data-goal-text placeholder={`Ziel ${i + 1}`}></textarea>
@@ -26,7 +26,12 @@ import { becomeHerQuestions, northStarVision, goalStates, identityDefaults, libr
         </div>
       </div>
     ))}
-    <p class="compass-reflect" id="goal-reflect"></p>
+    <div class="goal-review">
+      <p class="muted" id="goal-review-text"></p>
+      <button type="button" class="menu-btn" id="goal-review-btn">Ziele überprüft ✓</button>
+    </div>
+    <p class="compass-reflect" id="goal-reflect" hidden>Passen meine Ziele noch zu mir, oder haben sie sich verändert?</p>
+    
   </section>
 
   <section class="compass-section compass-card">

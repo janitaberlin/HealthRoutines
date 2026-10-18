@@ -7,6 +7,12 @@
 export const northStarVision =
   'Ich erschaffe mein 10/10-Leben, in dem ich durch mein Sein, meine unternehmerischen Talente und meine Fähigkeit, Menschen zu inspirieren, vollständig wirke.';
 
+/** Tägliche Frage: Ziele werden nicht jeden Morgen neu verhandelt (Janita 18.10.2026). */
+export const dailyQuestion = 'Was kann ich heute tun, um das Leben, für das ich mich entschieden habe, tatsächlich zu leben?';
+
+/** Ziele monatlich überprüfen. */
+export const reviewDays = 30;
+
 export const identityDefaults = {
   signature: 'My energy is my signature.',
   talents: [

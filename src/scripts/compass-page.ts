@@ -1,13 +1,7 @@
-import { pickForDay, safeLink, type GoalState } from '../lib/compass';
+import { reviewDays } from '../data/compass';
+import { reviewDue, safeLink, type GoalState } from '../lib/compass';
 import { dateKey } from '../lib/tracker';
 import { loadCompass, saveCompass } from './storage';
-
-/** Gelegentliche Reflexion zu den Zielen, eine pro Tag. */
-const reflections = [
-  'Passt dieses Ziel noch zu dir, oder hat es sich verändert?',
-  'Welches Ziel fühlt sich gerade lebendig an, welches eher nach Pflicht?',
-  'Was wäre ein kleiner Schritt, der sich heute leicht anfühlt?',
-];
 
 let compass = loadCompass();
 
@@ -43,6 +37,8 @@ for (const box of document.querySelectorAll<HTMLElement>('[data-goal]')) {
   text.value = compass.goals[i].text;
   text.addEventListener('input', () => {
     compass.goals[i].text = text.value;
+    // Wer Ziele festlegt, hat sie gerade überprüft: erster Check erst in einem Monat.
+    compass.fields['goals.reviewed'] ??= dateKey(new Date());
     save();
   });
   for (const b of buttons)
@@ -53,7 +49,21 @@ for (const box of document.querySelectorAll<HTMLElement>('[data-goal]')) {
     });
   mark();
 }
-document.getElementById('goal-reflect')!.textContent = pickForDay(reflections, dateKey(new Date()));
+// Monatlicher Ziel-Check statt tägliches Neuverhandeln.
+function renderReview(): void {
+  const last = compass.fields['goals.reviewed'];
+  const due = reviewDue(last, dateKey(new Date()), reviewDays);
+  document.getElementById('goal-review-text')!.textContent = last
+    ? `Zuletzt überprüft am ${last.split('-').reverse().join('.')}.`
+    : 'Noch nicht überprüft.';
+  document.getElementById('goal-reflect')!.hidden = !due;
+}
+document.getElementById('goal-review-btn')!.addEventListener('click', () => {
+  compass.fields['goals.reviewed'] = dateKey(new Date());
+  save();
+  renderReview();
+});
+renderReview();
 
 // Spark Library
 const list = document.getElementById('library-list')!;

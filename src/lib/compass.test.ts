@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emptyCompass, parseCompass, pickForDay, safeLink } from './compass';
+import { emptyCompass, reviewDue, parseCompass, pickForDay, safeLink } from './compass';
 
 describe('compass', () => {
   it('startet mit drei leeren Zielen', () => {
@@ -34,5 +34,13 @@ describe('compass', () => {
     expect(safeLink('https://open.spotify.com/x')).toBe('https://open.spotify.com/x');
     expect(safeLink('javascript:alert(1)')).toBeUndefined();
     expect(safeLink('kein link')).toBeUndefined();
+  });
+});
+
+describe('reviewDue', () => {
+  it('ist fällig ohne Datum oder nach 30 Tagen', () => {
+    expect(reviewDue(undefined, '2026-10-18', 30)).toBe(true);
+    expect(reviewDue('2026-10-01', '2026-10-18', 30)).toBe(false);
+    expect(reviewDue('2026-09-18', '2026-10-18', 30)).toBe(true);
   });
 });

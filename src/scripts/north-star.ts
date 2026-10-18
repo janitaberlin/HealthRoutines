@@ -1,4 +1,5 @@
-import { goalStates, northStarVision } from '../data/compass';
+import { goalStates, northStarVision, reviewDays } from '../data/compass';
+import { reviewDue } from '../lib/compass';
 import { dateKey } from '../lib/tracker';
 import { loadCompass } from './storage';
 
@@ -25,6 +26,11 @@ function render(): void {
       }),
     );
   }
+  // Hinweis nur, wenn Ziele da sind und der monatliche Check fällig ist.
+  const review = document.getElementById('north-star-review');
+  if (review)
+    review.hidden =
+      !compass.goals.some((g) => g.text.trim()) || !reviewDue(compass.fields['goals.reviewed'], dateKey(new Date()), reviewDays);
   const action = document.getElementById('today-action');
   if (action) {
     const text = compass.actions[dateKey(new Date())];

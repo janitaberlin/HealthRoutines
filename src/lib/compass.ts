@@ -77,3 +77,13 @@ export function safeLink(link: string | undefined): string | undefined {
     return undefined;
   }
 }
+
+/** Ziel-Check fällig, wenn noch nie oder vor mindestens `days` Tagen überprüft. */
+export function reviewDue(last: string | undefined, today: string, days: number): boolean {
+  if (!last) return true;
+  const toDay = (k: string) => {
+    const [y, m, d] = k.split('-').map(Number);
+    return Math.round(Date.UTC(y, m - 1, d) / 86_400_000);
+  };
+  return toDay(today) - toDay(last) >= days;
+}

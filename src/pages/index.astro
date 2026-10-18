@@ -5,7 +5,7 @@ import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
 import Spark from '../components/Spark.astro';
-import { northStarVision } from '../data/compass';
+import { dailyQuestion, northStarVision } from '../data/compass';
 ---
 <Base title="Janita's Health Routines" page="heute">
   <aside class="identity">
@@ -23,6 +23,8 @@ import { northStarVision } from '../data/compass';
     </div>
     <p class="north-star-vision" id="north-star-vision">{northStarVision}</p>
     <ol class="north-star-list" id="north-star-list"></ol>
+    <p class="north-star-daily">{dailyQuestion}</p>
+    <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
     <p class="muted" id="north-star-empty"><a href={url('compass/#north-star')}>Deine drei wichtigsten Lebensziele festlegen</a></p>
   </section>
 

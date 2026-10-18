@@ -365,3 +365,8 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .spark-question { margin: 0.4rem 0 0.6rem; font-family: var(--font-head); font-size: 1.4rem; line-height: 1.35; }
 .spark-action { width: 100%; margin: 0.6rem 0 0; }
 .spark-nav { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.2rem; }
+.north-star-daily { margin: 0.8rem 0 0; padding-top: 0.7rem; border-top: 1px solid var(--border); font-family: var(--font-head); font-size: 1.02rem; line-height: 1.35; }
+.north-star-review { margin: 0.5rem 0 0; font-size: 0.9rem; }
+.spark-daily { margin: 0 0 0.4rem; font-family: var(--font-head); font-size: 1.15rem; line-height: 1.35; }
+.goal-review { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.8rem; }
+.goal-review p { margin: 0; font-size: 0.9rem; }
