@@ -73,7 +73,7 @@ export const routines: Routine[] = [
       { id: 'tee-abend', text: 'Tee' },
       { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
       { id: 'handy-weg', text: 'Digital Sunset', hint: 'Handy 1 Std. vor dem Schlafen weg' },
-      { id: 'lesen', text: 'Reading Ritual', hint: 'ein paar Seiten, die mich wachsen lassen' },
+      { id: 'lesen', text: 'Lese-Ritual', hint: 'ein paar Seiten, die mich wachsen lassen' },
       { id: 'energie-plus', text: 'Energy Check: Was hat mir heute Energie gegeben?', note: true },
     ],
   },
