@@ -4,12 +4,13 @@ import { url } from '../lib/url';
 
 interface Props {
   title: string;
-  page: 'heute' | 'compass' | 'zeit' | 'verlauf';
+  page: 'heute' | 'routinen' | 'compass' | 'zeit' | 'verlauf';
 }
 const { title, page } = Astro.props;
 const appName = 'JANITA';
 const tabs = [
   { id: 'heute', href: '', label: 'Heute', icon: '<path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>' },
+  { id: 'routinen', href: 'routinen/', label: 'Routinen', icon: '<circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.3 2.4 2.4 4.6-5"/>' },
   { id: 'compass', href: 'compass/', label: 'Compass', icon: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>' },
   { id: 'zeit', href: 'zeit/', label: 'Zeit', icon: '<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M10 3h4"/>' },
   { id: 'verlauf', href: 'verlauf/', label: 'Verlauf', icon: '<path d="M5 20V10M12 20V4M19 20v-7"/>' },

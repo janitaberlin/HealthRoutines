@@ -1,4 +1,4 @@
-import { identity, impulses, routines } from '../data/routines';
+import { impulses, routines } from '../data/routines';
 import { addDays, dateKey, isChecked, parseKey, ratio, toggle } from '../lib/tracker';
 import { loadChecks, loadNotes, saveChecks, saveNotes } from './storage';
 
@@ -20,19 +20,12 @@ function dayName(key: string): string {
   return parseKey(key).toLocaleDateString('de-DE', { weekday: 'long' });
 }
 
-/** Jeden Tag ein anderer Identitätssatz, fortlaufend über die Tage. */
-function identitySentence(key: string): string {
-  const dayNumber = Math.floor(parseKey(key).getTime() / 86_400_000);
-  return identity.sentences[dayNumber % identity.sentences.length];
-}
-
 function impulseFor(key: string): (typeof impulses)[number] {
   const dayNumber = Math.floor(parseKey(key).getTime() / 86_400_000);
   return impulses[dayNumber % impulses.length];
 }
 
 function render(): void {
-  document.getElementById('identity-sentence')!.textContent = identitySentence(day);
   const impulse = impulseFor(day);
   document.getElementById('impulse-theme')!.textContent = impulse.theme;
   document.getElementById('impulse-question')!.textContent = impulse.question;

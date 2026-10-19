@@ -1,11 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
-import { identity, impulses, principles, routines } from '../data/routines';
+import { identity } from '../data/routines';
 import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
 import Spark from '../components/Spark.astro';
-import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../data/compass';
+import { identityDefaults } from '../data/compass';
+
+const boxes = [
+  { id: 'vision', eyebrow: '01 · North Star', title: 'Vision', sub: 'Meine Ziele', href: 'compass/#north-star', img: 'live-enjoy' },
+  { id: 'routinen', eyebrow: '02 · Daily Habits', title: 'Routinen', sub: 'Heute abhaken', href: 'routinen/', img: 'body-soul' },
+  { id: 'fokus', eyebrow: '03 · Create & Build', title: 'Fokus', sub: 'Stoppuhr starten', href: 'zeit/', img: 'create-build' },
+  { id: 'life', eyebrow: '04 · My Life', title: 'My Life', sub: 'Identität & Vision Board', href: 'compass/#my-life', img: 'learn-inspire' },
+];
 ---
 <Base title="JANITA" page="heute">
   <div class="splash" id="splash" aria-hidden="true">
@@ -42,6 +49,8 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
     <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
   </section>
 
+
+
   <section class="week-card" aria-label="Diese Woche">
     <div class="week-days" id="week-days">
       {['M', 'D', 'M', 'D', 'F', 'S', 'S'].map((d) => <span>{d}</span>)}
@@ -52,6 +61,15 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
     </div>
   </section>
 
+  <div class="home-boxes">
+    {boxes.map((b) => (
+      <a class="home-box" href={url(b.href)}>
+        <img src={url(`vision/${b.img}.jpg`)} alt="" loading="lazy" />
+        <div><small>{b.eyebrow}</small><strong>{b.title}</strong><span data-box={b.id}>{b.sub}</span></div>
+      </a>
+    ))}
+  </div>
+
   <button type="button" class="ritual-card" data-ignite>
     <span class="ritual-text">
       <span class="ritual-title">Remember Who You Are</span>
@@ -61,32 +79,6 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
   </button>
   <p class="today-action" id="today-action" hidden>One inspired action · <strong></strong></p>
 
-  <section class="north-star">
-    <div class="north-star-head">
-      <p class="eyebrow">My North Star</p>
-      <a href={url('compass/#north-star')} class="muted small-link">bearbeiten</a>
-    </div>
-    <p class="north-star-vision" id="north-star-vision">{northStarVision}</p>
-    <ol class="north-star-list" id="north-star-list"></ol>
-    <p class="north-star-daily">{dailyQuestion}</p>
-    <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
-    <p class="muted" id="north-star-empty"><a href={url('compass/#north-star')}>Deine drei wichtigsten Lebensziele festlegen</a></p>
-  </section>
-
-  <p class="section-eyebrow">My Life</p>
-  <div class="life-cards">
-    {lifeAreas.map((a, i) => (
-      <a class="life-card" href={url('compass/#my-life')}>
-        <img src={url(`vision/${a.id}.jpg`)} alt="" loading="lazy" />
-        <div><small>0{i + 1}</small><strong>{a.title}</strong></div>
-      </a>
-    ))}
-  </div>
-
-  <aside class="impulse">
-    <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
-    <p class="impulse-question" id="impulse-question">{impulses[0].question}</p>
-  </aside>
 
   <section class="now" id="now">
     <p class="eyebrow">Jetzt dran</p>
@@ -107,71 +99,13 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
     </details>
   </section>
 
-  <section class="day-head">
-    <button class="day-nav" type="button" data-shift="-1" aria-label="Vorheriger Tag">‹</button>
-    <div class="day-title">
-      <p class="eyebrow">Daily Healthy Habits</p>
-      <h1 id="day-label">Heute</h1>
-      <p id="day-date" class="muted"></p>
-    </div>
-    <button class="day-nav" type="button" data-shift="1" aria-label="Nächster Tag">›</button>
-  </section>
-
-  <div class="day-progress" aria-live="polite">
-    <div class="bar"><span id="total-bar"></span></div>
-    <p id="total-text" class="muted"></p>
-  </div>
-
-  <div class="routines">
-    {routines.map((r) => (
-      <section class="routine" data-routine={r.id}>
-        <header class="routine-head">
-          <span class="routine-icon" aria-hidden="true">{r.icon}</span>
-          <div class="routine-name">
-            <h2>{r.title}</h2>
-            {r.subtitle && <p class="routine-sub">{r.subtitle}</p>}
-          </div>
-          <span class="routine-count" data-count></span>
-        </header>
-        <ul class="items">
-          {r.items.map((item) => (
-            <li>
-              <button class="item" type="button" data-item={item.id} aria-pressed="false">
-                <span class="tick" aria-hidden="true"></span>
-                <span class="item-text">
-                  {item.text}
-                  {item.hint && <small>{item.hint}</small>}
-                </span>
-              </button>
-              {item.note && (
-                <textarea class="note" data-note={item.id} rows="1" placeholder="Notiz …" aria-label={item.text}></textarea>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
-    <section class="routine principle">
-      <header class="routine-head">
-        <span class="routine-icon" aria-hidden="true">{principles.icon}</span>
-        <div class="routine-name">
-          <h2>{principles.title}</h2>
-          <p class="routine-sub">{principles.text}</p>
-        </div>
-      </header>
-      <ul class="principle-list">
-        {principles.items.map((p) => <li>{p}</li>)}
-      </ul>
-    </section>
-  </div>
-
   <Spark />
 
   <script>
-    import '../scripts/today';
     import '../scripts/now';
     import '../scripts/spark';
     import '../scripts/north-star';
     import '../scripts/week-card';
+    import '../scripts/home';
   </script>
 </Base>

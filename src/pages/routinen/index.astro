@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import { impulses, principles, routines } from '../../data/routines';
+import { dailyQuestion } from '../../data/compass';
+---
+<Base title="Routinen" page="routinen">
+  <p class="section-eyebrow">Daily Question</p>
+  <p class="routines-question">{dailyQuestion}</p>
+
+  <aside class="impulse">
+    <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
+    <p class="impulse-question" id="impulse-question">{impulses[0].question}</p>
+  </aside>
+
+
+  <section class="day-head">
+    <button class="day-nav" type="button" data-shift="-1" aria-label="Vorheriger Tag">‹</button>
+    <div class="day-title">
+      <p class="eyebrow">Daily Healthy Habits</p>
+      <h1 id="day-label">Heute</h1>
+      <p id="day-date" class="muted"></p>
+    </div>
+    <button class="day-nav" type="button" data-shift="1" aria-label="Nächster Tag">›</button>
+  </section>
+
+  <div class="day-progress" aria-live="polite">
+    <div class="bar"><span id="total-bar"></span></div>
+    <p id="total-text" class="muted"></p>
+  </div>
+
+  <div class="routines">
+    {routines.map((r) => (
+      <section class="routine" data-routine={r.id}>
+        <header class="routine-head">
+          <span class="routine-icon" aria-hidden="true">{r.icon}</span>
+          <div class="routine-name">
+            <h2>{r.title}</h2>
+            {r.subtitle && <p class="routine-sub">{r.subtitle}</p>}
+          </div>
+          <span class="routine-count" data-count></span>
+        </header>
+        <ul class="items">
+          {r.items.map((item) => (
+            <li>
+              <button class="item" type="button" data-item={item.id} aria-pressed="false">
+                <span class="tick" aria-hidden="true"></span>
+                <span class="item-text">
+                  {item.text}
+                  {item.hint && <small>{item.hint}</small>}
+                </span>
+              </button>
+              {item.note && (
+                <textarea class="note" data-note={item.id} rows="1" placeholder="Notiz …" aria-label={item.text}></textarea>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <section class="routine principle">
+      <header class="routine-head">
+        <span class="routine-icon" aria-hidden="true">{principles.icon}</span>
+        <div class="routine-name">
+          <h2>{principles.title}</h2>
+          <p class="routine-sub">{principles.text}</p>
+        </div>
+      </header>
+      <ul class="principle-list">
+        {principles.items.map((p) => <li>{p}</li>)}
+      </ul>
+    </section>
+  </div>
+
+
+  <script>
+    import '../../scripts/today';
+  </script>
+</Base>
