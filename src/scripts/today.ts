@@ -56,22 +56,21 @@ function celebrate(): void {
   const layer = document.createElement('div');
   layer.className = 'stars';
   layer.setAttribute('aria-hidden', 'true');
-  // Goldregen über die ganze App, ca. 1–2 Sek.
-  for (let i = 0; i < 70; i++) {
-    const star = document.createElement('span');
-    star.textContent = i % 3 ? '✦' : '✧';
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.fontSize = `${0.6 + Math.random() * 1.2}rem`;
-    star.style.animationDelay = `${Math.random() * 0.5}s`;
-    star.style.animationDuration = `${1 + Math.random() * 0.6}s`;
-    star.style.setProperty('--drift', `${(Math.random() - 0.5) * 60}px`);
-    layer.append(star);
+  // Dichter Goldregen über die ganze App: feine goldene Tropfen und Glitzer, ca. 2 Sek.
+  for (let i = 0; i < 220; i++) {
+    const drop = document.createElement('span');
+    drop.className = i % 4 ? 'drop' : 'glitter';
+    drop.style.left = `${Math.random() * 100}%`;
+    drop.style.animationDelay = `${Math.random() * 0.9}s`;
+    drop.style.animationDuration = `${0.7 + Math.random() * 0.6}s`;
+    if (drop.className === 'drop') drop.style.height = `${14 + Math.random() * 26}px`;
+    layer.append(drop);
   }
   const text = document.createElement('p');
   text.textContent = 'Alles erledigt';
   layer.append(text);
   document.body.append(layer);
-  setTimeout(() => layer.remove(), 2300);
+  setTimeout(() => layer.remove(), 2600);
 }
 
 function grow(field: HTMLTextAreaElement): void {

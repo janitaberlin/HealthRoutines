@@ -499,9 +499,11 @@ button.state.state-evolving { background: var(--surface-2); }
 img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 
 /* Routinen: goldene Sterne, wenn alles erledigt ist (wie der Funke im Türöffner). */
-.stars { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; animation: gold-glow 2.2s ease both; }
+.stars { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; animation: gold-glow 2.4s ease both; }
 @keyframes gold-glow { 0% { background: rgb(212 170 90 / 0); } 20% { background: rgb(212 170 90 / 0.14); } 100% { background: rgb(212 170 90 / 0); } }
-.stars span { position: absolute; top: -2rem; color: #f3dc9a; text-shadow: 0 0 6px #f3dc9a, 0 0 16px rgb(212 170 90 / 0.7); animation: star-fall 1.3s cubic-bezier(0.4, 0, 0.7, 1) both; }
-.stars p { position: absolute; top: 42%; left: 0; right: 0; margin: 0; text-align: center; font-family: var(--font-editorial); font-size: 2rem; letter-spacing: 0.12em; text-transform: uppercase; color: #f3dc9a; text-shadow: 0 0 18px rgb(212 170 90 / 0.6); animation: star-text 2.2s ease both; }
-@keyframes star-fall { 0% { opacity: 0; transform: translate(0, 0) scale(0.4) rotate(0deg); } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--drift), 105vh) scale(1) rotate(180deg); } }
+.stars .drop, .stars .glitter { position: absolute; top: -40px; animation: gold-rain 1s linear both; }
+.stars .drop { width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgb(243 220 154 / 0), #f3dc9a 60%, #fff7dc); box-shadow: 0 0 6px rgb(212 170 90 / 0.8); }
+.stars .glitter { width: 4px; height: 4px; border-radius: 50%; background: #fff7dc; box-shadow: 0 0 6px 2px #f3dc9a; }
+.stars p { position: absolute; top: 42%; left: 0; right: 0; margin: 0; text-align: center; font-family: var(--font-editorial); font-size: 2rem; letter-spacing: 0.12em; text-transform: uppercase; color: #f3dc9a; text-shadow: 0 0 18px rgb(212 170 90 / 0.6); animation: star-text 2.4s ease both; }
+@keyframes gold-rain { 0% { opacity: 0; transform: translateY(0); } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(110vh); } }
 @keyframes star-text { 0% { opacity: 0; transform: translateY(8px); } 20%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; } }
