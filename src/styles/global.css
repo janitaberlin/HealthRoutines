@@ -311,6 +311,15 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .north-star-list li { margin: 0.35rem 0; }
 .north-star-list li span:first-child { margin-right: 0.4rem; }
 #north-star-empty { margin: 0.5rem 0 0; font-size: 0.92rem; }
+.north-star-list:has(.goal-row) { padding-left: 0; list-style: none; }
+.goal-row { display: flex; align-items: flex-start; gap: 0.6rem; }
+.goal-num { flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.3rem; border: 1px solid var(--border); border-radius: 50%; font-size: 0.75rem; line-height: 1.4rem; text-align: center; color: var(--muted); }
+button.state { margin-top: 0.45rem; }
+.goal-input { flex: 1; min-width: 0; padding: 0.35rem 0; resize: none; overflow: hidden; line-height: 1.35; border: 0; border-bottom: 1px solid transparent; background: transparent; color: var(--text); font: inherit; font-size: 1rem; }
+.goal-input:focus { outline: none; border-bottom-color: var(--border); }
+.goal-input::placeholder { color: var(--muted); }
+button.state { flex: none; background: transparent; font-family: inherit; cursor: pointer; }
+button.state.state-evolving { background: var(--surface-2); }
 .state { display: inline-block; padding: 0.05rem 0.5rem; border: 1px solid var(--border); border-radius: 999px; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); vertical-align: 0.1em; }
 .state-committed { border-color: var(--accent); color: var(--text); }
 .state-evolving { background: var(--surface-2); }

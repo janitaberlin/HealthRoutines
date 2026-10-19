@@ -61,6 +61,15 @@ const boxes = [
     </div>
   </section>
 
+  <section class="north-star">
+    <div class="north-star-head">
+      <p class="eyebrow">My Goals</p>
+      <a href={url('compass/#north-star')} class="muted small-link">Vision ansehen</a>
+    </div>
+    <ol class="north-star-list" id="north-star-list"></ol>
+    <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
+  </section>
+
   <div class="home-boxes">
     {boxes.map((b) => (
       <a class="home-box" href={url(b.href)}>
