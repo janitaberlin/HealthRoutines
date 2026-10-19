@@ -482,7 +482,9 @@ button.state.state-evolving { background: var(--surface-2); }
 .ritual-play svg { margin-left: 3px; }
 .welcome { position: relative; }
 .welcome > :not(.welcome-wave) { position: relative; }
-.welcome-wave { position: absolute; top: -2.5rem; right: -1rem; width: 62%; max-width: 18rem; pointer-events: none; }
+.welcome-wave { position: absolute; top: -2.5rem; right: -1rem; width: 62%; max-width: 18rem; pointer-events: none; overflow: visible; }
+.wave-spark { filter: drop-shadow(0 0 3px #f3dc9a) drop-shadow(0 0 7px rgb(212 170 90 / 0.8)); }
+@media (prefers-reduced-motion: reduce) { .wave-spark { display: none; } }
 .welcome-name { letter-spacing: 0.02em; }
 
 /* Startseite: vier Bild-Kästen unter der Woche */
