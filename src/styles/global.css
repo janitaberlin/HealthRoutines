@@ -529,7 +529,9 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .item-info { margin: 0.1rem 0 0.4rem 2.4rem; font-size: 0.82rem; color: var(--muted); }
 .item-info summary { cursor: pointer; list-style: none; }
 .item-info summary::-webkit-details-marker { display: none; }
-.item-info summary::before { content: 'ⓘ '; color: #d4a437; }
+.item-info summary { display: inline-block; padding: 0.2rem 0.6rem 0.4rem 0; }
+.item-info summary::before { content: ''; display: block; width: 0.55rem; height: 0.55rem; border-right: 1.5px solid #d4a437; border-bottom: 1.5px solid #d4a437; transform: rotate(45deg); transition: transform 0.2s ease; }
+.item-info[open] summary::before { transform: translateY(0.25rem) rotate(-135deg); }
 .item-info dl { margin: 0.5rem 0 0; display: grid; gap: 0.45rem; }
 .item-info dt { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: #d4a437; }
 .item-info dd { margin: 0; color: var(--text); }

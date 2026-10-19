@@ -41,7 +41,7 @@ import { principles, routines } from '../../data/routines';
               </button>
               {item.info && (
                 <details class="item-info">
-                  <summary>Darin stecken drei Dinge</summary>
+                  <summary aria-label="Erklärung öffnen"></summary>
                   <dl>{item.info.map((i) => (<div><dt>{i.title}</dt><dd>{i.text}</dd></div>))}</dl>
                 </details>
               )}
