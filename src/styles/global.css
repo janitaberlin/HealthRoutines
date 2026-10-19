@@ -485,8 +485,8 @@ button.state.state-evolving { background: var(--surface-2); }
 .welcome-wave { position: absolute; top: -2.5rem; right: -1rem; width: 62%; max-width: 18rem; pointer-events: none; overflow: visible; }
 .wave-lines { transform-origin: 100% 0; animation: wave-sway 14s ease-in-out infinite; }
 @keyframes wave-sway { 0%, 100% { transform: rotate(0deg) translate(0, 0) scaleY(1); } 50% { transform: rotate(-2.5deg) translate(-3px, 2px) scaleY(1.02); } }
-.wave-glitter { fill: #fff7dc; opacity: 0; filter: drop-shadow(0 0 2.5px #e6c25a); animation: wave-twinkle 10s ease-in-out infinite; }
-@keyframes wave-twinkle { 0%, 60%, 100% { opacity: 0; transform: scale(0.4); } 75% { opacity: 1; transform: scale(1); } }
+.wave-glitter { fill: #fff7dc; opacity: 0.45; filter: drop-shadow(0 0 2.5px #e6c25a); animation: wave-twinkle 10s ease-in-out infinite; }
+@keyframes wave-twinkle { 0%, 100% { opacity: 0.45; transform: scale(0.55) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(45deg); } }
 .wave-glitter { transform-box: fill-box; transform-origin: center; }
 @media (prefers-reduced-motion: reduce) { .wave-lines, .wave-glitter { animation: none; } }
 .welcome-name { letter-spacing: 0.02em; }
