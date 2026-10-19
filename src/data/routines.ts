@@ -87,7 +87,7 @@ export const principles = {
 
 /** Janitas Founder-Identität; oben auf „Heute“ steht jeden Tag ein anderer Satz. */
 export const identity = {
-  motto: 'I create. I lead. I live.',
+  motto: 'Erfolg folgt der Freude.',
   sentences: [
     'Ich erschaffe Marken und Erlebnisse, die Menschen lieben.',
     'Ich muss nicht alles selbst machen, um etwas Großes aufzubauen.',

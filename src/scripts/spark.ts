@@ -39,7 +39,7 @@ function show(n: number): void {
   for (const s of dialog!.querySelectorAll<HTMLElement>('.spark-step')) s.hidden = Number(s.dataset.step) !== n;
   document.getElementById('spark-step-label')!.textContent = `${n} / 3 · ${STEPS[n - 1]}`;
   (document.getElementById('spark-back') as HTMLButtonElement).hidden = n === 1;
-  document.getElementById('spark-next')!.textContent = n === 3 ? 'Let’s create ✨' : 'Weiter';
+  document.getElementById('spark-next')!.textContent = n === 3 ? 'Fertig' : 'Weiter';
 }
 
 if (dialog) {

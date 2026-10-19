@@ -9,9 +9,10 @@
   --accent: #f3f0ea;
   --accent-soft: #2a2825;
   --star: #f3f0ea;
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-editorial: 'Playfair Display', 'Didot', 'Bodoni 72', Georgia, serif;
-  --font-head: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  /* Klare Schrift wie Rewire; Serifen nur im Namen JANITA */
+  --font-head: var(--font-body);
   --radius: 12px;
   color-scheme: dark;
 }
@@ -41,7 +42,7 @@ body {
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
-h1, h2, h3 { font-family: var(--font-head); font-optical-sizing: auto; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
 button { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
 
@@ -61,12 +62,12 @@ button { font: inherit; color: inherit; }
 .refresh-btn {
   width: 2.5rem;
   height: 2.5rem;
-  border: 1px solid var(--border);
+  border: none;
   border-radius: 999px;
-  background: var(--surface);
+  background: none;
   cursor: pointer;
 }
-.refresh-btn { font-size: 1.15rem; color: var(--text); }
+.refresh-btn { font-size: 1.3rem; color: var(--text); }
 .refresh-btn.is-loading { animation: refresh-spin 0.8s linear infinite; }
 @keyframes refresh-spin { to { transform: rotate(360deg); } }
 .page { max-width: 1200px; margin: 0 auto; padding: 1rem; }
@@ -305,7 +306,7 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .north-star { margin: 0.9rem 0 0.5rem; padding: 1rem 1.1rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
 .north-star-head { display: flex; justify-content: space-between; align-items: baseline; }
 .small-link { font-size: 0.85rem; }
-.north-star-vision { margin: 0.5rem 0 0.2rem; font-family: var(--font-head); font-style: italic; font-size: 1.1rem; line-height: 1.4; }
+.north-star-vision { margin: 0.5rem 0 0.2rem; font-family: var(--font-head); font-style: normal; font-size: 1.1rem; line-height: 1.4; }
 .north-star-list { margin: 0.6rem 0 0; padding-left: 1.3rem; }
 .north-star-list li { margin: 0.35rem 0; }
 .north-star-list li span:first-child { margin-right: 0.4rem; }
@@ -319,13 +320,13 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .compass-section { margin: 2rem 0; padding-top: 1.4rem; border-top: 1px solid var(--border); }
 .compass-card { padding: 1.2rem 1.1rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface-2); }
 .compass-h2 { margin: 0.3rem 0 0.5rem; font-size: 1.35rem; font-weight: 500; line-height: 1.3; }
-.compass-reflect { margin: 0.8rem 0 0; font-family: var(--font-head); font-style: italic; color: var(--muted); }
+.compass-reflect { margin: 0.8rem 0 0; font-family: var(--font-head); font-style: normal; color: var(--muted); }
 .field-label { display: block; margin: 0.9rem 0 0.3rem; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .field {
   display: block; width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 10px;
   background: var(--bg); color: var(--text); font: inherit; font-size: 0.97rem; line-height: 1.45; resize: none; overflow: hidden;
 }
-.field-signature, .field-vision { margin-top: 0.6rem; font-family: var(--font-head); font-size: 1.25rem; font-style: italic; text-align: center; }
+.field-signature, .field-vision { margin-top: 0.6rem; font-family: var(--font-head); font-size: 1.25rem; font-style: normal; text-align: center; }
 .goal { margin: 0.9rem 0; }
 .goal-states { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; font-size: 0.82rem; }
 .vision { margin: 0.6rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; }
@@ -344,7 +345,7 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .spark-close-form { position: absolute; top: 0.6rem; right: 0.8rem; margin: 0; }
 .spark-x { border: 0; background: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; }
 .spark-title { margin: 0.5rem 0 0.8rem; font-size: 1.6rem; font-weight: 500; }
-.spark-signature { margin: 0; font-family: var(--font-head); font-style: italic; font-size: 1.2rem; }
+.spark-signature { margin: 0; font-family: var(--font-head); font-style: normal; font-size: 1.2rem; }
 .spark-design { margin: 0.3rem 0 0.6rem; color: var(--muted); font-size: 0.9rem; }
 .spark-talents { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; }
 .spark-talents li + li { margin-top: 0.2rem; }
@@ -370,7 +371,7 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .spark-life figure { margin: 0; }
 .spark-life img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
 .spark-life figcaption { margin-top: 0.2rem; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.both { margin: 1.5rem 0 0.5rem; text-align: center; font-family: var(--font-head); font-style: italic; font-size: 1.1rem; line-height: 1.5; }
+.both { margin: 1.5rem 0 0.5rem; text-align: center; font-family: var(--font-head); font-style: normal; font-size: 1.1rem; line-height: 1.5; }
 .both span { display: block; }
 .both span:last-child { font-style: normal; font-weight: 600; margin-top: 0.2rem; }
 .part-title { margin: 2.6rem 0 0; font-size: 1.6rem; font-weight: 500; text-align: center; }
@@ -382,7 +383,7 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .rhythm-a { margin: 0.2rem 0 0; font-variant-numeric: tabular-nums; }
 .rhythm-note { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--muted); }
 .rhythm-note span { letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem; }
-.life-quote { margin: 0.6rem 0 0; padding-left: 0.8rem; border-left: 2px solid var(--accent); font-family: var(--font-head); font-style: italic; font-size: 1rem; line-height: 1.4; }
+.life-quote { margin: 0.6rem 0 0; padding-left: 0.8rem; border-left: 2px solid var(--accent); font-family: var(--font-head); font-style: normal; font-size: 1rem; line-height: 1.4; }
 
 /* Türöffner beim Öffnen der App: Janita-Stil, Beige und Schwarz */
 .splash {
@@ -393,7 +394,7 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .splash.is-leaving { opacity: 0; pointer-events: none; }
 .splash-eyebrow { margin: 0; font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: #6b6b6b; animation: splash-in 0.8s ease both; }
 .splash-name { margin: 0.5rem 0 0; font-family: var(--font-editorial); font-size: clamp(2.8rem, 13vw, 4rem); font-weight: 400; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; padding-left: 0.12em; animation: splash-in 0.9s ease 0.2s both; }
-.splash-text { margin: 1.2rem 0 0; padding-top: 1rem; border-top: 1px solid #111111; font-family: var(--font-editorial); font-style: italic; font-size: 1.15rem; animation: splash-in 0.9s ease 0.5s both; }
+.splash-text { margin: 1.2rem 0 0; padding-top: 1rem; border-top: 1px solid #111111; font-family: var(--font-editorial); font-style: normal; font-size: 1.15rem; animation: splash-in 0.9s ease 0.5s both; }
 @keyframes splash-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* Rewire-Stil: Begrüßung, Wochenkarte, Bildkarten, Navigation unten */
@@ -435,3 +436,19 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .tab[aria-current='page'] { color: var(--text); opacity: 1; }
 .page { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
 .ignite { background: transparent; }
+
+/* Morgenritual als Karte mit Play-Knopf (statt „Ignite my spark“) */
+.ritual-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; margin: 0.4rem 0 1rem;
+  padding: 1.3rem 1.2rem; border: 1px solid var(--border); border-radius: 22px; background: var(--surface); color: var(--text);
+  text-align: left; cursor: pointer;
+}
+.ritual-text { display: grid; gap: 0.2rem; }
+.ritual-title { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; }
+.ritual-sub { font-size: 0.95rem; color: var(--muted); }
+.ritual-play { flex: none; display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: var(--text); color: var(--bg); }
+.ritual-play svg { margin-left: 3px; }
+.welcome { position: relative; }
+.welcome > :not(.welcome-wave) { position: relative; }
+.welcome-wave { position: absolute; top: -2.5rem; right: -1rem; width: 62%; max-width: 18rem; pointer-events: none; }
+.welcome-name { letter-spacing: 0.02em; }

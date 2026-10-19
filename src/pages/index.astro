@@ -10,7 +10,7 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
 <Base title="JANITA" page="heute">
   <div class="splash" id="splash" aria-hidden="true">
     <p class="splash-eyebrow">Welcome back,</p>
-    <p class="splash-name">Janita</p>
+    <p class="splash-name">JANITA</p>
     <p class="splash-text" id="splash-text">{identityDefaults.signature}</p>
   </div>
   <script is:inline>
@@ -30,8 +30,14 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
     })();
   </script>
   <section class="welcome">
+    <svg class="welcome-wave" viewBox="0 0 200 200" aria-hidden="true">
+      <defs><linearGradient id="wave-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9a26b" stop-opacity="0" /><stop offset="0.55" stop-color="#c9a26b" stop-opacity="0.55" /><stop offset="1" stop-color="#8a6a43" stop-opacity="0" /></linearGradient></defs>
+      {Array.from({ length: 28 }, (_, i) => (
+        <path d={`M ${20 + i * 2} 0 C ${120 - i * 2} ${40 + i * 2}, ${10 + i * 3} ${120 - i}, ${200} ${150 + i * 1.5}`} fill="none" stroke="url(#wave-gold)" stroke-width="0.4" />
+      ))}
+    </svg>
     <p class="welcome-hello">Welcome,</p>
-    <p class="welcome-name">Janita.</p>
+    <p class="welcome-name">JANITA.</p>
     <p class="welcome-motto">{identity.motto}</p>
     <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
   </section>
@@ -46,7 +52,13 @@ import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../
     </div>
   </section>
 
-  <button type="button" class="ignite" data-ignite>Ignite my spark ✨</button>
+  <button type="button" class="ritual-card" data-ignite>
+    <span class="ritual-text">
+      <span class="ritual-title">Remember Who You Are</span>
+      <span class="ritual-sub">3 Min. · Remember · Feel · Create</span>
+    </span>
+    <span class="ritual-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+  </button>
   <p class="today-action" id="today-action" hidden>One inspired action · <strong></strong></p>
 
   <section class="north-star">

@@ -10,7 +10,13 @@ import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, 
     <p class="eyebrow">My Inner Compass</p>
     <h1 class="compass-title">Remember Who You Are</h1>
     <p class="muted">Drei Minuten am Morgen. Nichts muss ausgefüllt werden.</p>
-    <button type="button" class="ignite" data-ignite>Ignite my spark ✨</button>
+    <button type="button" class="ritual-card" data-ignite>
+    <span class="ritual-text">
+      <span class="ritual-title">Remember Who You Are</span>
+      <span class="ritual-sub">3 Min. · Remember · Feel · Create</span>
+    </span>
+    <span class="ritual-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+  </button>
   </header>
 
   <p class="both">{bothText.map((t) => <span>{t}</span>)}</p>

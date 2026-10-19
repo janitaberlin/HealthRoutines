@@ -80,7 +80,7 @@ export const identityDefaults = {
     'Freude, Liebe, Leichtigkeit und die kleinen Momente',
   ].join('\n'),
   design: 'Generatorin · 6/2 · sakrale Autorität. Erfolg folgt der Freude.',
-  stands: 'I create. I lead. I live.\nFreude statt Leistungsdruck. Mein Leben nicht verwalten, sondern erschaffen.',
+  stands: 'Freude statt Leistungsdruck.\nIch möchte mein Leben nicht verwalten, ich möchte es erschaffen.',
   feel: 'Lebendig, gesund, schön, leicht und voller Energie.',
 };
 
@@ -93,7 +93,7 @@ export const visionAreas = [
   {
     id: 'business',
     title: 'Business & Wealth',
-    text: 'Ein Unternehmen, das mich begeistert und mir finanzielle Freiheit ermöglicht.\n\nDrei Wege, noch keine Entscheidung:\n1. Mathilde: meine Schmuckmarke mit eigener Markenwelt\n2. Janita Berlin Coaching: Mindset, Business, persönliche Entwicklung\n3. Personal Brand: Mindset, Identität, Visionen, Future Self',
+    text: 'Ein Unternehmen, das mich begeistert und mir finanzielle Freiheit ermöglicht.\n\nDrei Wege, noch keine Entscheidung:\n1. Mathilde: meine Schmuckmarke mit eigener Markenwelt\n2. JANITA Berlin Coaching: Mindset, Business, persönliche Entwicklung\n3. Personal Brand: Mindset, Identität, Visionen, Future Self',
   },
   {
     id: 'love',
