@@ -69,7 +69,7 @@ export const routines: Routine[] = [
     subtitle: 'Evening Ritual',
     icon: '☾',
     items: [
-      { id: 'abendbeutel', text: 'Self Care: Unwind & Pamper', hint: 'runterkommen und mich verwöhnen: Pflege, Bademantel, Haare hoch' },
+      { id: 'abendbeutel', text: 'Self Care: Bedtime Glow', hint: 'runterkommen, mich verwöhnen, bettfertig machen: Pflege, Bademantel, Haare hoch' },
       { id: 'tee-abend', text: 'Tee' },
       { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
       { id: 'handy-weg', text: 'Digital Sunset', hint: 'Handy 1 Std. vor dem Schlafen weg' },
