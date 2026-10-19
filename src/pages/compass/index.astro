@@ -45,6 +45,7 @@ import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, 
           <img src={url(`vision/${a.id}.jpg`)} alt={a.title} loading="lazy" />
           <h3>{i + 1}. {a.title}</h3>
           <p>{a.text}</p>
+          {'quote' in a && a.quote && <blockquote class="life-quote">{a.quote}</blockquote>}
         </article>
       ))}
     </div>

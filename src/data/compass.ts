@@ -41,7 +41,9 @@ export const lifeAreas = [
   { id: 'body-soul', title: 'Body & Soul', text: 'Aufwachen, Dankbarkeit, Bewegung, Körperbewusstsein. Ich möchte mich lebendig, gesund und schön fühlen.' },
   { id: 'create-build', title: 'Create & Build', text: 'Ideen entwickeln, Geschäftskonzepte erschaffen, Marken aufbauen, Verkaufspsychologie anwenden. Ich möchte unternehmerisch wirken.' },
   { id: 'learn-inspire', title: 'Learn & Inspire', text: 'Bücher lesen, Mindset-Themen erforschen, Erkenntnisse aufschreiben, Videos aufnehmen, Menschen inspirieren. Vielleicht irgendwann Bücher schreiben.' },
-  { id: 'live-enjoy', title: 'Live & Enjoy', text: 'Zeit mit meinem Mann, gutes Essen, Reisen, Begegnungen, Schönheit und spontane Erlebnisse. Das Leben genießen, das ich erschaffe.' },
+  { id: 'live-enjoy', title: 'Live & Enjoy', text: 'Zeit mit meinem Mann, gutes Essen, Reisen, Begegnungen, Schönheit und spontane Erlebnisse. Das Leben genießen, das ich erschaffe.',
+    quote: 'Made multi 5-figures today while I had breakfast with my dad and received a multi 6-figures katschingggg while we had dinner.',
+  },
 ];
 export const lifeOutro = 'Das sind keine vier konkurrierenden Ziele. Das sind vier Bestandteile desselben Lebens.';
 
