@@ -190,7 +190,9 @@ button { font: inherit; color: inherit; }
   color: var(--muted);
   font-size: 0.75rem;
 }
-.heat-cell.is-full { background: var(--accent); color: var(--bg); }
+.heat-cell.is-full { position: relative; background: linear-gradient(135deg, #c9a26b, #f3dc9a); color: #141312; box-shadow: 0 0 10px rgb(212 170 90 / 0.45); }
+/* Verlauf: komplett erledigte Tage bekommen einen goldenen Stern (Janita 19.10.2026). */
+.heat-cell.is-full::after { content: '✦'; position: absolute; top: 0.05rem; right: 0.2rem; font-size: 1rem; color: #fff7dc; text-shadow: 0 0 6px #f3dc9a, 0 0 12px rgb(212 170 90 / 0.8); animation: sparkle 2.4s ease-in-out infinite; }
 .heat-cell.is-future { background: transparent; border: 1px dashed var(--border); opacity: 0.5; }
 .heat-cell.is-today { outline: 2px solid var(--accent); outline-offset: 1px; }
 .routine-stats { display: grid; gap: 1rem; }
@@ -495,3 +497,11 @@ button.state.state-evolving { background: var(--surface-2); }
 .routines-question { margin: -0.4rem 0 1rem; font-size: 1.25rem; font-weight: 300; line-height: 1.35; }
 /* Learn & Inspire: Handy und Gesicht stehen oben im Bild, deshalb oben ausrichten. */
 img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
+
+/* Routinen: goldene Sterne, wenn alles erledigt ist (wie der Funke im Türöffner). */
+.stars { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; animation: gold-glow 2.2s ease both; }
+@keyframes gold-glow { 0% { background: rgb(212 170 90 / 0); } 20% { background: rgb(212 170 90 / 0.14); } 100% { background: rgb(212 170 90 / 0); } }
+.stars span { position: absolute; top: -2rem; color: #f3dc9a; text-shadow: 0 0 6px #f3dc9a, 0 0 16px rgb(212 170 90 / 0.7); animation: star-fall 1.3s cubic-bezier(0.4, 0, 0.7, 1) both; }
+.stars p { position: absolute; top: 42%; left: 0; right: 0; margin: 0; text-align: center; font-family: var(--font-editorial); font-size: 2rem; letter-spacing: 0.12em; text-transform: uppercase; color: #f3dc9a; text-shadow: 0 0 18px rgb(212 170 90 / 0.6); animation: star-text 2.2s ease both; }
+@keyframes star-fall { 0% { opacity: 0; transform: translate(0, 0) scale(0.4) rotate(0deg); } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--drift), 105vh) scale(1) rotate(180deg); } }
+@keyframes star-text { 0% { opacity: 0; transform: translateY(8px); } 20%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; } }

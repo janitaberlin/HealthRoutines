@@ -42,7 +42,36 @@ function render(): void {
   const share = ratio(checks, day, allIds);
   totalBar.style.width = `${Math.round(share * 100)}%`;
   const done = Math.round(share * allIds.length);
-  totalText.textContent = done === allIds.length ? 'Alles erledigt 🎉' : `${done} von ${allIds.length} erledigt`;
+  totalText.textContent = done === allIds.length ? 'Alles erledigt ✦' : `${done} von ${allIds.length} erledigt`;
+  // Goldene Sterne, sobald am selben Tag der letzte Haken gesetzt wird (nicht beim Öffnen oder Blättern).
+  const allDone = done === allIds.length;
+  if (allDone && wasDone[day] === false) celebrate();
+  wasDone[day] = allDone;
+}
+
+const wasDone: Record<string, boolean> = {};
+
+function celebrate(): void {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layer = document.createElement('div');
+  layer.className = 'stars';
+  layer.setAttribute('aria-hidden', 'true');
+  // Goldregen über die ganze App, ca. 1–2 Sek.
+  for (let i = 0; i < 70; i++) {
+    const star = document.createElement('span');
+    star.textContent = i % 3 ? '✦' : '✧';
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.fontSize = `${0.6 + Math.random() * 1.2}rem`;
+    star.style.animationDelay = `${Math.random() * 0.5}s`;
+    star.style.animationDuration = `${1 + Math.random() * 0.6}s`;
+    star.style.setProperty('--drift', `${(Math.random() - 0.5) * 60}px`);
+    layer.append(star);
+  }
+  const text = document.createElement('p');
+  text.textContent = 'Alles erledigt';
+  layer.append(text);
+  document.body.append(layer);
+  setTimeout(() => layer.remove(), 2300);
 }
 
 function grow(field: HTMLTextAreaElement): void {
