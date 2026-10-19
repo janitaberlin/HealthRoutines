@@ -72,9 +72,9 @@ export const routines: Routine[] = [
       { id: 'abendbeutel', text: 'Self Care: Pflege- und Gesundheitsroutine', hint: 'Bademantel, Haare hoch' },
       { id: 'tee-abend', text: 'Tee' },
       { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
-      { id: 'handy-weg', text: 'Handy 1 Std. vor dem Schlafen weg' },
+      { id: 'handy-weg', text: 'Digital Sunset', hint: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Reading Ritual', hint: 'ein paar Seiten, die mich wachsen lassen' },
-      { id: 'energie-plus', text: 'Was hat mir heute Energie gegeben?', note: true },
+      { id: 'energie-plus', text: 'Energy Check: Was hat mir heute Energie gegeben?', note: true },
     ],
   },
 ];
