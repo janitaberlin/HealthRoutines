@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, countDone, dateKey, mergeChecks, parseChecks, ratio, streak, toggle } from './tracker';
+import { activeStreak, addDays, countDone, dateKey, mergeChecks, parseChecks, ratio, streak, toggle } from './tracker';
 
 const ids = ['a', 'b'];
 
@@ -45,5 +45,14 @@ describe('tracker', () => {
 
   it('führt Stände zusammen', () => {
     expect(mergeChecks({ d: ['a'] }, { d: ['a', 'b'], e: ['c'] })).toEqual({ d: ['a', 'b'], e: ['c'] });
+  });
+});
+
+describe('activeStreak', () => {
+  it('zählt Tage mit mindestens einem Haken, heute ohne Haken bis gestern', () => {
+    const checks = { '2026-10-17': ['a'], '2026-10-18': ['b'], '2026-10-15': ['a'] };
+    expect(activeStreak(checks, '2026-10-19')).toBe(2);
+    expect(activeStreak({ ...checks, '2026-10-19': ['a'] }, '2026-10-19')).toBe(3);
+    expect(activeStreak({}, '2026-10-19')).toBe(0);
   });
 });

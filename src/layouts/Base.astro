@@ -8,6 +8,12 @@ interface Props {
 }
 const { title, page } = Astro.props;
 const appName = 'JANITA';
+const tabs = [
+  { id: 'heute', href: '', label: 'Heute', icon: '<path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>' },
+  { id: 'compass', href: 'compass/', label: 'Compass', icon: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>' },
+  { id: 'zeit', href: 'zeit/', label: 'Zeit', icon: '<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M10 3h4"/>' },
+  { id: 'verlauf', href: 'verlauf/', label: 'Verlauf', icon: '<path d="M5 20V10M12 20V4M19 20v-7"/>' },
+];
 const pageTitle = title === appName ? title : `${title} · ${appName}`;
 ---
 <!doctype html>
@@ -17,8 +23,7 @@ const pageTitle = title === appName ? title : `${title} · ${appName}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content="Meine täglichen Routinen zum Abhaken" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+    <meta name="theme-color" content="#141312" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" />
@@ -53,15 +58,18 @@ const pageTitle = title === appName ? title : `${title} · ${appName}`;
         <button class="theme-toggle" type="button" aria-label="Dunkles Design" aria-pressed="false">◐</button>
       </div>
     </header>
-    <nav class="book-switch" aria-label="Ansicht">
-      <a class="book-btn" href={url('')} aria-current={page === 'heute' ? 'page' : undefined}>Heute</a>
-      <a class="book-btn" href={url('compass/')} aria-current={page === 'compass' ? 'page' : undefined}>Compass</a>
-      <a class="book-btn" href={url('zeit/')} aria-current={page === 'zeit' ? 'page' : undefined}>Zeit</a>
-      <a class="book-btn" href={url('verlauf/')} aria-current={page === 'verlauf' ? 'page' : undefined}>Verlauf</a>
-    </nav>
     <main class="page">
       <slot />
     </main>
+    <nav class="tabbar" aria-label="Navigation">
+      {tabs.map((t) => (
+        <a class="tab" href={url(t.href)} aria-current={page === t.id ? 'page' : undefined}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={t.icon} />
+          <span>{t.label}</span>
+        </a>
+      ))}
+    </nav>
+
     <script>
       import '../scripts/theme';
       import '../scripts/refresh';

@@ -52,6 +52,20 @@ export function streak(checks: Checks, today: string, ids: string[]): number {
   return count;
 }
 
+/**
+ * Tage am Stück mit mindestens einem Haken. Ohne Haken heute zählt die Serie bis gestern.
+ */
+export function activeStreak(checks: Checks, today: string): number {
+  const any = (day: string) => (checks[day]?.length ?? 0) > 0;
+  let day = any(today) ? today : addDays(today, -1);
+  let count = 0;
+  while (any(day)) {
+    count++;
+    day = addDays(day, -1);
+  }
+  return count;
+}
+
 /** An wie vielen der letzten `days` Tage (inkl. heute) war ein Punkt erledigt. */
 export function countDone(checks: Checks, today: string, id: string, days: number): number {
   let n = 0;

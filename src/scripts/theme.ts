@@ -1,20 +1,17 @@
 const root = document.documentElement;
 const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
-const THEME_COLORS = { light: '#ffffff', dark: '#000000' } as const;
+const THEME_COLORS = { light: '#ffffff', dark: '#141312' } as const;
 
 function effectiveTheme(): 'light' | 'dark' {
   const chosen = root.dataset.theme;
-  if (chosen === 'light' || chosen === 'dark') return chosen;
-  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Standard ist das dunkle Design, hell nur auf Wunsch.
+  return chosen === 'light' ? 'light' : 'dark';
 }
 
 function sync(): void {
   const theme = effectiveTheme();
   toggle?.setAttribute('aria-pressed', String(theme === 'dark'));
-  // Bei manueller Wahl gilt die Browserleisten-Farbe unabhängig vom System-Design.
-  if (root.dataset.theme) {
-    for (const meta of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) meta.content = THEME_COLORS[theme];
-  }
+  for (const meta of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) meta.content = THEME_COLORS[theme];
 }
 
 toggle?.addEventListener('click', () => {
@@ -27,5 +24,4 @@ toggle?.addEventListener('click', () => {
   }
   sync();
 });
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
 sync();

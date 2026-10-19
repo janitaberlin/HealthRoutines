@@ -2,7 +2,7 @@
 
 Statische Website zum Abhaken täglicher Routinen (Astro 5, GitHub Pages). Live: https://janitaberlin.github.io/HealthRoutines/
 App-Name überall „JANITA“ (Janita 19.10.2026); Repo und Link bleiben HealthRoutines.
-Sprache mit dem Nutzer: Deutsch. Design wie Janitas RecipeBook (schwarz-weiß mit hellem Beige).
+Sprache mit dem Nutzer: Deutsch. Design seit 19.10.2026 dunkel und warm wie die App Rewire (Standard), hell per ◐ umschaltbar; Navigation als Leiste unten; Heute beginnt mit „Welcome, Janita.“, Wochenkarte (`src/scripts/week-card.ts`) und My-Life-Bildkarten. Türöffner bleibt beige.
 
 **Git-Workflow:** Immer direkt auf `main` committen und pushen, keine Branches, keine Pull Requests; vorher `npm test` und `npm run build` grün. Startet die Sitzung auf einem anderen Branch, Änderungen nach `main` übernehmen. Schlägt der Push fehl, Janita sofort sagen.
 

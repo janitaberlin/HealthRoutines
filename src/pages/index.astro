@@ -5,7 +5,7 @@ import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
 import Spark from '../components/Spark.astro';
-import { dailyQuestion, identityDefaults, northStarVision } from '../data/compass';
+import { dailyQuestion, identityDefaults, lifeAreas, northStarVision } from '../data/compass';
 ---
 <Base title="JANITA" page="heute">
   <div class="splash" id="splash" aria-hidden="true">
@@ -29,10 +29,22 @@ import { dailyQuestion, identityDefaults, northStarVision } from '../data/compas
       setTimeout(close, 2000);
     })();
   </script>
-  <aside class="identity">
-    <p class="identity-motto">{identity.motto}</p>
+  <section class="welcome">
+    <p class="welcome-hello">Welcome,</p>
+    <p class="welcome-name">Janita.</p>
+    <p class="welcome-motto">{identity.motto}</p>
     <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
-  </aside>
+  </section>
+
+  <section class="week-card" aria-label="Diese Woche">
+    <div class="week-days" id="week-days">
+      {['M', 'D', 'M', 'D', 'F', 'S', 'S'].map((d) => <span>{d}</span>)}
+    </div>
+    <div class="week-stats">
+      <p><span class="label">Day Streak</span><br /><span class="value" id="week-streak">0<small>Tage</small></span></p>
+      <p><span class="label">Business · Woche</span><br /><span class="value" id="week-invested">0<small>Std.</small></span></p>
+    </div>
+  </section>
 
   <button type="button" class="ignite" data-ignite>Ignite my spark ✨</button>
   <p class="today-action" id="today-action" hidden>One inspired action · <strong></strong></p>
@@ -48,6 +60,16 @@ import { dailyQuestion, identityDefaults, northStarVision } from '../data/compas
     <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
     <p class="muted" id="north-star-empty"><a href={url('compass/#north-star')}>Deine drei wichtigsten Lebensziele festlegen</a></p>
   </section>
+
+  <p class="section-eyebrow">My Life</p>
+  <div class="life-cards">
+    {lifeAreas.map((a, i) => (
+      <a class="life-card" href={url('compass/#my-life')}>
+        <img src={url(`vision/${a.id}.jpg`)} alt="" loading="lazy" />
+        <div><small>0{i + 1}</small><strong>{a.title}</strong></div>
+      </a>
+    ))}
+  </div>
 
   <aside class="impulse">
     <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
@@ -138,5 +160,6 @@ import { dailyQuestion, identityDefaults, northStarVision } from '../data/compas
     import '../scripts/now';
     import '../scripts/spark';
     import '../scripts/north-star';
+    import '../scripts/week-card';
   </script>
 </Base>
