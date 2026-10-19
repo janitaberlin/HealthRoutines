@@ -23,7 +23,7 @@ Inhalte: keine erfundenen medizinischen Fakten. Supplemente nur aus `/mnt/projec
 ## Code-Überblick
 
 - `src/lib/tracker.ts` – Haken, Serien, Auswertung (getestet in `tracker.test.ts`)
-- `src/pages/index.astro` + `src/scripts/today.ts` – Heute; Türöffner `#splash` (einmal pro App-Start ca. 2 Sek. Affirmation des Tages, sessionStorage `splash-seen`)
+- `src/pages/index.astro` + `src/scripts/today.ts` – Heute; Türöffner `#splash` (einmal pro App-Start ca. 2 Sek. „Welcome back, Janita.“ + Signatur aus dem Compass, Janita-Stil Beige/Schwarz; sessionStorage `splash-seen`)
 - `src/lib/time.ts` + `src/pages/zeit/index.astro` + `src/scripts/time-page.ts` – Zeiterfassung (Stoppuhr Business/Job, Woche, 8 Wochen, Nachtragen); Bereiche in `CATEGORIES`, ids nie ändern
 - `src/data/schedule.ts` + `src/lib/plan.ts` + `src/scripts/now.ts` – Tagesplan (Mo–Fr) und Karte „Jetzt dran“ auf Heute; Arbeitsblöcke (`work`) bieten die Stoppuhr an (`zeit/?start=business`)
 - Fokus-Block 25/50/90 Min. in der Stoppuhr (`focus` in `Running`, Wahl in `focus-minutes`), Signal per Ton

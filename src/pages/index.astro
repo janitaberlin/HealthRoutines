@@ -5,26 +5,28 @@ import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
 import Spark from '../components/Spark.astro';
-import { dailyQuestion, northStarVision } from '../data/compass';
+import { dailyQuestion, identityDefaults, northStarVision } from '../data/compass';
 ---
 <Base title="Janita's Health Routines" page="heute">
   <div class="splash" id="splash" aria-hidden="true">
-    <p class="splash-line">Take a breath,</p>
-    <p class="splash-text" id="splash-text"></p>
+    <p class="splash-eyebrow">Welcome back,</p>
+    <p class="splash-name">Janita.</p>
+    <p class="splash-text" id="splash-text">{identityDefaults.signature}</p>
   </div>
-  <script is:inline define:vars={{ sentences: identity.sentences }}>
-    // Türöffner: einmal pro App-Start kurz die Affirmation des Tages, Tippen überspringt.
+  <script is:inline>
+    // Türöffner: einmal pro App-Start kurz Name und Signatur, Tippen überspringt.
     (() => {
       const el = document.getElementById('splash');
       let seen = false;
       try { seen = sessionStorage.getItem('splash-seen') === '1'; sessionStorage.setItem('splash-seen', '1'); } catch {}
       if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { el.remove(); return; }
-      const now = new Date();
-      const day = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 86400000);
-      document.getElementById('splash-text').textContent = sentences[day % sentences.length];
+      try {
+        const own = JSON.parse(localStorage.getItem('inner-compass') || '{}')?.fields?.['identity.signature']?.trim();
+        if (own) document.getElementById('splash-text').textContent = own;
+      } catch {}
       const close = () => { el.classList.add('is-leaving'); setTimeout(() => el.remove(), 700); };
       el.addEventListener('click', close);
-      setTimeout(close, 2200);
+      setTimeout(close, 2000);
     })();
   </script>
   <aside class="identity">
