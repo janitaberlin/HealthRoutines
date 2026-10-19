@@ -68,7 +68,7 @@ button { font: inherit; color: inherit; }
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
-.site-title { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; text-decoration: none; }
+.site-title { display: inline-flex; align-items: center; font-family: var(--font-editorial); font-size: 1.45rem; font-weight: 400; letter-spacing: 0.18em; text-decoration: none; }
 .home-icon { flex: none; color: var(--accent); }
 .header-actions { display: flex; gap: 0.5rem; }
 .theme-toggle,
