@@ -59,7 +59,7 @@ export const routines: Routine[] = [
     subtitle: 'Freedom',
     icon: '↗',
     items: [
-      { id: 'walk-mittag', text: 'Mittags 1 Std. Walk', hint: '5k Steps' },
+      { id: 'walk-mittag', text: 'Power Walk 5k Steps', hint: 'mittags' },
     ],
   },
   {
