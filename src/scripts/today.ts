@@ -1,4 +1,4 @@
-import { impulses, routines } from '../data/routines';
+import { routines } from '../data/routines';
 import { addDays, dateKey, isChecked, parseKey, ratio, toggle } from '../lib/tracker';
 import { loadChecks, loadNotes, saveChecks, saveNotes } from './storage';
 
@@ -20,15 +20,7 @@ function dayName(key: string): string {
   return parseKey(key).toLocaleDateString('de-DE', { weekday: 'long' });
 }
 
-function impulseFor(key: string): (typeof impulses)[number] {
-  const dayNumber = Math.floor(parseKey(key).getTime() / 86_400_000);
-  return impulses[dayNumber % impulses.length];
-}
-
 function render(): void {
-  const impulse = impulseFor(day);
-  document.getElementById('impulse-theme')!.textContent = impulse.theme;
-  document.getElementById('impulse-question')!.textContent = impulse.question;
   label.textContent = dayName(day);
   dateText.textContent = parseKey(day).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
   nextBtn.disabled = day >= today;

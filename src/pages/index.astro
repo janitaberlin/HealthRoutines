@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import { identity } from '../data/routines';
+import { identity, impulses } from '../data/routines';
+import { dailyQuestion } from '../data/compass';
 import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
@@ -72,7 +73,13 @@ const boxes = [
     </div>
     <ol class="north-star-list" id="north-star-list"></ol>
     <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
+    <p class="north-star-daily"><span class="eyebrow">Daily Question</span><br />{dailyQuestion}</p>
   </section>
+
+  <aside class="impulse">
+    <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
+    <p class="impulse-question" id="impulse-question">{impulses[0].question}</p>
+  </aside>
 
   <button type="button" class="ritual-card" data-ignite>
     <span class="ritual-text">

@@ -1,4 +1,4 @@
-import { identity, routines } from '../data/routines';
+import { identity, impulses, routines } from '../data/routines';
 import { totals } from '../lib/time';
 import { dateKey, parseKey, ratio } from '../lib/tracker';
 import { loadChecks, loadCompass, loadSessions } from './storage';
@@ -7,6 +7,9 @@ import { loadChecks, loadCompass, loadSessions } from './storage';
 const today = dateKey(new Date());
 const dayNumber = Math.floor(parseKey(today).getTime() / 86_400_000);
 document.getElementById('identity-sentence')!.textContent = identity.sentences[dayNumber % identity.sentences.length];
+const impulse = impulses[dayNumber % impulses.length];
+document.getElementById('impulse-theme')!.textContent = impulse.theme;
+document.getElementById('impulse-question')!.textContent = impulse.question;
 
 function setBox(id: string, text: string): void {
   const el = document.querySelector<HTMLElement>(`[data-box="${id}"]`);

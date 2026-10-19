@@ -1,17 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { impulses, principles, routines } from '../../data/routines';
-import { dailyQuestion } from '../../data/compass';
+import { principles, routines } from '../../data/routines';
 ---
 <Base title="Routinen" page="routinen">
-  <p class="section-eyebrow">Daily Question</p>
-  <p class="routines-question">{dailyQuestion}</p>
-
-  <aside class="impulse">
-    <p class="eyebrow">Mindset-Impuls · <span id="impulse-theme">{impulses[0].theme}</span></p>
-    <p class="impulse-question" id="impulse-question">{impulses[0].question}</p>
-  </aside>
-
+  <div class="day-progress" aria-live="polite">
+    <div class="bar"><span id="total-bar"></span></div>
+    <p id="total-text" class="muted"></p>
+  </div>
 
   <section class="day-head">
     <button class="day-nav" type="button" data-shift="-1" aria-label="Vorheriger Tag">‹</button>
@@ -22,11 +17,6 @@ import { dailyQuestion } from '../../data/compass';
     </div>
     <button class="day-nav" type="button" data-shift="1" aria-label="Nächster Tag">›</button>
   </section>
-
-  <div class="day-progress" aria-live="polite">
-    <div class="bar"><span id="total-bar"></span></div>
-    <p id="total-text" class="muted"></p>
-  </div>
 
   <div class="routines">
     {routines.map((r) => (
