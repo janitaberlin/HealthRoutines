@@ -3,7 +3,7 @@ import { routines } from '../data/routines';
 import { dateKey, ratio } from '../lib/tracker';
 import { loadChecks, loadSessions } from './storage';
 
-/** Wochenkarte auf Heute: Tage mit Haken, heute erledigte Routinen und Business-Zeit (Erschaffen) dieser Woche. */
+/** Wochenkarte auf Heute: Tage mit Haken, heute erledigte Routinen und Business-Zeit (Create) dieser Woche. */
 function render(): void {
   const today = dateKey(new Date());
   const checks = loadChecks();
