@@ -9,6 +9,8 @@ export interface RoutineItem {
   hint?: string;
   /** Zeigt ein Notizfeld, z. B. für Dankbarkeit; Text wird pro Tag gespeichert. */
   note?: boolean;
+  /** Erklärung zum Aufklappen unter dem Punkt. */
+  info?: { title: string; text: string }[];
 }
 
 export interface Routine {
@@ -40,7 +42,11 @@ export const routines: Routine[] = [
     subtitle: 'Inspired Action',
     icon: '✦',
     items: [
-      { id: 'fokus-welt', text: 'Was möchte heute durch mich entstehen – und wie bringe ich es in die Welt?', note: true },
+      { id: 'fokus-welt', text: 'Was möchte heute durch mich entstehen – und wie bringe ich es in die Welt?', note: true, info: [
+        { title: 'Empfangen', text: 'Was inspiriert mich? Was beschäftigt mich? Was möchte ich ausdrücken?' },
+        { title: 'Erschaffen', text: 'Was mache ich daraus? Einen Gedanken, ein Video, eine Geschichte, eine Idee?' },
+        { title: 'Teilen', text: 'Wie lasse ich andere daran teilhaben?' },
+      ] },
       { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', note: true, hint: 'z. B. Bewegung, Schönheit, Nähe, ein Moment für mich' },
       { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde' },
       { id: 'fokus-dienen', text: 'Wie und wem kann ich heute mit meinen Talenten dienen?', note: true },

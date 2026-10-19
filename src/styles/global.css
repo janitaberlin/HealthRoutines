@@ -485,8 +485,8 @@ button.state.state-evolving { background: var(--surface-2); }
 .welcome-wave { position: absolute; top: -2.5rem; right: -1rem; width: 62%; max-width: 18rem; pointer-events: none; overflow: visible; }
 .wave-lines { transform-origin: 100% 0; animation: wave-sway 14s ease-in-out infinite; }
 @keyframes wave-sway { 0%, 100% { transform: rotate(0deg) translate(0, 0) scaleY(1); } 50% { transform: rotate(-2.5deg) translate(-3px, 2px) scaleY(1.02); } }
-.wave-glitter { fill: #fff7dc; opacity: 0.45; filter: drop-shadow(0 0 2.5px #e6c25a); animation: wave-twinkle 10s ease-in-out infinite; }
-@keyframes wave-twinkle { 0%, 100% { opacity: 0.45; transform: scale(0.55) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(45deg); } }
+.wave-glitter { fill: #fff7dc; opacity: 0; filter: drop-shadow(0 0 2px #e6c25a); animation: wave-twinkle 10s ease-in-out infinite; }
+@keyframes wave-twinkle { 0%, 76%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); } 88% { opacity: 1; transform: scale(1) rotate(45deg); } }
 .wave-glitter { transform-box: fill-box; transform-origin: center; }
 @media (prefers-reduced-motion: reduce) { .wave-lines, .wave-glitter { animation: none; } }
 .welcome-name { letter-spacing: 0.02em; }
@@ -524,3 +524,12 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .hd-facts dt { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .hd-facts dd { margin: 0; font-size: 0.9rem; }
 .hd-note { margin: 0.7rem 0 0; font-size: 0.78rem; color: var(--muted); }
+
+/* Aufklappbare Erklärung unter einem Routinenpunkt */
+.item-info { margin: 0.1rem 0 0.4rem 2.4rem; font-size: 0.82rem; color: var(--muted); }
+.item-info summary { cursor: pointer; list-style: none; }
+.item-info summary::-webkit-details-marker { display: none; }
+.item-info summary::before { content: 'ⓘ '; color: #d4a437; }
+.item-info dl { margin: 0.5rem 0 0; display: grid; gap: 0.45rem; }
+.item-info dt { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: #d4a437; }
+.item-info dd { margin: 0; color: var(--text); }

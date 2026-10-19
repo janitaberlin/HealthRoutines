@@ -39,6 +39,12 @@ import { principles, routines } from '../../data/routines';
                   {item.hint && <small>{item.hint}</small>}
                 </span>
               </button>
+              {item.info && (
+                <details class="item-info">
+                  <summary>Darin stecken drei Dinge</summary>
+                  <dl>{item.info.map((i) => (<div><dt>{i.title}</dt><dd>{i.text}</dd></div>))}</dl>
+                </details>
+              )}
               {item.note && (
                 <textarea class="note" data-note={item.id} rows="1" placeholder="Notiz …" aria-label={item.text}></textarea>
               )}

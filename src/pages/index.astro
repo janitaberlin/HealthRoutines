@@ -50,9 +50,9 @@ const boxes = [
         {Array.from({ length: 28 }, (_, i) => (
           <path d={`M ${20 + i * 2} 0 C ${120 - i * 2} ${40 + i * 2}, ${10 + i * 3} ${120 - i}, ${200} ${150 + i * 1.5}`} fill="none" stroke="url(#wave-shine)" stroke-width="0.18" />
         ))}
-        {/* Glitzerstern auf der Linie, Versatz, Dauer: bunt gemischt und ab dem Öffnen sichtbar, damit es mal hier, mal da aufblitzt. */}
-        {[[63, 29, 0, 11], [71, 51, 6.3, 13], [78, 71, 2.8, 10], [85, 87, 9.1, 12], [95, 102, 4.4, 14], [110, 118, 1.5, 9.5], [132, 135, 7.7, 12.5], [161, 152, 3.6, 11.5]].map(([x, y, d, t]) => (
-          <path class="wave-glitter" d={`M ${x} ${y - 4} Q ${x} ${y} ${x + 4} ${y} Q ${x} ${y} ${x} ${y + 4} Q ${x} ${y} ${x - 4} ${y} Q ${x} ${y} ${x} ${y - 4} Z`} style={`animation-delay: -${d}s; animation-duration: ${t}s`} />
+        {/* Glitzerstern auf der Linie, Versatz, Dauer: immer nur 1–2 sichtbar, mal hier, mal da, ab dem Öffnen, damit es mal hier, mal da aufblitzt. */}
+        {[[63, 29, 9.6, 11], [71, 51, 6.3, 13], [78, 71, 2.8, 10], [85, 87, 9.1, 12], [95, 102, 4.4, 14], [110, 118, 1.5, 9.5], [132, 135, 7.7, 12.5], [161, 152, 3.6, 11.5]].map(([x, y, d, t]) => (
+          <path class="wave-glitter" d={`M ${x} ${y - 3.4} Q ${x} ${y} ${x + 3.4} ${y} Q ${x} ${y} ${x} ${y + 3.4} Q ${x} ${y} ${x - 3.4} ${y} Q ${x} ${y} ${x} ${y - 3.4} Z`} style={`animation-delay: -${d}s; animation-duration: ${t}s`} />
         ))}
       </g>
     </svg>
