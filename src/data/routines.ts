@@ -60,7 +60,7 @@ export const routines: Routine[] = [
     items: [
       { id: 'lunch', text: 'Healthy Lunch' },
       { id: 'walk-mittag', text: 'Power Walk 5k Steps' },
-      { id: 'inspiration', text: 'Inspirational Talk oder Podcast', hint: 'gern beim Walk' },
+      { id: 'inspiration', text: 'Inspirational Talk oder Podcast' },
     ],
   },
   {
