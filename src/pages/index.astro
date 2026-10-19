@@ -8,6 +8,25 @@ import Spark from '../components/Spark.astro';
 import { dailyQuestion, northStarVision } from '../data/compass';
 ---
 <Base title="Janita's Health Routines" page="heute">
+  <div class="splash" id="splash" aria-hidden="true">
+    <p class="splash-line">Take a breath,</p>
+    <p class="splash-text" id="splash-text"></p>
+  </div>
+  <script is:inline define:vars={{ sentences: identity.sentences }}>
+    // Türöffner: einmal pro App-Start kurz die Affirmation des Tages, Tippen überspringt.
+    (() => {
+      const el = document.getElementById('splash');
+      let seen = false;
+      try { seen = sessionStorage.getItem('splash-seen') === '1'; sessionStorage.setItem('splash-seen', '1'); } catch {}
+      if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { el.remove(); return; }
+      const now = new Date();
+      const day = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 86400000);
+      document.getElementById('splash-text').textContent = sentences[day % sentences.length];
+      const close = () => { el.classList.add('is-leaving'); setTimeout(() => el.remove(), 700); };
+      el.addEventListener('click', close);
+      setTimeout(close, 2200);
+    })();
+  </script>
   <aside class="identity">
     <p class="identity-motto">{identity.motto}</p>
     <p class="identity-sentence" id="identity-sentence">{identity.sentences[0]}</p>
