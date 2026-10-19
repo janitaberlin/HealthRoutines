@@ -5,7 +5,6 @@ import { schedule } from '../data/schedule';
 import { CATEGORIES } from '../lib/time';
 import { url } from '../lib/url';
 import Spark from '../components/Spark.astro';
-import { identityDefaults } from '../data/compass';
 
 const boxes = [
   { id: 'vision', eyebrow: '01 · North Star', title: 'Vision', sub: 'Meine Ziele', href: 'compass/#north-star', img: 'live-enjoy' },
@@ -18,19 +17,15 @@ const boxes = [
   <div class="splash" id="splash" aria-hidden="true">
     <p class="splash-eyebrow">Welcome back,</p>
     <p class="splash-name">JANITA</p>
-    <p class="splash-text" id="splash-text">{identityDefaults.signature}</p>
+    <p class="splash-text">Your energy is your signature.</p>
   </div>
   <script is:inline>
-    // Türöffner: einmal pro App-Start kurz Name und Signatur, Tippen überspringt.
+    // Türöffner: einmal pro App-Start kurz Name und „Your energy is your signature.“, Tippen überspringt.
     (() => {
       const el = document.getElementById('splash');
       let seen = false;
       try { seen = sessionStorage.getItem('splash-seen') === '1'; sessionStorage.setItem('splash-seen', '1'); } catch {}
       if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { el.remove(); return; }
-      try {
-        const own = JSON.parse(localStorage.getItem('inner-compass') || '{}')?.fields?.['identity.signature']?.trim();
-        if (own) document.getElementById('splash-text').textContent = own;
-      } catch {}
       const close = () => { el.classList.add('is-leaving'); setTimeout(() => el.remove(), 700); };
       el.addEventListener('click', close);
       setTimeout(close, 2400);
