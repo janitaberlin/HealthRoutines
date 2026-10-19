@@ -50,7 +50,7 @@ export const routines: Routine[] = [
     icon: '◎',
     items: [
       { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
-      { id: 'magnesium', text: 'Magnesium Komplex 7 Ultra', hint: 'abends, mind. 2 Std. Abstand zu Eisen' },
+      { id: 'supplements', text: 'Supplements nehmen' },
     ],
   },
   {
