@@ -29,7 +29,7 @@ export const routines: Routine[] = [
     items: [
       { id: 'tee-morgen', text: 'Tee' },
       { id: 'dankbar', text: 'Ich bin dankbar für …', note: true },
-      { id: 'sport-morgen', text: '15 Min. Sport oder Sportkurs' },
+      { id: 'sport-morgen', text: 'Move & Glow', hint: '15 Min. oder Kurs: MWH Class, Reformer Pilates, Joggen, KINRGY, Pamela Reif Glutes' },
       { id: 'outfit', text: 'Getting ready', hint: 'Outfit an, Make-up, Haare' },
       { id: 'supplements', text: 'Supplements nehmen' },
     ],

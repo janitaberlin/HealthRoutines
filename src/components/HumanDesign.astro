@@ -1,0 +1,56 @@
+---
+// Janitas Bodygraph: nur die per Chart-Screenshot (18.10.2026) bestätigten Daten.
+// Definierte Zentren gold gefüllt, offene nur umrandet; nur die drei bestätigten Kanäle in Gold.
+const facts: [string, string][] = [
+  ['Typ', 'Generatorin'],
+  ['Profil', '6/2'],
+  ['Strategie', 'Reagieren'],
+  ['Autorität', 'Sakral'],
+  ['Signatur', 'Zufriedenheit'],
+  ['Nicht-Selbst', 'Frustration'],
+  ['Kanäle', '2–14 · 43–23 · 32–54'],
+  ['Definiert', 'Ajna, Kehle, G, Sakral, Milz, Wurzel'],
+  ['Offen', 'Kopf, Herz/Ego, Solarplexus'],
+];
+---
+<details class="vision hd" open>
+  <summary>Mein Human Design</summary>
+  <div class="hd-body">
+    <svg class="hd-graph" viewBox="0 0 200 300" role="img" aria-label="Bodygraph: definiert Ajna, Kehle, G, Sakral, Milz, Wurzel; Kanäle 2–14, 43–23, 32–54">
+      <defs>
+        <linearGradient id="hd-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e6c25a" />
+          <stop offset="1" stop-color="#b8892a" />
+        </linearGradient>
+      </defs>
+      <g class="hd-paths">
+        <path d="M100 38 V48" /><path d="M100 122 V140" /><path d="M100 180 V205" />
+        <path d="M100 235 V255" /><path d="M88 122 Q60 150 55 205" /><path d="M112 122 Q140 150 145 205" />
+        <path d="M70 220 H85" /><path d="M115 220 H130" /><path d="M85 262 Q60 255 55 232" />
+        <path d="M115 262 Q140 255 145 232" /><path d="M120 160 L136 180" /><path d="M112 118 L140 176" />
+        <path d="M80 160 Q55 175 52 205" />
+      </g>
+      <g class="hd-channels">
+        <path d="M100 78 V92" /><path d="M100 180 V205" /><path d="M55 232 Q62 258 85 264" />
+      </g>
+      <polygon class="hd-open" points="100,8 82,38 118,38" />
+      <polygon class="hd-def" points="82,48 118,48 100,78" />
+      <rect class="hd-def" x="85" y="92" width="30" height="30" rx="4" />
+      <polygon class="hd-def" points="100,140 120,160 100,180 80,160" />
+      <polygon class="hd-open" points="133,186 150,170 153,190" />
+      <rect class="hd-def" x="85" y="205" width="30" height="30" rx="4" />
+      <polygon class="hd-def" points="40,200 40,240 70,220" />
+      <polygon class="hd-open" points="160,200 160,240 130,220" />
+      <rect class="hd-def" x="85" y="255" width="30" height="30" rx="4" />
+      <g class="hd-gates">
+        <text x="100" y="64">43</text><text x="100" y="101">23</text>
+        <text x="100" y="177">2</text><text x="100" y="214">14</text>
+        <text x="52" y="228">32</text><text x="94" y="268">54</text>
+      </g>
+    </svg>
+    <dl class="hd-facts">
+      {facts.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+    </dl>
+  </div>
+  <p class="hd-note">Reflexionsrahmen, keine Festlegung. Daten aus meinem Chart (allaboutHumanDesign.de); Gold = definiert.</p>
+</details>

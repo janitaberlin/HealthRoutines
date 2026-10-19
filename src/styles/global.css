@@ -510,3 +510,17 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .stars canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .stars p { position: absolute; top: 55%; left: 0; right: 0; margin: 0; text-align: center; font-family: var(--font-editorial); font-size: 2rem; letter-spacing: 0.12em; text-transform: uppercase; color: #f3dc9a; text-shadow: 0 0 18px rgb(212 170 90 / 0.6); animation: star-text 3.6s ease 0.6s both; }
 @keyframes star-text { 0% { opacity: 0; transform: translateY(8px); } 20%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+/* Human Design im Compass */
+.hd-body { display: grid; gap: 1.1rem; margin-top: 0.8rem; }
+.hd-graph { display: block; width: 62%; max-width: 230px; height: auto; margin: 0 auto; }
+.hd-paths path { fill: none; stroke: var(--border); stroke-width: 3; stroke-linecap: round; }
+.hd-channels path { fill: none; stroke: url(#hd-gold); stroke-width: 4; stroke-linecap: round; }
+.hd-def { fill: url(#hd-gold); stroke: #d4a437; stroke-width: 1; }
+.hd-open { fill: var(--surface); stroke: var(--muted); stroke-width: 1; }
+.hd-gates text { font-size: 7px; text-anchor: middle; fill: #141312; font-weight: 600; }
+.hd-facts { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1rem; }
+.hd-facts div:nth-last-child(-n+3) { grid-column: 1 / -1; }
+.hd-facts dt { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.hd-facts dd { margin: 0; font-size: 0.9rem; }
+.hd-note { margin: 0.7rem 0 0; font-size: 0.78rem; color: var(--muted); }

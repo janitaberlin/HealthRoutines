@@ -4,6 +4,7 @@ import Spark from '../../components/Spark.astro';
 import { url } from '../../lib/url';
 import { schedule } from '../../data/schedule';
 import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, levels, northStarVision, goalStates, identityDefaults, libraryTypes, visionAreas } from '../../data/compass';
+import HumanDesign from '../../components/HumanDesign.astro';
 ---
 <Base title="My Inner Compass" page="compass">
   <header class="compass-hero">
@@ -28,6 +29,7 @@ import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, 
     <label class="field-label">Wer bin ich?</label>
     <textarea class="field field-signature" rows="1" data-field="identity.signature" data-default={identityDefaults.signature}></textarea>
     <textarea class="field" rows="2" data-field="identity.design" data-default={identityDefaults.design} aria-label="Human Design (Reflexionsrahmen)"></textarea>
+    <HumanDesign />
     <details class="vision">
       <summary>Meine Talente</summary>
       <textarea class="field" rows="7" data-field="identity.talents" data-default={identityDefaults.talents}></textarea>
