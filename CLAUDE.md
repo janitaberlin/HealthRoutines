@@ -2,7 +2,7 @@
 
 Statische Website zum Abhaken täglicher Routinen (Astro 5, GitHub Pages). Live: https://janitaberlin.github.io/HealthRoutines/
 App-Name überall „JANITA“ (Janita 19.10.2026); Repo und Link bleiben HealthRoutines.
-Sprache mit dem Nutzer: Deutsch. Design seit 19.10.2026 dunkel und warm wie die App Rewire (Standard), hell per ◐ umschaltbar; Navigation als Leiste unten; Heute ist kurz wie Rewire: „Welcome, JANITA.“, Wochenkarte (`src/scripts/week-card.ts`), darunter 4 Bild-Kästen Vision/Routinen/Fokus/My Life (`src/scripts/home.ts`), Ritual-Karte, Jetzt dran. Abhakliste auf eigener Seite `src/pages/routinen/`. Türöffner bleibt beige. Schrift Inter (klar wie Rewire), Playfair Display nur für den Namen. Janitas Regeln (19.10.2026): nie kursiv; JANITA immer in Großbuchstaben; nicht „Ignite my spark“ (Ritual heißt „Remember Who You Are“, Karte mit Play-Knopf); Motto „Erfolg folgt der Freude.“ statt „I create. I lead. I live.“.
+Sprache mit dem Nutzer: Deutsch. Design seit 19.10.2026 dunkel und warm wie die App Rewire (Standard), hell per ◐ umschaltbar; Navigation als Leiste unten; Heute ist kurz wie Rewire: „Welcome, JANITA.“, Wochenkarte (`src/scripts/week-card.ts`), darunter 4 Bild-Kästen Vision/Routinen/Fokus/My Life (`src/scripts/home.ts`), Ritual-Karte, Jetzt dran. Abhakliste auf eigener Seite `src/pages/routinen/`. Türöffner schwarz (Janita 19.10.2026). Schrift Inter (klar wie Rewire), Playfair Display nur für den Namen. Janitas Regeln (19.10.2026): nie kursiv; JANITA immer in Großbuchstaben; nicht „Ignite my spark“ (Ritual heißt „Remember Who You Are“, Karte mit Play-Knopf); Motto „Erfolg folgt der Freude.“ statt „I create. I lead. I live.“.
 
 **Versionen:** Version 1 = Commit `1fe2ecc` (19.10.2026, siehe `VERSIONEN.md`). Alles danach ist Version 2; Janita will ab jetzt nur noch kleine Änderungen.
 
@@ -26,7 +26,7 @@ Inhalte: keine erfundenen medizinischen Fakten. Supplemente nur aus `/mnt/projec
 ## Code-Überblick
 
 - `src/lib/tracker.ts` – Haken, Serien, Auswertung (getestet in `tracker.test.ts`)
-- `src/pages/routinen/index.astro` + `src/scripts/today.ts` – Abhakliste; `src/pages/index.astro` – Heute (Startseite); Türöffner `#splash` (einmal pro App-Start ca. 2 Sek. „Welcome back, JANITA“ + Signatur aus dem Compass, Janita-Stil Beige/Schwarz, Schrift `--font-editorial` (Playfair Display als Ersatz für Editor’s Note); sessionStorage `splash-seen`)
+- `src/pages/routinen/index.astro` + `src/scripts/today.ts` – Abhakliste; `src/pages/index.astro` – Heute (Startseite); Türöffner `#splash` (einmal pro App-Start ca. 2 Sek. „Welcome back, JANITA“ + Signatur aus dem Compass, schwarz mit hellem Text, Schrift `--font-editorial` (Playfair Display als Ersatz für Editor’s Note); sessionStorage `splash-seen`)
 - `src/lib/time.ts` + `src/pages/zeit/index.astro` + `src/scripts/time-page.ts` – Zeiterfassung (Stoppuhr Business/Job, Woche, 8 Wochen, Nachtragen); Bereiche in `CATEGORIES`, ids nie ändern
 - `src/data/schedule.ts` + `src/lib/plan.ts` + `src/scripts/now.ts` – Tagesplan (Mo–Fr) und Karte „Jetzt dran“ auf Heute; Arbeitsblöcke (`work`) bieten die Stoppuhr an (`zeit/?start=business`)
 - Fokus-Block 25/50/90 Min. in der Stoppuhr (`focus` in `Running`, Wahl in `focus-minutes`), Signal per Ton
