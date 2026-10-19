@@ -9,6 +9,7 @@
   --accent-soft: #f5f1ea;
   --star: #111111;
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial: 'Playfair Display', 'Didot', 'Bodoni 72', Georgia, serif;
   --font-head: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   --radius: 12px;
   color-scheme: light;
@@ -405,6 +406,6 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 }
 .splash.is-leaving { opacity: 0; pointer-events: none; }
 .splash-eyebrow { margin: 0; font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); animation: splash-in 0.8s ease both; }
-.splash-name { margin: 0.4rem 0 0; font-family: var(--font-head); font-size: clamp(3.2rem, 15vw, 4.5rem); font-weight: 500; line-height: 1; letter-spacing: -0.01em; animation: splash-in 0.9s ease 0.2s both; }
-.splash-text { margin: 1.2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--text); font-family: var(--font-head); font-style: italic; font-size: 1.15rem; animation: splash-in 0.9s ease 0.5s both; }
+.splash-name { margin: 0.5rem 0 0; font-family: var(--font-editorial); font-size: clamp(2.8rem, 13vw, 4rem); font-weight: 400; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; padding-left: 0.12em; animation: splash-in 0.9s ease 0.2s both; }
+.splash-text { margin: 1.2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--text); font-family: var(--font-editorial); font-style: italic; font-size: 1.15rem; animation: splash-in 0.9s ease 0.5s both; }
 @keyframes splash-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
