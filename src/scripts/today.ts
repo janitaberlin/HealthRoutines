@@ -56,21 +56,85 @@ function celebrate(): void {
   const layer = document.createElement('div');
   layer.className = 'stars';
   layer.setAttribute('aria-hidden', 'true');
-  // Dichter Goldregen über die ganze App: feine goldene Tropfen und Glitzer, ca. 2 Sek.
-  for (let i = 0; i < 220; i++) {
-    const drop = document.createElement('span');
-    drop.className = i % 4 ? 'drop' : 'glitter';
-    drop.style.left = `${Math.random() * 100}%`;
-    drop.style.animationDelay = `${Math.random() * 0.9}s`;
-    drop.style.animationDuration = `${0.7 + Math.random() * 0.6}s`;
-    if (drop.className === 'drop') drop.style.height = `${14 + Math.random() * 26}px`;
-    layer.append(drop);
-  }
+  const canvas = document.createElement('canvas');
   const text = document.createElement('p');
   text.textContent = 'Alles erledigt';
-  layer.append(text);
+  layer.append(canvas, text);
   document.body.append(layer);
-  setTimeout(() => layer.remove(), 2600);
+  goldRain(canvas);
+  setTimeout(() => layer.remove(), 4300);
+}
+
+const RISE = 0.7;
+
+/** Feuerwerk „Goldregen“: Raketen steigen auf, platzen oben auf, goldene Funken hängen wie eine Traube nach unten. */
+function goldRain(canvas: HTMLCanvasElement): void {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const w = innerWidth;
+  const h = innerHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d')!;
+  ctx.scale(dpr, dpr);
+  type Spark = { x: number; y: number; vx: number; vy: number; life: number; delay: number };
+  const sparks: Spark[] = [];
+  const bursts = [
+    { x: w * 0.5, y: h * 0.2, delay: 0 },
+    { x: w * 0.22, y: h * 0.3, delay: 0.35 },
+    { x: w * 0.78, y: h * 0.27, delay: 0.6 },
+  ];
+  for (const b of bursts) {
+    for (let i = 0; i < 140; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 2 + Math.random() * 4.5;
+      sparks.push({ x: b.x, y: b.y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 1, delay: b.delay + RISE });
+    }
+  }
+  const start = performance.now();
+  let last = start;
+  // Rakete steigt von unten auf und platzt dann auf.
+  const rocket = (b: (typeof bursts)[number], t: number): void => {
+    const p = (t - b.delay) / RISE;
+    if (p < 0 || p > 1) return;
+    const eased = 1 - (1 - p) ** 2;
+    const y = h + 10 - (h + 10 - b.y) * eased;
+    ctx.fillStyle = 'rgba(255, 247, 220, 1)';
+    ctx.beginPath();
+    ctx.arc(b.x + Math.sin(p * 12) * 1.5, y, 2.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(243, 220, 154, 0.5)';
+    ctx.fillRect(b.x - 0.8 + (Math.random() - 0.5) * 2, y + 4, 1.6, 6 + Math.random() * 8);
+  };
+  const frame = (now: number): void => {
+    const t = (now - start) / 1000;
+    const dt = Math.min((now - last) / 16.7, 3);
+    last = now;
+    // Leicht ausblenden statt löschen, so entstehen die hängenden Goldspuren.
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const b of bursts) rocket(b, t);
+    for (const s of sparks) {
+      if (t < s.delay || s.life <= 0) continue;
+      s.vx *= 0.96 ** dt;
+      s.vy = s.vy * 0.96 ** dt + 0.09 * dt;
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      s.life -= 0.0075 * dt;
+      const a = Math.max(s.life, 0);
+      ctx.fillStyle = `rgba(243, 220, 154, ${a})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 1.4, 0, Math.PI * 2);
+      ctx.fill();
+      if (Math.random() < 0.08) {
+        ctx.fillStyle = `rgba(255, 247, 220, ${a})`;
+        ctx.fillRect(s.x - 1.5, s.y - 1.5, 3, 3);
+      }
+    }
+    if (t < 4) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
 }
 
 function grow(field: HTMLTextAreaElement): void {

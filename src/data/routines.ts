@@ -55,7 +55,7 @@ export const routines: Routine[] = [
   },
   {
     id: 'bewegung',
-    title: 'Move & Glow',
+    title: 'Dream Walk',
     subtitle: 'Freedom',
     icon: '↗',
     items: [
