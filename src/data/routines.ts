@@ -36,7 +36,7 @@ export const routines: Routine[] = [
   },
   {
     id: 'fokus',
-    title: 'Tagesfokus',
+    title: 'Daily Intention',
     subtitle: 'Inspired Action',
     icon: '✦',
     items: [
