@@ -2,7 +2,7 @@ import { routines } from '../data/routines';
 import { addDays, countDone, dateKey, mergeChecks, parseChecks, parseKey, ratio, streak } from '../lib/tracker';
 import { mergeSessions, parseSessions } from '../lib/time';
 import { parseCompass } from '../lib/compass';
-import { loadChecks, loadCompass, loadNotes, loadSessions, saveChecks, saveCompass, saveNotes, saveSessions } from './storage';
+import { loadBoard, loadChecks, loadCompass, loadNotes, loadSessions, parseBoard, saveBoard, saveChecks, saveCompass, saveNotes, saveSessions } from './storage';
 
 const WEEKS = 5;
 const WEEKDAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
@@ -92,7 +92,7 @@ function render(): void {
 const status = document.getElementById('backup-status')!;
 
 document.getElementById('export')!.addEventListener('click', () => {
-  const backup = { checks, sessions: loadSessions(), notes: loadNotes(), compass: loadCompass() };
+  const backup = { checks, sessions: loadSessions(), notes: loadNotes(), compass: loadCompass(), board: loadBoard() };
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -131,6 +131,11 @@ document.getElementById('import')!.addEventListener('change', async (e) => {
   }
   const importedCompass = isNew ? (data as { compass?: unknown }).compass : null;
   if (importedCompass && typeof importedCompass === 'object') saveCompass(parseCompass(JSON.stringify(importedCompass)));
+  const importedBoard = isNew ? parseBoard((data as { board?: unknown }).board) : [];
+  if (importedBoard.length) {
+    const current = loadBoard();
+    saveBoard([...current, ...importedBoard.filter((b) => !current.some((c) => c.id === b.id))]);
+  }
   status.textContent = `${days} Tage und ${importedSessions.length} Zeiteinträge übernommen.`;
   render();
 });

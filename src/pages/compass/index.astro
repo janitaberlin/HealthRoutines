@@ -56,6 +56,11 @@ import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, 
       ))}
     </div>
     <p class="compass-reflect">{lifeOutro}</p>
+    <h3 class="board-title">Mein Vision Board</h3>
+    <p class="compass-reflect">Bilder, die zeigen, wer ich bin und wie ich leben will. Sie bleiben nur auf diesem Handy und sind in der Sicherung enthalten.</p>
+    <div class="board-grid" id="board-grid"></div>
+    <label class="menu-btn board-add-btn">+ Bild hinzufügen<input type="file" id="board-add" accept="image/*" multiple hidden /></label>
+    <p class="board-status" id="board-status" aria-live="polite"></p>
   </section>
 
   <section class="compass-section" id="north-star">
@@ -156,5 +161,6 @@ import { bothText, rhythm, lifeAreas, lifeIntro, lifeOutro, becomeHerQuestions, 
   <script>
     import '../../scripts/compass-page';
     import '../../scripts/spark';
+    import '../../scripts/vision-board';
   </script>
 </Base>

@@ -367,6 +367,15 @@ a.timer-btn[data-cat='job'] { background: var(--surface-2); color: var(--text); 
 .life-area img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
 .life-area h3 { margin: 0.6rem 0 0.2rem; font-family: var(--font-head); font-size: 1.05rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 .life-area p { margin: 0; font-size: 0.95rem; line-height: 1.45; color: var(--muted); }
+.board-title { margin: 1.8rem 0 0.2rem; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.board-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin: 0.8rem 0; }
+.board-grid:empty { display: none; }
+.board-item { position: relative; margin: 0; }
+.board-item img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
+.board-remove { position: absolute; top: 0.4rem; right: 0.4rem; width: 1.8rem; height: 1.8rem; border: 0; border-radius: 50%; background: rgb(0 0 0 / 0.55); color: #fff; font-size: 1.1rem; line-height: 1; cursor: pointer; }
+.board-text { width: 100%; margin-top: 0.3rem; padding: 0.3rem 0; border: 0; border-bottom: 1px solid var(--border); background: transparent; color: var(--text); font: inherit; font-size: 0.85rem; }
+.board-add-btn { display: inline-block; cursor: pointer; }
+.board-status { margin: 0.4rem 0 0; font-size: 0.85rem; color: var(--muted); }
 .spark-life { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.8rem 0; }
 .spark-life figure { margin: 0; }
 .spark-life img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }

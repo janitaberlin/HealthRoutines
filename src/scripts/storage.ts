@@ -96,3 +96,37 @@ export function saveCompass(compass: Compass): void {
     // Speicher nicht verfügbar.
   }
 }
+
+/** Eigenes Vision Board: Bilder (verkleinert als JPG-Data-URL) mit kurzem Text. */
+export interface BoardImage {
+  id: string;
+  src: string;
+  text: string;
+}
+
+const BOARD_KEY = 'vision-board';
+
+export function parseBoard(raw: unknown): BoardImage[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((b) => b && typeof b.id === 'string' && typeof b.src === 'string' && b.src.startsWith('data:image/'))
+    .map((b) => ({ id: b.id, src: b.src, text: typeof b.text === 'string' ? b.text : '' }));
+}
+
+export function loadBoard(): BoardImage[] {
+  try {
+    return parseBoard(JSON.parse(localStorage.getItem(BOARD_KEY) ?? '[]'));
+  } catch {
+    return [];
+  }
+}
+
+/** Gibt false zurück, wenn der Speicher voll ist. */
+export function saveBoard(board: BoardImage[]): boolean {
+  try {
+    localStorage.setItem(BOARD_KEY, JSON.stringify(board));
+    return true;
+  } catch {
+    return false;
+  }
+}
