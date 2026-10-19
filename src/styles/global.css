@@ -435,7 +435,7 @@ button.state.state-evolving { background: var(--surface-2); }
 .week-days span.is-today { color: var(--text); font-weight: 700; }
 .week-days span.is-done::after { background: var(--text); border-color: var(--text); }
 .week-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.9rem; }
-.week-stats p { margin: 0; }
+.week-stats a { display: block; color: inherit; text-decoration: none; }
 .week-stats .label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 .week-stats .value { font-size: 2rem; font-weight: 300; line-height: 1.2; }
 .week-stats .value small { margin-left: 0.3rem; font-size: 0.9rem; }

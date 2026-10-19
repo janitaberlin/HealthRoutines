@@ -51,8 +51,8 @@ const boxes = [
       {['M', 'D', 'M', 'D', 'F', 'S', 'S'].map((d) => <span>{d}</span>)}
     </div>
     <div class="week-stats">
-      <p><span class="label">Heute</span><br /><span class="value" id="week-streak">0<small>von 0</small></span></p>
-      <p><span class="label">Create</span><br /><span class="value" id="week-invested">0<small>Std.</small></span></p>
+      <a href={url('routinen/')}><span class="label">Heute ›</span><br /><span class="value" id="week-streak">0<small>von 0</small></span></a>
+      <a href={url('zeit/')}><span class="label">Create ›</span><br /><span class="value" id="week-invested">0<small>Std.</small></span></a>
     </div>
   </section>
 
