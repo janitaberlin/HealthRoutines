@@ -486,5 +486,5 @@ button.state.state-evolving { background: var(--surface-2); }
 .home-box strong { font-size: 1.2rem; font-weight: 600; }
 .home-box span { font-size: 0.82rem; opacity: 0.85; }
 .routines-question { margin: -0.4rem 0 1rem; font-size: 1.25rem; font-weight: 300; line-height: 1.35; }
-/* Learn & Inspire: Schrift steht oben im Bild, deshalb oben ausrichten. */
+/* Learn & Inspire: Handy und Gesicht stehen oben im Bild, deshalb oben ausrichten. */
 img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
