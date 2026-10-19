@@ -31,6 +31,7 @@ export const routines: Routine[] = [
       { id: 'dankbar', text: 'Ich bin dankbar für …', note: true },
       { id: 'sport-morgen', text: '15 Min. Sport oder Sportkurs' },
       { id: 'outfit', text: 'Getting ready', hint: 'Outfit an, Make-up, Haare' },
+      { id: 'supplements', text: 'Supplements nehmen' },
     ],
   },
   {
@@ -42,15 +43,6 @@ export const routines: Routine[] = [
       { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', note: true, hint: 'z. B. Bewegung, Schönheit, Nähe, ein Moment für mich' },
       { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde' },
       { id: 'fokus-dienen', text: 'Wie und wem kann ich heute mit meinen Talenten dienen?', note: true },
-    ],
-  },
-  {
-    id: 'supplemente',
-    title: 'Supplemente',
-    icon: '◎',
-    items: [
-      { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
-      { id: 'supplements', text: 'Supplements nehmen' },
     ],
   },
   {
@@ -70,6 +62,7 @@ export const routines: Routine[] = [
     items: [
       { id: 'abendbeutel', text: 'Self Care: Pflege- und Gesundheitsroutine', hint: 'Bademantel, Haare hoch' },
       { id: 'tee-abend', text: 'Tee' },
+      { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
       { id: 'handy-weg', text: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Lesen' },
       { id: 'energie-plus', text: 'Was hat mir heute Energie gegeben?', note: true },
