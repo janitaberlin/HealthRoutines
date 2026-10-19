@@ -483,9 +483,12 @@ button.state.state-evolving { background: var(--surface-2); }
 .welcome { position: relative; }
 .welcome > :not(.welcome-wave) { position: relative; }
 .welcome-wave { position: absolute; top: -2.5rem; right: -1rem; width: 62%; max-width: 18rem; pointer-events: none; overflow: visible; }
-.wave-lines { transform-origin: 100% 0; animation: wave-sway 9s ease-in-out infinite; }
-@keyframes wave-sway { 0%, 100% { transform: rotate(0deg) translateX(0); } 50% { transform: rotate(-2.5deg) translateX(-3px); } }
-@media (prefers-reduced-motion: reduce) { .wave-lines { animation: none; } }
+.wave-lines { transform-origin: 100% 0; animation: wave-sway 6s ease-in-out infinite; }
+@keyframes wave-sway { 0%, 100% { transform: rotate(0deg) translate(0, 0) scaleY(1); } 50% { transform: rotate(-6deg) translate(-6px, 4px) scaleY(1.05); } }
+.wave-glitter { fill: #fff7dc; opacity: 0; filter: drop-shadow(0 0 1.5px #e6c25a); animation: wave-twinkle 4.4s ease-in-out infinite; }
+@keyframes wave-twinkle { 0%, 70%, 100% { opacity: 0; transform: scale(0.4); } 80% { opacity: 1; transform: scale(1); } }
+.wave-glitter { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { .wave-lines, .wave-glitter { animation: none; } }
 .welcome-name { letter-spacing: 0.02em; }
 
 /* Startseite: vier Bild-Kästen unter der Woche */

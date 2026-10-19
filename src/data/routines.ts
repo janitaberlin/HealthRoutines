@@ -48,10 +48,12 @@ export const routines: Routine[] = [
   {
     id: 'bewegung',
     title: 'Dream Walk',
-    subtitle: 'Freedom',
+    subtitle: 'Mittags · Freedom',
     icon: '↗',
     items: [
-      { id: 'walk-mittag', text: 'Power Walk 5k Steps', hint: 'mittags' },
+      { id: 'lunch', text: 'Healthy Lunch' },
+      { id: 'walk-mittag', text: 'Power Walk 5k Steps' },
+      { id: 'inspiration', text: 'Inspirational Talk oder Podcast', hint: 'gern beim Walk' },
     ],
   },
   {
