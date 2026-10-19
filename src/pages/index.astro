@@ -33,7 +33,7 @@ const boxes = [
       } catch {}
       const close = () => { el.classList.add('is-leaving'); setTimeout(() => el.remove(), 700); };
       el.addEventListener('click', close);
-      setTimeout(close, 2000);
+      setTimeout(close, 2400);
     })();
   </script>
   <section class="welcome">
@@ -61,15 +61,6 @@ const boxes = [
     </div>
   </section>
 
-  <section class="north-star">
-    <div class="north-star-head">
-      <p class="eyebrow">My Goals</p>
-      <a href={url('compass/#north-star')} class="muted small-link">Vision ansehen</a>
-    </div>
-    <ol class="north-star-list" id="north-star-list"></ol>
-    <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
-  </section>
-
   <div class="home-boxes">
     {boxes.map((b) => (
       <a class="home-box" href={url(b.href)}>
@@ -78,6 +69,15 @@ const boxes = [
       </a>
     ))}
   </div>
+
+  <section class="north-star">
+    <div class="north-star-head">
+      <p class="eyebrow">My Goals</p>
+      <a href={url('compass/#north-star')} class="muted small-link">Vision ansehen</a>
+    </div>
+    <ol class="north-star-list" id="north-star-list"></ol>
+    <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
+  </section>
 
   <button type="button" class="ritual-card" data-ignite>
     <span class="ritual-text">
