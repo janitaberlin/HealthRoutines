@@ -29,7 +29,7 @@ export const routines: Routine[] = [
     subtitle: 'Body & Beauty',
     icon: '☀︎',
     items: [
-      { id: 'tee-morgen', text: 'Frischer Tee', hint: 'z. B. grüner Tee mit Zitrone: sanftes Koffein für wache, ruhige Energie, Zitrone für Frische und etwas Vitamin C' },
+      { id: 'tee-morgen', text: 'Frischer Tee, z. B. grüner Tee mit Zitrone', hint: 'sanftes Koffein für wache, ruhige Energie, Zitrone für Frische und etwas Vitamin C' },
       { id: 'dankbar', text: 'Ich bin dankbar für …', note: true },
       { id: 'sport-morgen', text: 'Move & Glow', hint: '15 Min. oder Kurs: MWH Class, Reformer Pilates, Joggen, KINRGY, Pamela Reif Glutes' },
       { id: 'outfit', text: 'Getting ready', hint: 'Outfit an, Make-up, Haare' },
