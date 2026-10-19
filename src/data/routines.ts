@@ -70,6 +70,7 @@ export const routines: Routine[] = [
     icon: '☾',
     items: [
       { id: 'abendbeutel', text: 'Self Care: Pflege- und Gesundheitsroutine', hint: 'Bademantel, Haare hoch' },
+      { id: 'tee-abend', text: 'Tee' },
       { id: 'handy-weg', text: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Lesen' },
       { id: 'energie-plus', text: 'Was hat mir heute Energie gegeben?', note: true },
