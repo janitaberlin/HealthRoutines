@@ -75,14 +75,6 @@ import CycleLog from '../components/CycleLog.astro';
     </div>
   </section>
 
-  <section class="cycle-mini">
-    <a class="cycle-mini-head" href={url('zyklus/')}>
-      <span><span class="eyebrow" data-cycle-day>Heute</span><strong data-cycle-phase>Zyklus</strong></span>
-      <span class="cycle-mini-link">Zyklus ›</span>
-    </a>
-    <CycleLog />
-  </section>
-
   <div class="home-boxes">
     {boxes.map((b) => (
       <a class="home-box" href={url(b.href)}>
@@ -91,6 +83,14 @@ import CycleLog from '../components/CycleLog.astro';
       </a>
     ))}
   </div>
+
+  <section class="cycle-mini">
+    <a class="cycle-mini-head" href={url('zyklus/')}>
+      <span><span class="eyebrow" data-cycle-day>Heute</span><strong data-cycle-phase>Zyklus</strong></span>
+      <span class="cycle-mini-link">Zyklus ›</span>
+    </a>
+    <CycleLog />
+  </section>
 
   <section class="north-star">
     <div class="north-star-head">
