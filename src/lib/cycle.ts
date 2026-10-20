@@ -8,11 +8,12 @@ export interface CycleData {
 
 export type Phase = 'periode' | 'follikel' | 'eisprung' | 'luteal';
 
-export const PHASES: { id: Phase; label: string }[] = [
-  { id: 'periode', label: 'Periode' },
-  { id: 'follikel', label: 'Follikelphase' },
-  { id: 'eisprung', label: 'Eisprung' },
-  { id: 'luteal', label: 'Lutealphase' },
+/** Tipps als Orientierung im Sinne von Cycle Syncing, keine medizinische Aussage; die eigene Energie zählt mehr. */
+export const PHASES: { id: Phase; label: string; tip: string }[] = [
+  { id: 'periode', label: 'Periode', tip: 'Tempo rausnehmen: sanfte Bewegung wie Spazieren oder Yoga, Wärme, früher ins Bett. Gute Zeit für Rückblick und Planen statt großer Projekte.' },
+  { id: 'follikel', label: 'Follikelphase', tip: 'Viele spüren jetzt steigende Energie: Raum für Neues, Ideen, Konzepte und kraftvolleres Training.' },
+  { id: 'eisprung', label: 'Eisprung', tip: 'Oft die sichtbarste Zeit: Calls, Videos, Präsentationen und wichtige Gespräche hierhin legen.' },
+  { id: 'luteal', label: 'Lutealphase', tip: 'Zu Ende bringen statt neu starten: Details, Aufräumen, Routinen. Gegen Ende mehr Pausen und Ruhe einplanen.' },
 ];
 
 export const ENERGY = ['Total low', 'Low', 'Okay', 'High', 'Total high'];

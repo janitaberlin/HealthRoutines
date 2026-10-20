@@ -583,3 +583,5 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .phase-bar b { display: block; height: 100%; background: linear-gradient(90deg, #d4a437, #e6c25a); }
 .phase-val { grid-column: 2; font-size: 0.78rem; color: var(--muted); }
 .cycle-note { margin-top: 1.6rem; font-size: 0.78rem; }
+
+.cycle-tip { margin: 0.6rem 0 0; padding-left: 0.7rem; border-left: 2px solid #d4a437; font-size: 0.88rem; color: var(--text); }

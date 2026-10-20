@@ -6,6 +6,7 @@ import { loadCycle, saveCycle } from './storage';
 const today = dateKey(new Date());
 let day = today;
 const PHASE_LABEL = Object.fromEntries(PHASES.map((p) => [p.id, p.label])) as Record<Phase, string>;
+const PHASE_TIP = Object.fromEntries(PHASES.map((p) => [p.id, p.tip])) as Record<Phase, string>;
 const DAYS = 56;
 
 function render(): void {
@@ -17,6 +18,10 @@ function render(): void {
   }
   for (const el of document.querySelectorAll('[data-cycle-phase]')) {
     el.textContent = info ? PHASE_LABEL[info.phase] : 'Noch keine Periode eingetragen';
+  }
+  for (const el of document.querySelectorAll<HTMLElement>('[data-cycle-tip]')) {
+    el.hidden = !info;
+    el.textContent = info ? PHASE_TIP[info.phase] : '';
   }
   for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-cycle-period]')) {
     btn.setAttribute('aria-pressed', String(data.periods.includes(day)));
