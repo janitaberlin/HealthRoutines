@@ -1,0 +1,15 @@
+---
+/** Eintragen: Periode an/aus und Energie 1–5 für einen Tag. Logik in src/scripts/cycle.ts. */
+import { ENERGY } from '../lib/cycle';
+---
+<div class="cycle-log">
+  <button class="cycle-period" type="button" data-cycle-period aria-pressed="false">
+    <span class="cycle-drop" aria-hidden="true"></span> Periode
+  </button>
+  <p class="field-label">Energie</p>
+  <div class="energy-chips" role="group" aria-label="Energie">
+    {ENERGY.map((label, i) => (
+      <button type="button" class="energy-chip" data-energy={i + 1} aria-pressed="false">{label}</button>
+    ))}
+  </div>
+</div>

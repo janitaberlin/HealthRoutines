@@ -1,3 +1,4 @@
+import { parseCycle, type CycleData } from '../lib/cycle';
 import { parseReflections, type Reflections } from '../lib/reflection';
 import { parseCompass, type Compass } from '../lib/compass';
 import { isCategory, parseSessions, type Running, type Session } from '../lib/time';
@@ -145,6 +146,24 @@ export function loadReflections(): Reflections {
 export function saveReflections(reflections: Reflections): void {
   try {
     localStorage.setItem(REFLECTION_KEY, JSON.stringify(reflections));
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}
+
+const CYCLE_KEY = 'cycle';
+
+export function loadCycle(): CycleData {
+  try {
+    return parseCycle(JSON.parse(localStorage.getItem(CYCLE_KEY) ?? '{}'));
+  } catch {
+    return parseCycle(null);
+  }
+}
+
+export function saveCycle(cycle: CycleData): void {
+  try {
+    localStorage.setItem(CYCLE_KEY, JSON.stringify(cycle));
   } catch {
     // Speicher nicht verfügbar.
   }

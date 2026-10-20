@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import CycleLog from '../../components/CycleLog.astro';
+import { PHASES } from '../../lib/cycle';
+---
+<Base title="Zyklus" page="zyklus">
+  <h1 class="page-title">Zyklus</h1>
+
+  <section class="cycle-card compass-card">
+    <div class="cycle-head">
+      <div>
+        <p class="eyebrow" data-cycle-day>Heute</p>
+        <h2 class="cycle-phase" data-cycle-phase>Noch keine Periode eingetragen</h2>
+      </div>
+      <input type="date" class="cycle-date" id="cycle-date" aria-label="Tag wählen" />
+    </div>
+    <CycleLog />
+  </section>
+
+  <h2 class="section-title">Energie und Zyklus</h2>
+  <p class="muted">Die letzten 8 Wochen: Linie = deine Energie, Band darunter = Phase.</p>
+  <div id="cycle-chart" class="cycle-chart"></div>
+  <ul class="cycle-legend">
+    {PHASES.map((p) => <li><i class={`ph-${p.id}`}></i>{p.label}</li>)}
+  </ul>
+
+  <h2 class="section-title">Energie je Phase</h2>
+  <div id="cycle-phases" class="cycle-phases"></div>
+
+  <p class="muted cycle-note">Phasen sind geschätzt nach Kalender aus deinen Periodentagen: Eisprung etwa 14 Tage vor der nächsten Periode, Zykluslänge aus deinen eigenen Daten (sonst 28 Tage). Kein Eisprungnachweis und kein Ersatz für ärztliche Abklärung.</p>
+
+  <script>
+    import '../../scripts/cycle';
+  </script>
+</Base>

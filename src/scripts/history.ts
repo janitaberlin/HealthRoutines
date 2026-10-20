@@ -3,7 +3,8 @@ import { addDays, countDone, dateKey, mergeChecks, parseChecks, parseKey, ratio,
 import { mergeSessions, parseSessions } from '../lib/time';
 import { parseCompass } from '../lib/compass';
 import { parseReflections } from '../lib/reflection';
-import { loadBoard, loadChecks, loadCompass, loadNotes, loadReflections, loadSessions, parseBoard, saveBoard, saveChecks, saveCompass, saveNotes, saveReflections, saveSessions } from './storage';
+import { mergeCycle, parseCycle } from '../lib/cycle';
+import { loadBoard, loadChecks, loadCompass, loadNotes, loadReflections, loadSessions, loadCycle, saveCycle, parseBoard, saveBoard, saveChecks, saveCompass, saveNotes, saveReflections, saveSessions } from './storage';
 
 const WEEKS = 5;
 const WEEKDAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
@@ -93,7 +94,7 @@ function render(): void {
 const status = document.getElementById('backup-status')!;
 
 document.getElementById('export')!.addEventListener('click', () => {
-  const backup = { checks, sessions: loadSessions(), notes: loadNotes(), compass: loadCompass(), board: loadBoard(), reflections: loadReflections() };
+  const backup = { checks, sessions: loadSessions(), notes: loadNotes(), compass: loadCompass(), board: loadBoard(), reflections: loadReflections(), cycle: loadCycle() };
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -139,6 +140,7 @@ document.getElementById('import')!.addEventListener('change', async (e) => {
   }
   const importedReflections = isNew ? parseReflections((data as { reflections?: unknown }).reflections) : {};
   saveReflections({ ...importedReflections, ...loadReflections() });
+  if (isNew) saveCycle(mergeCycle(loadCycle(), parseCycle((data as { cycle?: unknown }).cycle)));
   status.textContent = `${days} Tage und ${importedSessions.length} Zeiteinträge übernommen.`;
   render();
 });

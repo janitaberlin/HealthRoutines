@@ -13,6 +13,7 @@ const boxes = [
   { id: 'fokus', eyebrow: '03 · Create & Build', title: 'Fokus', sub: 'Stoppuhr starten', href: 'zeit/', img: 'create-build' },
   { id: 'life', eyebrow: '04 · My Life', title: 'My Life', sub: 'Identität & Vision Board', href: 'compass/#my-life', img: 'learn-inspire' },
 ];
+import CycleLog from '../components/CycleLog.astro';
 ---
 <Base title="JANITA" page="heute">
   <div class="splash" id="splash" aria-hidden="true">
@@ -72,6 +73,14 @@ const boxes = [
       <a href={url('routinen/')}><span class="label">Heute ›</span><br /><span class="value" id="week-streak">0<small>von 0</small></span></a>
       <a href={url('zeit/')}><span class="label">Create ›</span><br /><span class="value" id="week-invested">0<small>Std.</small></span></a>
     </div>
+  </section>
+
+  <section class="cycle-mini">
+    <a class="cycle-mini-head" href={url('zyklus/')}>
+      <span><span class="eyebrow" data-cycle-day>Heute</span><strong data-cycle-phase>Zyklus</strong></span>
+      <span class="cycle-mini-link">Zyklus ›</span>
+    </a>
+    <CycleLog />
   </section>
 
   <div class="home-boxes">
@@ -135,5 +144,6 @@ const boxes = [
     import '../scripts/north-star';
     import '../scripts/week-card';
     import '../scripts/home';
+    import '../scripts/cycle';
   </script>
 </Base>
