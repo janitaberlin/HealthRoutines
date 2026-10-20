@@ -75,6 +75,15 @@ import CycleLog from '../components/CycleLog.astro';
     </div>
   </section>
 
+  <a class="home-notice" id="sunday-notice" href={url('verlauf/#reflection')} hidden>
+    <span class="eyebrow">Sonntag</span><strong>Plan your week &amp; Reflexion ›</strong>
+  </a>
+  <div class="home-notice" id="backup-notice" hidden>
+    <span class="eyebrow">Monatliche Sicherung</span>
+    <strong>Alles in Google Drive sichern</strong>
+    <button type="button" class="menu-btn" id="backup-now">Jetzt sichern</button>
+  </div>
+
   <div class="home-boxes">
     {boxes.map((b) => (
       <a class="home-box" href={url(b.href)}>
@@ -145,5 +154,6 @@ import CycleLog from '../components/CycleLog.astro';
     import '../scripts/week-card';
     import '../scripts/home';
     import '../scripts/cycle';
+    import '../scripts/notices';
   </script>
 </Base>

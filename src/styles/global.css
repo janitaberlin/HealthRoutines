@@ -585,3 +585,18 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .cycle-note { margin-top: 1.6rem; font-size: 0.78rem; }
 
 .cycle-tip { margin: 0.6rem 0 0; padding-left: 0.7rem; border-left: 2px solid #d4a437; font-size: 0.88rem; color: var(--text); }
+
+/* Hinweise auf Heute, Meine Antworten, Nutzung */
+.home-notice { display: block; margin: 0 0 1rem; padding: 0.9rem 1.1rem; border: 1px solid #d4a437; border-radius: 18px; background: var(--surface-2); color: inherit; text-decoration: none; }
+.home-notice strong { display: block; margin-top: 0.2rem; font-weight: 500; }
+.home-notice .menu-btn { margin-top: 0.7rem; }
+.answers-link { display: block; margin: 0 0 1.4rem; padding: 0.9rem 1.1rem; border: 1px solid var(--border); border-radius: 18px; color: inherit; text-decoration: none; font-weight: 500; }
+.answers-link span { display: block; margin-top: 0.2rem; font-size: 0.82rem; font-weight: 400; color: var(--muted); }
+.answer-filter { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0.5rem; }
+.answer-filter .energy-chip { padding: 0.45rem 0.8rem; }
+.answer-day { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.answer-day h2 { margin: 0 0 0.4rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #d4a437; }
+.answer-q { margin: 0.6rem 0 0.15rem; font-size: 0.8rem; color: var(--muted); }
+.answer-a { margin: 0; white-space: pre-line; }
+.usage-row { display: grid; grid-template-columns: 9.5rem 1fr 1.6rem; gap: 0.7rem; align-items: center; padding: 0.4rem 0; font-size: 0.88rem; }
+.usage-n { text-align: right; color: var(--muted); }

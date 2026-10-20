@@ -11,7 +11,7 @@ for (const field of document.querySelectorAll<HTMLTextAreaElement>('[data-reflec
   field.value = loadReflections()[week]?.[key] ?? '';
   field.addEventListener('input', () => {
     const all = loadReflections();
-    const entry = { plan: '', become: '', outcome: '', ...all[week], [key]: field.value };
+    const entry: WeekEntry = Object.assign({ plan: '', become: '', outcome: '' }, all[week], { [key]: field.value });
     if (entry.plan.trim() || entry.become.trim() || entry.outcome.trim()) all[week] = entry;
     else delete all[week];
     saveReflections(all);

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
 ---
 <Base title="Verlauf" page="verlauf">
   <h1 class="page-title">Verlauf</h1>
@@ -17,16 +18,21 @@ import Base from '../../layouts/Base.astro';
     <div id="reflection-past" class="reflection-past" hidden></div>
   </section>
 
+  <a class="answers-link" href={url('antworten/')}>Meine Antworten<span>Alles, was ich in Routinen und Reflexion geschrieben habe ›</span></a>
+
   <section class="overview" id="overview"></section>
 
   <h2 class="section-title">Pro Routine</h2>
   <div id="routine-stats" class="routine-stats"></div>
 
+  <h2 class="section-title">Was ich nutze</h2>
+  <div id="usage" class="usage"></div>
+
   <section class="backup">
     <h2 class="section-title">Sicherung</h2>
-    <p class="muted">Deine Haken und Zeiten werden auf diesem Gerät gespeichert. Mit einer Sicherung kannst du sie auf ein anderes Gerät mitnehmen.</p>
+    <p class="muted">Alles liegt nur auf diesem Handy: Routinen, Antworten, Reflexion, Zyklus, Zeiten, Compass. Einmal im Monat erinnert dich Heute daran, alles als eine Datei in Google Drive zu sichern.</p>
     <div class="backup-actions">
-      <button class="menu-btn" type="button" id="export">Sicherung herunterladen</button>
+      <button class="menu-btn" type="button" id="export">Jetzt sichern (Drive)</button>
       <label class="menu-btn">
         Sicherung einspielen
         <input type="file" id="import" accept="application/json,.json" hidden />

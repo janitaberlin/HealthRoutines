@@ -4,7 +4,9 @@ import { mergeSessions, parseSessions } from '../lib/time';
 import { parseCompass } from '../lib/compass';
 import { parseReflections } from '../lib/reflection';
 import { mergeCycle, parseCycle } from '../lib/cycle';
-import { loadBoard, loadChecks, loadCompass, loadNotes, loadReflections, loadSessions, loadCycle, saveCycle, parseBoard, saveBoard, saveChecks, saveCompass, saveNotes, saveReflections, saveSessions } from './storage';
+import { AREAS, trackedSince, usageDays } from '../lib/usage';
+import { daysBetween } from '../lib/cycle';
+import { loadBoard, loadChecks, loadLastBackup, loadNotes, loadReflections, loadSessions, loadCycle, loadUsage, saveCycle, parseBoard, saveBoard, saveChecks, saveCompass, saveNotes, saveReflections, saveSessions, shareBackup } from './storage';
 
 const WEEKS = 5;
 const WEEKDAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
@@ -93,15 +95,39 @@ function render(): void {
 
 const status = document.getElementById('backup-status')!;
 
-document.getElementById('export')!.addEventListener('click', () => {
-  const backup = { checks, sessions: loadSessions(), notes: loadNotes(), compass: loadCompass(), board: loadBoard(), reflections: loadReflections(), cycle: loadCycle() };
-  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `health-routines-${today}.json`;
-  a.click();
-  URL.revokeObjectURL(a.href);
+function backupStatus(): void {
+  const last = loadLastBackup();
+  status.textContent = last ? `Letzte Sicherung: ${parseKey(last).toLocaleDateString('de-DE')}` : 'Noch keine Sicherung.';
+}
+
+document.getElementById('export')!.addEventListener('click', async () => {
+  if (await shareBackup()) backupStatus();
 });
+
+/** Was ich in den letzten 30 Tagen genutzt habe. */
+function renderUsage(): void {
+  const box = document.getElementById('usage');
+  if (!box) return;
+  const usage = loadUsage();
+  const since = trackedSince(usage);
+  const days = usageDays(usage, today);
+  const span = since ? Math.min(30, daysBetween(since, today) + 1) : 0;
+  const intro = document.createElement('p');
+  intro.className = 'muted';
+  intro.textContent = span > 1 ? `An wie vielen der letzten ${span} Tage du jeden Bereich geöffnet hast.` : 'Wird seit heute gezählt. Nach ein paar Wochen siehst du hier, was du wirklich nutzt.';
+  box.replaceChildren(
+    intro,
+    ...AREAS.map((a) => {
+      const row = document.createElement('div');
+      row.className = 'usage-row';
+      row.innerHTML = '<span></span><span class="phase-bar"><b></b></span><span class="usage-n"></span>';
+      row.firstElementChild!.textContent = a.label;
+      (row.querySelector('b') as HTMLElement).style.width = span ? `${(days[a.id] / span) * 100}%` : '0';
+      row.lastElementChild!.textContent = `${days[a.id]}`;
+      return row;
+    }),
+  );
+}
 
 document.getElementById('import')!.addEventListener('change', async (e) => {
   const file = (e.target as HTMLInputElement).files?.[0];
@@ -146,3 +172,5 @@ document.getElementById('import')!.addEventListener('change', async (e) => {
 });
 
 render();
+renderUsage();
+backupStatus();

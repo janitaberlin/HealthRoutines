@@ -1,8 +1,9 @@
+import { parseUsage, recordUse, type Usage } from '../lib/usage';
 import { parseCycle, type CycleData } from '../lib/cycle';
 import { parseReflections, type Reflections } from '../lib/reflection';
 import { parseCompass, type Compass } from '../lib/compass';
 import { isCategory, parseSessions, type Running, type Session } from '../lib/time';
-import { parseChecks, type Checks } from '../lib/tracker';
+import { dateKey, parseChecks, type Checks } from '../lib/tracker';
 
 const KEY = 'routine-checks';
 
@@ -167,4 +168,81 @@ export function saveCycle(cycle: CycleData): void {
   } catch {
     // Speicher nicht verfügbar.
   }
+}
+
+const USAGE_KEY = 'usage';
+
+export function loadUsage(): Usage {
+  try {
+    return parseUsage(JSON.parse(localStorage.getItem(USAGE_KEY) ?? '{}'));
+  } catch {
+    return {};
+  }
+}
+
+/** Merkt sich, dass ein Bereich heute genutzt wurde. */
+export function trackUse(area: string): void {
+  try {
+    localStorage.setItem(USAGE_KEY, JSON.stringify(recordUse(loadUsage(), dateKey(new Date()), area)));
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}
+
+const BACKUP_KEY = 'backup-last';
+
+export function loadLastBackup(): string | null {
+  try {
+    return localStorage.getItem(BACKUP_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function saveLastBackup(day: string): void {
+  try {
+    localStorage.setItem(BACKUP_KEY, day);
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}
+
+/** Alles, was die App speichert, als eine Sicherungsdatei. */
+export function buildBackup(): string {
+  const backup = {
+    checks: loadChecks(),
+    sessions: loadSessions(),
+    notes: loadNotes(),
+    compass: loadCompass(),
+    board: loadBoard(),
+    reflections: loadReflections(),
+    cycle: loadCycle(),
+    usage: loadUsage(),
+  };
+  return JSON.stringify(backup, null, 2);
+}
+
+/**
+ * Sicherung teilen (iPhone: Teilen-Menü, dort Google Drive oder „In Dateien sichern“), sonst herunterladen.
+ * Gibt false zurück, wenn abgebrochen.
+ */
+export async function shareBackup(): Promise<boolean> {
+  const day = dateKey(new Date());
+  const name = `janita-sicherung-${day}.json`;
+  const file = new File([buildBackup()], name, { type: 'application/json' });
+  if (navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: 'JANITA Sicherung' });
+    } catch {
+      return false;
+    }
+  } else {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+  saveLastBackup(day);
+  return true;
 }

@@ -1,7 +1,7 @@
 import { identityDefaults, sparkQuestions } from '../data/compass';
 import { pickForDay } from '../lib/compass';
 import { dateKey } from '../lib/tracker';
-import { loadCompass, saveCompass } from './storage';
+import { loadCompass, saveCompass, trackUse } from './storage';
 
 const STEPS = ['Remember', 'Feel', 'Create'];
 const dialog = document.getElementById('spark') as HTMLDialogElement | null;
@@ -48,6 +48,7 @@ if (dialog) {
     fill();
     show(1);
     dialog.showModal();
+    trackUse('ritual');
   });
   document.getElementById('spark-back')!.addEventListener('click', () => show(step - 1));
   document.getElementById('spark-next')!.addEventListener('click', () => {

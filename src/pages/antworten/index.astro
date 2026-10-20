@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Meine Antworten" page="antworten">
+  <h1 class="page-title">Meine Antworten</h1>
+  <p class="muted">Alles, was ich in meinen Routinen, im Ritual und in der Wochenreflexion geschrieben habe, neueste zuerst.</p>
+  <div class="answer-filter" id="answer-filter" role="group" aria-label="Filter"></div>
+  <div id="answers" class="answers"></div>
+  <script>
+    import '../../scripts/answers';
+  </script>
+</Base>

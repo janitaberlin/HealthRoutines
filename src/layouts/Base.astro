@@ -4,7 +4,7 @@ import { url } from '../lib/url';
 
 interface Props {
   title: string;
-  page: 'heute' | 'routinen' | 'compass' | 'zeit' | 'verlauf' | 'zyklus';
+  page: 'heute' | 'routinen' | 'compass' | 'zeit' | 'verlauf' | 'zyklus' | 'antworten';
 }
 const { title, page } = Astro.props;
 const appName = 'JANITA';
@@ -49,7 +49,7 @@ const pageTitle = title === appName ? title : `${title} · ${appName}`;
       } catch {}
     </script>
   </head>
-  <body>
+  <body data-page={page}>
     <header class="site-header">
       <a class="site-title" href={url('')} aria-label={`Startseite: ${appName}`}>
         <span>DREAM BIG</span>
@@ -74,6 +74,8 @@ const pageTitle = title === appName ? title : `${title} · ${appName}`;
     <script>
       import '../scripts/theme';
       import '../scripts/refresh';
+      import { trackUse } from '../scripts/storage';
+      trackUse(document.body.dataset.page ?? '');
     </script>
   </body>
 </html>
