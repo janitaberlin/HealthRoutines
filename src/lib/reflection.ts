@@ -1,7 +1,8 @@
 import { addDays, parseKey } from './tracker';
 
-/** Wochenreflexion: Montag der Woche → Antworten. */
+/** Plan your week + Wochenreflexion: Montag der Woche → Antworten. */
 export interface WeekEntry {
+  plan: string;
   become: string;
   outcome: string;
 }
@@ -30,9 +31,10 @@ export function parseReflections(raw: unknown): Reflections {
   for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(k) || !v || typeof v !== 'object') continue;
     const e = v as Record<string, unknown>;
+    const plan = typeof e.plan === 'string' ? e.plan : '';
     const become = typeof e.become === 'string' ? e.become : '';
     const outcome = typeof e.outcome === 'string' ? e.outcome : '';
-    if (become || outcome) out[k] = { become, outcome };
+    if (plan || become || outcome) out[k] = { plan, become, outcome };
   }
   return out;
 }

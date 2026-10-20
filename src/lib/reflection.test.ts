@@ -15,7 +15,8 @@ describe('reflection', () => {
 
   it('liest gespeicherte Antworten robust', () => {
     const r = parseReflections({ '2026-10-19': { become: 'mutiger', outcome: 3 }, quatsch: { become: 'x' }, '2026-10-12': { become: '' } });
-    expect(r).toEqual({ '2026-10-19': { become: 'mutiger', outcome: '' } });
+    expect(r).toEqual({ '2026-10-19': { plan: '', become: 'mutiger', outcome: '' } });
+    expect(parseReflections({ '2026-10-26': { plan: 'Launch' } })['2026-10-26'].plan).toBe('Launch');
     expect(parseReflections('kaputt')).toEqual({});
   });
 });

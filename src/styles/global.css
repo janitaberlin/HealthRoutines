@@ -540,6 +540,7 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 /* Wochenreflexion im Verlauf */
 .reflection { margin: 0 0 1.4rem; }
 .reflection .field-label:first-of-type { margin-top: 0.5rem; }
+.reflection-sub { margin-top: 1.3rem; }
 .reflection-past { margin-top: 1rem; border-top: 1px solid var(--border); }
 .reflection-old { padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
 .reflection-old summary { cursor: pointer; color: var(--muted); font-size: 0.85rem; }

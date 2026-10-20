@@ -6,7 +6,10 @@ import Base from '../../layouts/Base.astro';
   <p class="muted">Die letzten 5 Wochen. Je kräftiger ein Tag, desto mehr war erledigt.</p>
 
   <section class="reflection compass-card" id="reflection">
-    <p class="eyebrow">Wochenreflexion · <span id="reflection-week"></span></p>
+    <p class="eyebrow">Plan your week · <span id="reflection-week"></span></p>
+    <label class="field-label" for="reflect-plan">Was sind meine Money-Making Activities diese Woche?</label>
+    <textarea class="field" id="reflect-plan" rows="3" data-reflect="plan" placeholder="Was bringt diese Woche Umsatz?"></textarea>
+    <p class="eyebrow reflection-sub">Wochenreflexion</p>
     <label class="field-label" for="reflect-become">Who did I become this week?</label>
     <textarea class="field" id="reflect-become" rows="3" data-reflect="become" placeholder="Wer bin ich diese Woche geworden?"></textarea>
     <label class="field-label" for="reflect-outcome">What is the outcome?</label>

@@ -2,7 +2,7 @@ import { weekLabel, weekStart, type WeekEntry } from '../lib/reflection';
 import { dateKey } from '../lib/tracker';
 import { loadReflections, saveReflections } from './storage';
 
-/** Wochenreflexion im Verlauf: zwei Fragen für die laufende Woche, frühere Wochen darunter. */
+/** Plan your week + Wochenreflexion im Verlauf: drei Fragen für die laufende Woche, frühere Wochen darunter. */
 const week = weekStart(dateKey(new Date()));
 document.getElementById('reflection-week')!.textContent = weekLabel(week);
 
@@ -11,8 +11,8 @@ for (const field of document.querySelectorAll<HTMLTextAreaElement>('[data-reflec
   field.value = loadReflections()[week]?.[key] ?? '';
   field.addEventListener('input', () => {
     const all = loadReflections();
-    const entry = { become: '', outcome: '', ...all[week], [key]: field.value };
-    if (entry.become.trim() || entry.outcome.trim()) all[week] = entry;
+    const entry = { plan: '', become: '', outcome: '', ...all[week], [key]: field.value };
+    if (entry.plan.trim() || entry.become.trim() || entry.outcome.trim()) all[week] = entry;
     else delete all[week];
     saveReflections(all);
   });
@@ -29,7 +29,7 @@ for (const [k, e] of past) {
   const summary = document.createElement('summary');
   summary.textContent = weekLabel(k);
   item.append(summary);
-  for (const [label, text] of [['Who did I become?', e.become], ['Outcome', e.outcome]]) {
+  for (const [label, text] of [['Money-Making Activities', e.plan], ['Who did I become?', e.become], ['Outcome', e.outcome]]) {
     if (!text.trim()) continue;
     const h = document.createElement('p');
     h.className = 'eyebrow';
