@@ -53,7 +53,7 @@ export const routines: Routine[] = [
       { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde', infoTitle: 'Outcome-Check für jedes To-do', info: [
         { title: 'Outcome', text: 'Was ist das Ergebnis, wenn es erledigt ist?' },
         { title: 'Besser', text: 'Verbessere ich dadurch etwas?' },
-        { title: 'Umsatz', text: 'Mache ich dadurch Umsatz?' },
+        { title: 'Money-Making Activity', text: 'Mache ich dadurch Umsatz? Money-Making Activities zuerst.' },
       ] },
       { id: 'fokus-dienen', text: 'Wie und wem kann ich heute mit meinen Talenten dienen?', note: true },
     ],
