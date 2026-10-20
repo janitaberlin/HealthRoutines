@@ -1,3 +1,4 @@
+import { parseReflections, type Reflections } from '../lib/reflection';
 import { parseCompass, type Compass } from '../lib/compass';
 import { isCategory, parseSessions, type Running, type Session } from '../lib/time';
 import { parseChecks, type Checks } from '../lib/tracker';
@@ -128,5 +129,23 @@ export function saveBoard(board: BoardImage[]): boolean {
     return true;
   } catch {
     return false;
+  }
+}
+
+const REFLECTION_KEY = 'week-reflection';
+
+export function loadReflections(): Reflections {
+  try {
+    return parseReflections(JSON.parse(localStorage.getItem(REFLECTION_KEY) ?? '{}'));
+  } catch {
+    return {};
+  }
+}
+
+export function saveReflections(reflections: Reflections): void {
+  try {
+    localStorage.setItem(REFLECTION_KEY, JSON.stringify(reflections));
+  } catch {
+    // Speicher nicht verfügbar.
   }
 }

@@ -5,6 +5,15 @@ import Base from '../../layouts/Base.astro';
   <h1 class="page-title">Verlauf</h1>
   <p class="muted">Die letzten 5 Wochen. Je kräftiger ein Tag, desto mehr war erledigt.</p>
 
+  <section class="reflection compass-card" id="reflection">
+    <p class="eyebrow">Wochenreflexion · <span id="reflection-week"></span></p>
+    <label class="field-label" for="reflect-become">Who did I become this week?</label>
+    <textarea class="field" id="reflect-become" rows="3" data-reflect="become" placeholder="Wer bin ich diese Woche geworden?"></textarea>
+    <label class="field-label" for="reflect-outcome">What is the outcome?</label>
+    <textarea class="field" id="reflect-outcome" rows="3" data-reflect="outcome" placeholder="Was ist aus den Dingen auf meiner To-do-Liste geworden?"></textarea>
+    <div id="reflection-past" class="reflection-past" hidden></div>
+  </section>
+
   <section class="overview" id="overview"></section>
 
   <h2 class="section-title">Pro Routine</h2>
@@ -25,5 +34,6 @@ import Base from '../../layouts/Base.astro';
 
   <script>
     import '../../scripts/history';
+    import '../../scripts/reflection';
   </script>
 </Base>
