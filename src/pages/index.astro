@@ -84,6 +84,25 @@ import CycleLog from '../components/CycleLog.astro';
     ))}
   </div>
 
+  <section class="now" id="now">
+    <p class="eyebrow">Jetzt dran</p>
+    <h2 id="now-title">Tagesplan</h2>
+    <p id="now-text" class="muted"></p>
+    <div class="now-actions" id="now-actions" hidden>
+      {CATEGORIES.map((c) => (
+        <a class="timer-btn timer-btn--small" data-cat={c.id} href={url(`zeit/?start=${c.id}`)}>▶ {c.label}</a>
+      ))}
+    </div>
+    <details class="plan">
+      <summary>Ganzer Tagesplan</summary>
+      <ol class="plan-list">
+        {schedule.map((b) => (
+          <li data-block={b.from}><span>{b.from}–{b.to}</span><strong>{b.title}</strong><small>{b.text}</small></li>
+        ))}
+      </ol>
+    </details>
+  </section>
+
   <section class="cycle-mini">
     <a class="cycle-mini-head" href={url('zyklus/')}>
       <span><span class="eyebrow" data-cycle-day>Heute</span><strong data-cycle-phase>Zyklus</strong></span>
@@ -116,25 +135,6 @@ import CycleLog from '../components/CycleLog.astro';
   </button>
   <p class="today-action" id="today-action" hidden>One inspired action · <strong></strong></p>
 
-
-  <section class="now" id="now">
-    <p class="eyebrow">Jetzt dran</p>
-    <h2 id="now-title">Tagesplan</h2>
-    <p id="now-text" class="muted"></p>
-    <div class="now-actions" id="now-actions" hidden>
-      {CATEGORIES.map((c) => (
-        <a class="timer-btn timer-btn--small" data-cat={c.id} href={url(`zeit/?start=${c.id}`)}>▶ {c.label}</a>
-      ))}
-    </div>
-    <details class="plan">
-      <summary>Ganzer Tagesplan</summary>
-      <ol class="plan-list">
-        {schedule.map((b) => (
-          <li data-block={b.from}><span>{b.from}–{b.to}</span><strong>{b.title}</strong><small>{b.text}</small></li>
-        ))}
-      </ol>
-    </details>
-  </section>
 
   <Spark />
 
