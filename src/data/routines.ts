@@ -11,6 +11,8 @@ export interface RoutineItem {
   note?: boolean;
   /** Erklärung zum Aufklappen unter dem Punkt. */
   info?: { title: string; text: string }[];
+  /** Text neben dem Pfeil, Standard „Darin stecken drei Dinge“. */
+  infoTitle?: string;
 }
 
 export interface Routine {
@@ -48,7 +50,11 @@ export const routines: Routine[] = [
         { title: 'Teilen', text: 'Wie lasse ich andere daran teilhaben?' },
       ] },
       { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', note: true, hint: 'z. B. Bewegung, Schönheit, Nähe, ein Moment für mich' },
-      { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde' },
+      { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde', infoTitle: 'Outcome-Check für jedes To-do', info: [
+        { title: 'Outcome', text: 'Was ist das Ergebnis, wenn es erledigt ist?' },
+        { title: 'Besser', text: 'Verbessere ich dadurch etwas?' },
+        { title: 'Umsatz', text: 'Mache ich dadurch Umsatz?' },
+      ] },
       { id: 'fokus-dienen', text: 'Wie und wem kann ich heute mit meinen Talenten dienen?', note: true },
     ],
   },
