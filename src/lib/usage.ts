@@ -7,6 +7,7 @@ export const AREAS: { id: string; label: string }[] = [
   { id: 'heute', label: 'Heute' },
   { id: 'routinen', label: 'Routinen' },
   { id: 'ritual', label: 'Ritual' },
+  { id: 'affirmationen', label: 'Affirmationen' },
   { id: 'compass', label: 'Compass' },
   { id: 'zeit', label: 'Zeit' },
   { id: 'zyklus', label: 'Zyklus' },

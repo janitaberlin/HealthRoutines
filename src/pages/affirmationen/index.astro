@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { affirmQuestions, defaultAffirmations, languages, science } from '../../data/affirmations';
+---
+<Base title="My Affirmations" page="affirmationen">
+  <h1 class="page-title">My Affirmations</h1>
+
+  <div class="affirm-tabs" role="tablist">
+    <button type="button" role="tab" data-mode="morning" aria-selected="true">Morning</button>
+    <button type="button" role="tab" data-mode="evening" aria-selected="false">Evening</button>
+  </div>
+
+  <section class="affirm-player compass-card">
+    <ol class="affirm-list" id="affirm-list"></ol>
+    <button type="button" class="affirm-play" id="affirm-play" aria-label="Abspielen">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" /></svg>
+    </button>
+    <p class="affirm-status muted" id="affirm-status" aria-live="polite"></p>
+    <div class="affirm-settings">
+      <label>Sprache
+        <select id="affirm-lang">{languages.map((l) => <option value={l.id}>{l.label}</option>)}</select>
+      </label>
+      <label>Stimme
+        <select id="affirm-gender"><option value="frau">Frau</option><option value="mann">Mann</option></select>
+      </label>
+      <label class="affirm-check"><input type="checkbox" id="affirm-music" checked /> Meditationsmusik</label>
+    </div>
+  </section>
+
+  <section class="affirm-why">
+    <p class="eyebrow" id="why-title">Warum morgens</p>
+    <div data-why="morning">{science.morning.map((t) => <p>{t}</p>)}</div>
+    <div data-why="evening" hidden>{science.evening.map((t) => <p>{t}</p>)}</div>
+    <p class="muted">{science.tip}</p>
+  </section>
+
+  <details class="vision affirm-create" id="affirm-create">
+    <summary>Meine Affirmationen erstellen</summary>
+    <p class="muted">Beantworte die Fragen, tippe auf „Mit Claude erstellen“ und füge die Sätze danach unten ein, einen pro Zeile.</p>
+    {affirmQuestions.map((q) => (
+      <>
+        <label class="field-label">{q.label}</label>
+        <textarea class="field" rows="2" data-field={q.id}></textarea>
+      </>
+    ))}
+    <a class="menu-btn affirm-claude" id="affirm-claude" href="https://claude.ai/new" target="_blank" rel="noopener">✦ Mit Claude erstellen</a>
+    <label class="field-label">Morning Affirmations</label>
+    <textarea class="field" rows="6" data-field="affirm.morning" data-default={defaultAffirmations.morning}></textarea>
+    <label class="field-label">Evening Affirmations</label>
+    <textarea class="field" rows="6" data-field="affirm.evening" data-default={defaultAffirmations.evening}></textarea>
+  </details>
+
+  <script>
+    import '../../scripts/affirmations';
+  </script>
+</Base>
