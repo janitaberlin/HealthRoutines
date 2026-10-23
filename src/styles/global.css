@@ -635,3 +635,22 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .affirm-why { margin: 1.6rem 0; }
 .affirm-why p { margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.5; }
 .affirm-create .menu-btn { display: inline-block; margin: 1rem 0 0.4rem; text-decoration: none; color: inherit; border-color: #d4a437; }
+
+/* Vision Board als Collage */
+.vision-head { margin-bottom: 1rem; }
+.collage { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 3.4rem; grid-auto-flow: dense; gap: 0.35rem; margin: 0 0 1.2rem; }
+.collage:empty { display: none; }
+.collage-item { position: relative; grid-column: span 3; grid-row: span 3; padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: var(--surface-2); cursor: pointer; }
+.collage-item[data-kind='tall'] { grid-column: span 2; grid-row: span 4; }
+.collage-item[data-kind='wide'] { grid-column: span 4; grid-row: span 3; }
+.collage-item[data-kind='square'] { grid-column: span 3; grid-row: span 3; }
+.collage-item[data-kind^='hero'] { grid-column: span 6; grid-row: span 5; }
+.collage-item[data-kind='hero-tall'] { grid-column: span 4; grid-row: span 6; }
+.collage-item img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.collage-item span { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.2rem 0.6rem 0.45rem; background: linear-gradient(transparent, rgb(0 0 0 / 0.65)); color: #fff; font-size: 0.75rem; text-align: left; }
+.board-add-btn { cursor: pointer; }
+.board-view { width: min(92vw, 30rem); padding: 1rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); color: var(--text); }
+.board-view::backdrop { background: rgb(0 0 0 / 0.75); }
+.board-view img { display: block; width: 100%; max-height: 65vh; object-fit: contain; border-radius: 12px; margin: 0.4rem 0 0.8rem; }
+.board-view form { text-align: right; }
+.board-view .menu-btn { margin-top: 0.8rem; }

@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Vision" page="vision">
+  <header class="vision-head">
+    <p class="eyebrow">My Vision</p>
+    <h1 class="page-title">Vision Board</h1>
+    <p class="muted">Alle Bilder, die zeigen, wer ich bin und wie ich leben will. Sie ordnen sich von selbst als Collage.</p>
+  </header>
+  <div class="collage" id="board-grid"></div>
+  <p class="collage-empty muted" id="board-empty" hidden>Noch keine Bilder. Lade deine ersten Vision-Bilder hoch.</p>
+  <label class="affirm-start board-add-btn">+ Bilder hinzufügen<input type="file" id="board-add" accept="image/*" multiple hidden /></label>
+  <p class="board-status" id="board-status" aria-live="polite"></p>
+
+  <dialog class="board-view" id="board-view">
+    <form method="dialog"><button class="spark-x" aria-label="Schließen">×</button></form>
+    <img id="board-view-img" alt="" />
+    <input class="board-text" id="board-view-text" placeholder="Was bedeutet dieses Bild?" />
+    <button type="button" class="menu-btn" id="board-view-remove">Bild entfernen</button>
+  </dialog>
+
+  <script>
+    import '../../scripts/vision-page';
+  </script>
+</Base>
