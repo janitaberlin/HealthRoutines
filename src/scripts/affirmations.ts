@@ -1,10 +1,15 @@
 import { affirmQuestions, defaultAffirmations, femaleVoices, languages, maleVoices } from '../data/affirmations';
 import { buildPrompt, claudeLink, lines, pickVoice, type Gender } from '../lib/affirm';
 import { Ambient } from './ambient';
+import { dateKey } from '../lib/tracker';
 import { loadCompass, saveCompass } from './storage';
 
 /** My Affirmations: Morning/Evening anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
 type Mode = 'morning' | 'evening';
+const TEXT = {
+  morning: { title: 'Your morning words', sub: 'Set the frame for your day.', start: 'Start morning session' },
+  evening: { title: 'Tonight’s reset', sub: 'Let go and fall asleep with your own words.', start: 'Start evening session' },
+};
 const SETTINGS = { morning: { rate: 0.95, pause: 2500, loopMinutes: 0 }, evening: { rate: 0.82, pause: 5000, loopMinutes: 20 } };
 
 let compass = loadCompass();
@@ -31,6 +36,12 @@ const musicBox = document.getElementById('affirm-music') as HTMLInputElement;
 function render(): void {
   for (const tab of document.querySelectorAll<HTMLButtonElement>('[data-mode]')) tab.setAttribute('aria-selected', String(tab.dataset.mode === mode));
   for (const el of document.querySelectorAll<HTMLElement>('[data-why]')) el.hidden = el.dataset.why !== mode;
+  document.getElementById('affirm-title')!.textContent = TEXT[mode].title;
+  document.getElementById('affirm-sub')!.textContent = TEXT[mode].sub;
+  document.getElementById('affirm-play-label')!.textContent = TEXT[mode].start;
+  document.getElementById('affirm-now')!.textContent = current()[0] ?? '';
+  const days = playedDays().length;
+  document.getElementById('affirm-days')!.textContent = String(Math.max(days, 1)).padStart(2, '0');
   document.getElementById('why-title')!.textContent = mode === 'morning' ? 'Warum morgens' : 'Warum abends beim Einschlafen';
   list.replaceChildren(
     ...current().map((t) => {
@@ -39,6 +50,16 @@ function render(): void {
       return li;
     }),
   );
+}
+
+/** Tage, an denen ich zugehört habe: „Day 07“ wie im Vorbild. */
+function playedDays(): string[] {
+  return field('affirm.played').split(',').filter(Boolean);
+}
+function markPlayed(): void {
+  const today = dateKey(new Date());
+  const days = playedDays();
+  if (!days.includes(today)) setField('affirm.played', [...days, today].join(','));
 }
 
 function voice(): SpeechSynthesisVoice | null {
@@ -52,8 +73,9 @@ function stop(text = ''): void {
   speechSynthesis.cancel();
   music.stop();
   playBtn.classList.remove('is-playing');
-  playBtn.setAttribute('aria-label', 'Abspielen');
+  document.getElementById('affirm-play-label')!.textContent = TEXT[mode].start;
   list.querySelectorAll('li').forEach((li) => li.classList.remove('is-now'));
+  document.getElementById('affirm-now')!.textContent = current()[0] ?? '';
   status.textContent = text;
 }
 
@@ -69,8 +91,10 @@ function play(): void {
   const { rate, pause, loopMinutes } = SETTINGS[mode];
   const until = Date.now() + loopMinutes * 60000;
   playing = true;
+  markPlayed();
+  render();
   playBtn.classList.add('is-playing');
-  playBtn.setAttribute('aria-label', 'Stoppen');
+  document.getElementById('affirm-play-label')!.textContent = 'Stop';
   if (musicBox.checked) music.start(mode === 'evening' ? 0.14 : 0.18);
   status.textContent = v ? `Stimme: ${v.name}` : `Keine ${lang.label}-Stimme auf diesem Gerät gefunden, es liest die Standardstimme.`;
   if (mode === 'evening') status.textContent += ' · läuft bis zu 20 Min., Bildschirm anlassen';
@@ -82,6 +106,7 @@ function play(): void {
       else return stop('Fertig. ✦');
     }
     list.querySelectorAll('li').forEach((li, n) => li.classList.toggle('is-now', n === i));
+    document.getElementById('affirm-now')!.textContent = sentences[i];
     const u = new SpeechSynthesisUtterance(sentences[i]);
     u.lang = lang.lang;
     if (v) u.voice = v;

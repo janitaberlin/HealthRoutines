@@ -3,19 +3,42 @@ import Base from '../../layouts/Base.astro';
 import { affirmQuestions, defaultAffirmations, languages, science } from '../../data/affirmations';
 ---
 <Base title="My Affirmations" page="affirmationen">
-  <h1 class="page-title">My Affirmations</h1>
+  <section class="affirm-hero">
+    <svg class="affirm-orb" viewBox="0 0 200 200" aria-hidden="true">
+      <defs>
+        <radialGradient id="orb-core" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#fff7dc" stop-opacity="0.95" />
+          <stop offset="0.25" stop-color="#f0d27a" stop-opacity="0.6" />
+          <stop offset="0.6" stop-color="#d4a437" stop-opacity="0.15" />
+          <stop offset="1" stop-color="#d4a437" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="90" fill="url(#orb-core)" />
+      <g class="orb-dust">
+        {Array.from({ length: 70 }, (_, i) => {
+          const a = i * 2.39996;
+          const r = 12 + ((i * 37) % 70);
+          return <circle cx={100 + Math.cos(a) * r} cy={100 + Math.sin(a) * r * 0.8} r={0.5 + ((i * 7) % 10) / 10} style={`animation-delay: -${(i * 0.37) % 6}s`} />;
+        })}
+      </g>
+    </svg>
+    <p class="eyebrow">Your Practice</p>
+    <p class="affirm-day">Day <span id="affirm-days">01</span></p>
+  </section>
 
-  <div class="affirm-tabs" role="tablist">
-    <button type="button" role="tab" data-mode="morning" aria-selected="true">Morning</button>
-    <button type="button" role="tab" data-mode="evening" aria-selected="false">Evening</button>
-  </div>
-
-  <section class="affirm-player compass-card">
-    <ol class="affirm-list" id="affirm-list"></ol>
-    <button type="button" class="affirm-play" id="affirm-play" aria-label="Abspielen">
-      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" /></svg>
+  <section class="affirm-panel">
+    <div class="affirm-tabs" role="tablist">
+      <button type="button" role="tab" data-mode="morning" aria-selected="true">Morning</button>
+      <button type="button" role="tab" data-mode="evening" aria-selected="false">Evening</button>
+    </div>
+    <h2 class="affirm-title" id="affirm-title">Your morning words</h2>
+    <p class="affirm-sub muted" id="affirm-sub">Set the frame for your day.</p>
+    <p class="affirm-now" id="affirm-now" aria-live="polite"></p>
+    <button type="button" class="affirm-start" id="affirm-play">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" /></svg>
+      <span id="affirm-play-label">Start morning session</span>
     </button>
-    <p class="affirm-status muted" id="affirm-status" aria-live="polite"></p>
+    <p class="affirm-status muted" id="affirm-status"></p>
     <div class="affirm-settings">
       <label>Sprache
         <select id="affirm-lang">{languages.map((l) => <option value={l.id}>{l.label}</option>)}</select>
@@ -23,8 +46,12 @@ import { affirmQuestions, defaultAffirmations, languages, science } from '../../
       <label>Stimme
         <select id="affirm-gender"><option value="frau">Frau</option><option value="mann">Mann</option></select>
       </label>
-      <label class="affirm-check"><input type="checkbox" id="affirm-music" checked /> Meditationsmusik</label>
+      <label class="affirm-check"><input type="checkbox" id="affirm-music" checked /> Musik</label>
     </div>
+    <details class="affirm-words">
+      <summary>Meine Sätze</summary>
+      <ol class="affirm-list" id="affirm-list"></ol>
+    </details>
   </section>
 
   <section class="affirm-why">
