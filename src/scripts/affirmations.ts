@@ -16,6 +16,7 @@ let compass = loadCompass();
 let mode: Mode = new Date().getHours() >= 17 ? 'evening' : 'morning';
 let playing = false;
 let timer = 0;
+let spoken: SpeechSynthesisUtterance | null = null;
 const music = new Ambient();
 
 const field = (key: string, fallback = '') => compass.fields[key]?.trim() || fallback;
@@ -108,6 +109,7 @@ function play(): void {
     list.querySelectorAll('li').forEach((li, n) => li.classList.toggle('is-now', n === i));
     document.getElementById('affirm-now')!.textContent = sentences[i];
     const u = new SpeechSynthesisUtterance(sentences[i]);
+    spoken = u; // iPhone: ohne Referenz wird onend manchmal nie ausgelöst
     u.lang = lang.lang;
     if (v) u.voice = v;
     u.rate = rate;
@@ -116,10 +118,15 @@ function play(): void {
       i++;
       timer = window.setTimeout(next, pause);
     };
+    u.onerror = (e) => {
+      if (!playing || e.error === 'interrupted' || e.error === 'canceled') return;
+      stop('Vorlesen ging nicht. Bitte Lautstärke prüfen und nochmal starten.');
+    };
     speechSynthesis.speak(u);
   };
-  // Musik erst kurz einklingen lassen.
-  timer = window.setTimeout(next, musicBox.checked ? 2500 : 0);
+  // iPhone erlaubt Vorlesen nur direkt nach dem Tippen: deshalb sofort starten, die Musik blendet sich sanft ein.
+  speechSynthesis.cancel();
+  next();
 }
 
 playBtn.addEventListener('click', () => (playing ? stop() : play()));

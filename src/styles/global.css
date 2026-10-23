@@ -459,11 +459,11 @@ button.state.state-evolving { background: var(--surface-2); }
 .life-card strong { display: block; margin-top: 0.2rem; font-size: 1.2rem; font-weight: 500; }
 
 .tabbar {
-  position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5, 1fr);
+  position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(6, 1fr);
   padding: 0.6rem 0.3rem calc(0.6rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--border);
   border-radius: 24px 24px 0 0; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
-.tab { display: grid; justify-items: center; gap: 0.25rem; padding: 0.3rem 0; color: var(--muted); text-decoration: none; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+.tab { display: grid; justify-items: center; gap: 0.25rem; padding: 0.3rem 0; color: var(--muted); text-decoration: none; font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
 .tab svg { width: 1.5rem; height: 1.5rem; }
 .tab[aria-current='page'] { color: var(--text); opacity: 1; }
 .page { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
@@ -562,7 +562,7 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .cycle-drop { width: 0.6rem; height: 0.6rem; border-radius: 50% 0 50% 50%; transform: rotate(-45deg); border: 1.3px solid var(--ph-periode); }
 .cycle-period[aria-pressed='true'] { border-color: var(--ph-periode); background: color-mix(in srgb, var(--ph-periode) 22%, transparent); }
 .cycle-period[aria-pressed='true'] .cycle-drop { background: var(--ph-periode); }
-.energy-chips { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; }
+.energy-chips { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.35rem; }
 .energy-chip { padding: 0.55rem 0.1rem; border: 1px solid var(--border); border-radius: 12px; background: transparent; color: var(--muted); font: inherit; font-size: 0.72rem; line-height: 1.2; cursor: pointer; }
 .energy-chip[aria-pressed='true'] { color: #141312; border-color: #d4a437; background: linear-gradient(135deg, #f0d27a, #d4a437); font-weight: 600; }
 .cycle-card { margin-bottom: 1.4rem; }

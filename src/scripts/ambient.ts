@@ -16,6 +16,7 @@ export class Ambient {
     if (this.ctx) return;
     const ctx = new AudioContext();
     this.ctx = ctx;
+    void ctx.resume();
     const master = ctx.createGain();
     master.gain.setValueAtTime(0, ctx.currentTime);
     master.gain.linearRampToValueAtTime(volume, ctx.currentTime + 4);
