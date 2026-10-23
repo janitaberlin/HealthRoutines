@@ -3,6 +3,7 @@ import { buildPrompt, claudeLink, lines, pickVoice, type Gender } from '../lib/a
 import { Ambient } from './ambient';
 import { dateKey } from '../lib/tracker';
 import { loadCompass, saveCompass } from './storage';
+import { deleteRecording, loadRecording, saveRecording, startRecording } from './recording';
 
 /** My Affirmations: Morning/Evening anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
 type Mode = 'morning' | 'evening';
@@ -17,6 +18,8 @@ let mode: Mode = new Date().getHours() >= 17 ? 'evening' : 'morning';
 let playing = false;
 let timer = 0;
 let spoken: SpeechSynthesisUtterance | null = null;
+let audio: HTMLAudioElement | null = null;
+const recUrls: Partial<Record<Mode, string>> = {};
 const music = new Ambient();
 
 const field = (key: string, fallback = '') => compass.fields[key]?.trim() || fallback;
@@ -65,6 +68,8 @@ function stop(text = ''): void {
   playing = false;
   window.clearTimeout(timer);
   speechSynthesis.cancel();
+  audio?.pause();
+  audio = null;
   music.stop();
   playBtn.classList.remove('is-playing');
   document.getElementById('affirm-play-label')!.textContent = TEXT[mode].start;
@@ -72,7 +77,34 @@ function stop(text = ''): void {
   status.textContent = text;
 }
 
+/** Eigene Aufnahme abspielen; Evening wiederholt sie bis zu 20 Min. */
+function playRecording(): void {
+  const src = recUrls[mode];
+  if (!src) {
+    status.textContent = `Noch keine eigene Aufnahme für ${mode === 'morning' ? 'Morning' : 'Evening'}. Unten bei „Mit meiner Stimme“ aufnehmen.`;
+    return;
+  }
+  const until = Date.now() + SETTINGS[mode].loopMinutes * 60000;
+  const a = new Audio(src);
+  audio = a;
+  playing = true;
+  markPlayed();
+  render();
+  playBtn.classList.add('is-playing');
+  document.getElementById('affirm-play-label')!.textContent = 'Stop';
+  if (musicBox.checked) music.start(mode === 'evening' ? 0.12 : 0.16);
+  status.textContent = 'Deine eigene Stimme';
+  if (mode === 'evening') status.textContent += ' · läuft bis zu 20 Min., Bildschirm anlassen';
+  a.onended = () => {
+    if (!playing || audio !== a) return;
+    if (Date.now() < until) timer = window.setTimeout(() => playing && audio === a && void a.play(), 4000);
+    else stop('Fertig. ✦');
+  };
+  a.play().catch(() => stop('Die Aufnahme ließ sich nicht abspielen. Bitte nochmal tippen.'));
+}
+
 function play(): void {
+  if (genderSel.value === 'ich') return playRecording();
   if (!('speechSynthesis' in window)) {
     status.textContent = 'Dieses Gerät kann leider nicht vorlesen.';
     return;
@@ -126,6 +158,7 @@ for (const tab of document.querySelectorAll<HTMLButtonElement>('[data-mode]'))
     stop();
     mode = tab.dataset.mode as Mode;
     render();
+    renderRec();
   });
 
 langSel.value = field('affirm.lang', 'de');
@@ -155,6 +188,66 @@ function updateLink(): void {
   claude.href = claudeLink(buildPrompt(affirmQuestions.map((q) => ({ label: q.label, text: field(q.id) })), lang.prompt));
 }
 
+// Aufnahme mit eigener Stimme, je Modus eine.
+const recBtn = document.getElementById('rec-btn') as HTMLButtonElement;
+const recDel = document.getElementById('rec-del') as HTMLButtonElement;
+const recStatus = document.getElementById('rec-status')!;
+let recorder: { stop: () => Promise<Blob> } | null = null;
+const modeLabel = () => (mode === 'morning' ? 'Morning' : 'Evening');
+
+function renderRec(): void {
+  const has = !!recUrls[mode];
+  recDel.hidden = !has || !!recorder;
+  if (recorder) return;
+  recBtn.textContent = has ? '● Neu aufnehmen' : '● Aufnehmen';
+  recStatus.textContent = has ? `Deine Aufnahme für ${modeLabel()} ist gespeichert. Bei Stimme „Meine Aufnahme“ wählen.` : `Noch keine Aufnahme für ${modeLabel()}.`;
+}
+
+async function loadRecs(): Promise<void> {
+  for (const m of ['morning', 'evening'] as Mode[]) {
+    const blob = await loadRecording(`affirm-${m}`);
+    if (recUrls[m]) URL.revokeObjectURL(recUrls[m]!);
+    recUrls[m] = blob ? URL.createObjectURL(blob) : undefined;
+  }
+  renderRec();
+}
+
+recBtn.addEventListener('click', async () => {
+  if (recorder) {
+    const r = recorder;
+    recorder = null;
+    recBtn.classList.remove('is-recording');
+    const blob = await r.stop();
+    try {
+      await saveRecording(`affirm-${mode}`, blob);
+    } catch {
+      recStatus.textContent = 'Speichern hat nicht geklappt.';
+      return;
+    }
+    genderSel.value = 'ich';
+    setField('affirm.gender', 'ich');
+    await loadRecs();
+    return;
+  }
+  stop();
+  try {
+    recorder = await startRecording();
+  } catch {
+    recStatus.textContent = 'Kein Zugriff aufs Mikrofon. Bitte in den Einstellungen erlauben.';
+    return;
+  }
+  recBtn.classList.add('is-recording');
+  recBtn.textContent = '■ Aufnahme beenden';
+  recDel.hidden = true;
+  recStatus.textContent = `Aufnahme läuft (${modeLabel()}). Lies deine Sätze oben langsam vor.`;
+});
+
+recDel.addEventListener('click', async () => {
+  await deleteRecording(`affirm-${mode}`);
+  await loadRecs();
+});
+
 window.addEventListener('pagehide', () => stop());
+void loadRecs();
 updateLink();
 render();

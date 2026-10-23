@@ -628,6 +628,10 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .affirm-check { display: inline-flex; align-items: center; gap: 0.35rem; }
 .affirm-check input { accent-color: #d4a437; }
 .affirm-mine { margin: 1.4rem 0 1rem; }
+.affirm-rec { margin: 0 0 1rem; }
+.affirm-rec-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
+#rec-btn.is-recording { border-color: #d4a437; color: #d4a437; }
+.affirm-rec-status { margin: 0.5rem 0 0; font-size: 0.85rem; }
 .affirm-why p { margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.5; }
 .journey-time { display: block; margin: 1rem 0; color: inherit; text-decoration: none; }
 .journey-hours { display: flex; gap: 1.4rem; margin-top: 0.3rem; }

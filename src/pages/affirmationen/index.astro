@@ -44,7 +44,7 @@ import { affirmQuestions, defaultAffirmations, languages, science } from '../../
         <select id="affirm-lang">{languages.map((l) => <option value={l.id}>{l.label}</option>)}</select>
       </label>
       <label>Stimme
-        <select id="affirm-gender"><option value="frau">Frau</option><option value="mann">Mann</option></select>
+        <select id="affirm-gender"><option value="frau">Frau</option><option value="mann">Mann</option><option value="ich">Meine Aufnahme</option></select>
       </label>
       <label class="affirm-check"><input type="checkbox" id="affirm-music" checked /> Musik</label>
     </div>
@@ -61,6 +61,16 @@ import { affirmQuestions, defaultAffirmations, languages, science } from '../../
       <label class="field-label" for="words-evening">Evening</label>
       <textarea class="field" id="words-evening" rows="6" data-field="affirm.evening" data-default={defaultAffirmations.evening}></textarea>
     </div>
+  </section>
+
+  <section class="compass-card affirm-rec">
+    <p class="eyebrow">Mit meiner Stimme</p>
+    <p class="muted">Lies deine Sätze einmal selbst ein, ruhig und mit Pausen. Dann hörst du dich selbst statt der Computerstimme, mit Musik darunter.</p>
+    <div class="affirm-rec-actions">
+      <button type="button" class="menu-btn" id="rec-btn">● Aufnehmen</button>
+      <button type="button" class="menu-btn" id="rec-del" hidden>Aufnahme löschen</button>
+    </div>
+    <p class="muted affirm-rec-status" id="rec-status" aria-live="polite"></p>
   </section>
 
   <details class="vision affirm-create" id="affirm-create">

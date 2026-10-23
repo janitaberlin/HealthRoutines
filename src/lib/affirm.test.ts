@@ -26,4 +26,12 @@ describe('affirm', () => {
     expect(pickVoice(voices, 'en-US', 'mann', f, m)?.name).toBe('Samantha');
     expect(pickVoice(voices, 'fr-FR', 'frau', f, m)).toBeNull();
   });
+
+  it('nimmt Premium-Stimmen zuerst', () => {
+    const voices = [
+      { name: 'Anna', lang: 'de-DE' },
+      { name: 'Anna (Premium)', lang: 'de-DE' },
+    ];
+    expect(pickVoice(voices, 'de-DE', 'frau', ['anna'], [])?.name).toBe('Anna (Premium)');
+  });
 });

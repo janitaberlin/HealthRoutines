@@ -38,5 +38,11 @@ export function pickVoice<V extends VoiceLike>(voices: V[], lang: string, gender
   const known = gender === 'frau' ? female : male;
   const other = gender === 'frau' ? male : female;
   const has = (v: V, list: string[]) => list.some((n) => v.name.toLowerCase().includes(n));
-  return pool.find((v) => has(v, known)) ?? pool.find((v) => !has(v, other)) ?? pool[0] ?? null;
+  // Natürlicher klingende Stimmen (Premium/Erweitert, z. B. am iPhone nachgeladen) zuerst.
+  const sorted = [...pool].sort((a, b) => Number(isNatural(b)) - Number(isNatural(a)));
+  return sorted.find((v) => has(v, known)) ?? sorted.find((v) => !has(v, other)) ?? sorted[0] ?? null;
+}
+
+export function isNatural(v: VoiceLike): boolean {
+  return /premium|enhanced|erweitert|natural|neural|siri/i.test(v.name);
 }
