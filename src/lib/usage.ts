@@ -9,10 +9,10 @@ export const AREAS: { id: string; label: string }[] = [
   { id: 'ritual', label: 'Ritual' },
   { id: 'affirmationen', label: 'Affirmationen' },
   { id: 'vision', label: 'Vision Board' },
-  { id: 'compass', label: 'Compass' },
+  { id: 'compass', label: 'Compass (alt)' },
   { id: 'zeit', label: 'Zeit' },
   { id: 'zyklus', label: 'Zyklus' },
-  { id: 'verlauf', label: 'Verlauf' },
+  { id: 'verlauf', label: 'My Journey' },
   { id: 'antworten', label: 'Meine Antworten' },
 ];
 

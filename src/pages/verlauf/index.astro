@@ -1,10 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
+import { CATEGORIES } from '../../lib/time';
+import { becomeHerQuestions, libraryTypes, visionAreas } from '../../data/compass';
 ---
-<Base title="Verlauf" page="verlauf">
-  <h1 class="page-title">Verlauf</h1>
-  <p class="muted">Die letzten 5 Wochen. Je kräftiger ein Tag, desto mehr war erledigt.</p>
+<Base title="My Journey" page="verlauf">
+  <h1 class="page-title">My Journey</h1>
+  <p class="muted">Meine Woche planen, zurückschauen und sehen, was ich schon geschafft habe.</p>
 
   <section class="reflection compass-card" id="reflection">
     <p class="eyebrow">Plan your week · <span id="reflection-week"></span></p>
@@ -18,19 +20,72 @@ import { url } from '../../lib/url';
     <div id="reflection-past" class="reflection-past" hidden></div>
   </section>
 
+  <a class="journey-time compass-card" href={url('zeit/')}>
+    <p class="eyebrow">Zeit diese Woche</p>
+    <span class="journey-hours">{CATEGORIES.map((c) => <span><strong data-hours={c.id}>0:00</strong> {c.label}</span>)}</span>
+    <span class="journey-more">Stoppuhr &amp; Details ›</span>
+  </a>
+
   <a class="answers-link" href={url('antworten/')}>Meine Antworten<span>Alles, was ich in Routinen und Reflexion geschrieben habe ›</span></a>
 
+  <h2 class="section-title">Meine Routinen</h2>
+  <p class="muted">Die letzten 5 Wochen. Je kräftiger ein Tag, desto mehr war erledigt.</p>
   <section class="overview" id="overview"></section>
 
   <h2 class="section-title">Pro Routine</h2>
   <div id="routine-stats" class="routine-stats"></div>
+
+  <details class="journey-deepen">
+    <summary>Vertiefen, wenn ich Lust habe</summary>
+  <section class="compass-section journey-deep">
+    <p class="eyebrow">My 10/10 Life</p>
+    <h2 class="compass-h2">Don’t just imagine your dream life. Become the person who lives it.</h2>
+    {visionAreas.map((a) => (
+      <details class="vision">
+        <summary>{a.title}</summary>
+        <textarea class="field" rows="5" data-field={`vision.${a.id}`} data-default={a.text}></textarea>
+      </details>
+    ))}
+  </section>
+
+  <section class="compass-section journey-deep">
+    <p class="eyebrow">Become Her</p>
+    <h2 class="compass-h2">What would the woman I’m becoming do today?</h2>
+    <p class="compass-reflect">Wie würde ich heute leben, entscheiden und handeln, wenn ich bereits mein Higher Self wäre?</p>
+    <textarea class="field" rows="2" data-field="her.heute" data-default="" aria-label="Higher Self heute"></textarea>
+    <details class="vision">
+      <summary>Future Self Fragen</summary>
+      {becomeHerQuestions.map((q) => (
+        <>
+          <label class="field-label">{q.q}</label>
+          <textarea class="field" rows="2" data-field={`her.${q.id}`} data-default=""></textarea>
+        </>
+      ))}
+    </details>
+  </section>
+
+  <section class="compass-section journey-deep" id="library">
+    <p class="eyebrow">My Spark Library</p>
+    <h2 class="compass-h2">Was mich zum Leuchten bringt</h2>
+    <p class="muted">Musik, Momente, Ideen, Erfolge, Orte, Menschen. Fotos, Videos und Sprachnachrichten als Link (z. B. aus Google Drive oder iCloud).</p>
+    <form class="add-form library-form" id="library-form">
+      <select id="library-type" aria-label="Art">
+        {libraryTypes.map((t) => <option>{t}</option>)}
+      </select>
+      <input id="library-text" required placeholder="Was ist es?" />
+      <input id="library-link" type="url" placeholder="Link (optional)" />
+      <button class="menu-btn menu-btn--primary">Hinzufügen</button>
+    </form>
+    <ul class="library-list" id="library-list"></ul>
+  </section>
+  </details>
 
   <h2 class="section-title">Was ich nutze</h2>
   <div id="usage" class="usage"></div>
 
   <section class="backup">
     <h2 class="section-title">Sicherung</h2>
-    <p class="muted">Alles liegt nur auf diesem Handy: Routinen, Antworten, Reflexion, Zyklus, Zeiten, Compass. Einmal im Monat erinnert dich Heute daran, alles als eine Datei in Google Drive zu sichern.</p>
+    <p class="muted">Alles liegt nur auf diesem Handy: Routinen, Antworten, Reflexion, Zyklus, Zeiten, Vision. Mit „Jetzt sichern“ speicherst du alles als eine Datei in Google Drive.</p>
     <div class="backup-actions">
       <button class="menu-btn" type="button" id="export">Jetzt sichern (Drive)</button>
       <label class="menu-btn">
@@ -44,5 +99,7 @@ import { url } from '../../lib/url';
   <script>
     import '../../scripts/history';
     import '../../scripts/reflection';
+    import '../../scripts/compass-page';
+    import '../../scripts/journey-time';
   </script>
 </Base>

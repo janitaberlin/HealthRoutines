@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { lifeAreas, lifeIntro, lifeOutro, levels, northStarVision, goalStates, identityDefaults } from '../../data/compass';
+import HumanDesign from '../../components/HumanDesign.astro';
 ---
 <Base title="Vision" page="vision">
   <header class="vision-head">
@@ -19,7 +22,74 @@ import Base from '../../layouts/Base.astro';
     <button type="button" class="menu-btn" id="board-view-remove">Bild entfernen</button>
   </dialog>
 
+  <section class="compass-section" id="my-life">
+    <p class="eyebrow">My Life</p>
+    <h2 class="compass-h2">{lifeIntro}</h2>
+    <div class="life-board">
+      {lifeAreas.map((a, i) => (
+        <article class="life-area">
+          <img src={url(`vision/${a.id}.jpg`)} alt={a.title} loading="lazy" />
+          <h3>{i + 1}. {a.title}</h3>
+          <p>{a.text}</p>
+          {'quote' in a && a.quote && <blockquote class="life-quote">{a.quote}</blockquote>}
+        </article>
+      ))}
+    </div>
+    <p class="compass-reflect">{lifeOutro}</p>
+  </section>
+
+  <section class="compass-section" id="north-star">
+    <p class="eyebrow">My North Star</p>
+    <div class="levels">
+      {levels.map((l) => (
+        <div class="level">
+          <p class="level-label">{l.label} <span>· {l.hint}</span></p>
+          <textarea class="field" rows="2" data-field={`level.${l.id}`} data-default={l.text}></textarea>
+        </div>
+      ))}
+    </div>
+    <h2 class="compass-h2">Drei Lebensziele</h2>
+    <p class="muted">Einmal bewusst festlegen, dann einmal im Monat überprüfen. Morgens wird nichts neu verhandelt.</p>
+    {[0, 1, 2].map((i) => (
+      <div class="goal" data-goal={i}>
+        <textarea class="field" rows="2" data-goal-text placeholder={`Ziel ${i + 1}`}></textarea>
+        <div class="goal-states" role="group" aria-label="Status">
+          {goalStates.map((s) => (
+            <button type="button" class="focus-btn" data-state={s.id} aria-pressed="false" title={s.hint}>{s.label}</button>
+          ))}
+        </div>
+      </div>
+    ))}
+    <div class="goal-review">
+      <p class="muted" id="goal-review-text"></p>
+      <button type="button" class="menu-btn" id="goal-review-btn">Ziele überprüft ✓</button>
+    </div>
+    <p class="compass-reflect" id="goal-reflect" hidden>Passen meine Ziele noch zu mir, oder haben sie sich verändert?</p>
+    
+  </section>
+
+  <section class="compass-section compass-card" id="identity">
+    <p class="eyebrow">Remember Who You Are</p>
+    <label class="field-label">Wer bin ich?</label>
+    <textarea class="field field-signature" rows="1" data-field="identity.signature" data-default={identityDefaults.signature}></textarea>
+    <textarea class="field" rows="2" data-field="identity.design" data-default={identityDefaults.design} aria-label="Human Design (Reflexionsrahmen)"></textarea>
+    <HumanDesign />
+    <details class="vision">
+      <summary>Meine Talente</summary>
+      <textarea class="field" rows="7" data-field="identity.talents" data-default={identityDefaults.talents}></textarea>
+    </details>
+    <label class="field-label">Was liebe ich?</label>
+    <textarea class="field" rows="7" data-field="identity.loves" data-default={identityDefaults.loves}></textarea>
+    <label class="field-label">Meine Werte</label>
+    <textarea class="field" rows="2" data-field="identity.stands" data-default={identityDefaults.stands}></textarea>
+    <label class="field-label">Wie möchte ich mich fühlen?</label>
+    <textarea class="field" rows="2" data-field="identity.feel" data-default={identityDefaults.feel}></textarea>
+    <label class="field-label">Was ist meine Großvision?</label>
+    <textarea class="field field-vision" rows="3" data-field="northstar.vision" data-default={northStarVision}></textarea>
+  </section>
+
   <script>
     import '../../scripts/vision-page';
+    import '../../scripts/compass-page';
   </script>
 </Base>

@@ -11,7 +11,7 @@ const boxes = [
   { id: 'vision', eyebrow: '01 · North Star', title: 'Vision', sub: 'Mein Vision Board', href: 'vision/', img: 'live-enjoy' },
   { id: 'routinen', eyebrow: '02 · Daily Habits', title: 'Routinen', sub: 'Heute abhaken', href: 'routinen/', img: 'body-soul' },
   { id: 'fokus', eyebrow: '03 · Create & Build', title: 'Fokus', sub: 'Stoppuhr starten', href: 'zeit/', img: 'create-build' },
-  { id: 'life', eyebrow: '04 · My Life', title: 'My Life', sub: 'Identität & Lebensbereiche', href: 'compass/#my-life', img: 'learn-inspire' },
+  { id: 'life', eyebrow: '04 · My Life', title: 'My Life', sub: 'Identität & Lebensbereiche', href: 'vision/#my-life', img: 'learn-inspire' },
 ];
 import CycleLog from '../components/CycleLog.astro';
 ---
@@ -118,10 +118,10 @@ import CycleLog from '../components/CycleLog.astro';
   <section class="north-star">
     <div class="north-star-head">
       <p class="eyebrow">My Goals</p>
-      <a href={url('compass/#north-star')} class="muted small-link">Vision ansehen</a>
+      <a href={url('vision/#north-star')} class="muted small-link">Vision ansehen</a>
     </div>
     <ol class="north-star-list" id="north-star-list"></ol>
-    <p class="north-star-review" id="north-star-review" hidden><a href={url('compass/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
+    <p class="north-star-review" id="north-star-review" hidden><a href={url('vision/#north-star')}>Zeit für deinen monatlichen Ziel-Check</a></p>
     <p class="north-star-daily"><span class="eyebrow">Daily Question</span><br />{dailyQuestion}</p>
   </section>
 

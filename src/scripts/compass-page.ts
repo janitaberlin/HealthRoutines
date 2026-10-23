@@ -55,8 +55,9 @@ for (const box of document.querySelectorAll<HTMLElement>('[data-goal]')) {
     });
   mark();
 }
-// Monatlicher Ziel-Check statt tägliches Neuverhandeln.
+// Monatlicher Ziel-Check statt tägliches Neuverhandeln (auf Vision).
 function renderReview(): void {
+  if (!document.getElementById('goal-review-text')) return;
   const last = compass.fields['goals.reviewed'];
   const due = reviewDue(last, dateKey(new Date()), reviewDays);
   document.getElementById('goal-review-text')!.textContent = last
@@ -64,16 +65,17 @@ function renderReview(): void {
     : 'Noch nicht überprüft.';
   document.getElementById('goal-reflect')!.hidden = !due;
 }
-document.getElementById('goal-review-btn')!.addEventListener('click', () => {
+document.getElementById('goal-review-btn')?.addEventListener('click', () => {
   compass.fields['goals.reviewed'] = dateKey(new Date());
   save();
   renderReview();
 });
 renderReview();
 
-// Spark Library
-const list = document.getElementById('library-list')!;
+// Spark Library (in My Journey unter Vertiefen)
+const list = document.getElementById('library-list');
 function renderLibrary(): void {
+  if (!list) return;
   list.replaceChildren(
     ...[...compass.library].reverse().map((item) => {
       const li = document.createElement('li');
@@ -104,7 +106,7 @@ function renderLibrary(): void {
   );
 }
 
-document.getElementById('library-form')!.addEventListener('submit', (e) => {
+document.getElementById('library-form')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const text = document.getElementById('library-text') as HTMLInputElement;
   const link = document.getElementById('library-link') as HTMLInputElement;

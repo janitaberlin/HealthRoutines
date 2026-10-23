@@ -27,7 +27,6 @@ const setField = (key: string, value: string) => {
 };
 const current = () => lines(field(`affirm.${mode}`, defaultAffirmations[mode]));
 
-const list = document.getElementById('affirm-list')!;
 const status = document.getElementById('affirm-status')!;
 const playBtn = document.getElementById('affirm-play') as HTMLButtonElement;
 const langSel = document.getElementById('affirm-lang') as HTMLSelectElement;
@@ -37,6 +36,7 @@ const musicBox = document.getElementById('affirm-music') as HTMLInputElement;
 function render(): void {
   for (const tab of document.querySelectorAll<HTMLButtonElement>('[data-mode]')) tab.setAttribute('aria-selected', String(tab.dataset.mode === mode));
   for (const el of document.querySelectorAll<HTMLElement>('[data-why]')) el.hidden = el.dataset.why !== mode;
+  for (const el of document.querySelectorAll<HTMLElement>('[data-words]')) el.hidden = el.dataset.words !== mode;
   document.getElementById('affirm-title')!.textContent = TEXT[mode].title;
   document.getElementById('affirm-sub')!.textContent = TEXT[mode].sub;
   document.getElementById('affirm-play-label')!.textContent = TEXT[mode].start;
@@ -44,13 +44,6 @@ function render(): void {
   const days = playedDays().length;
   document.getElementById('affirm-days')!.textContent = String(Math.max(days, 1)).padStart(2, '0');
   document.getElementById('why-title')!.textContent = mode === 'morning' ? 'Warum morgens' : 'Warum abends beim Einschlafen';
-  list.replaceChildren(
-    ...current().map((t) => {
-      const li = document.createElement('li');
-      li.textContent = t;
-      return li;
-    }),
-  );
 }
 
 /** Tage, an denen ich zugehört habe: „Day 07“ wie im Vorbild. */
@@ -75,7 +68,6 @@ function stop(text = ''): void {
   music.stop();
   playBtn.classList.remove('is-playing');
   document.getElementById('affirm-play-label')!.textContent = TEXT[mode].start;
-  list.querySelectorAll('li').forEach((li) => li.classList.remove('is-now'));
   document.getElementById('affirm-now')!.textContent = current()[0] ?? '';
   status.textContent = text;
 }
@@ -106,7 +98,6 @@ function play(): void {
       if (Date.now() < until) i = 0;
       else return stop('Fertig. ✦');
     }
-    list.querySelectorAll('li').forEach((li, n) => li.classList.toggle('is-now', n === i));
     document.getElementById('affirm-now')!.textContent = sentences[i];
     const u = new SpeechSynthesisUtterance(sentences[i]);
     spoken = u; // iPhone: ohne Referenz wird onend manchmal nie ausgelöst
