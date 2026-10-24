@@ -6,6 +6,8 @@ import { parseReflections } from '../lib/reflection';
 import { mergeCycle, parseCycle } from '../lib/cycle';
 import { AREAS, trackedSince, usageDays } from '../lib/usage';
 import { daysBetween } from '../lib/cycle';
+import { parseMoney } from '../lib/money';
+import { loadMoney, saveMoney } from './storage';
 import { loadBoard, loadChecks, loadLastBackup, loadNotes, loadReflections, loadSessions, loadCycle, loadUsage, saveCycle, parseBoard, saveBoard, saveChecks, saveCompass, saveNotes, saveReflections, saveSessions, shareBackup } from './storage';
 
 const WEEKS = 5;
@@ -167,6 +169,7 @@ document.getElementById('import')!.addEventListener('change', async (e) => {
   const importedReflections = isNew ? parseReflections((data as { reflections?: unknown }).reflections) : {};
   saveReflections({ ...importedReflections, ...loadReflections() });
   if (isNew) saveCycle(mergeCycle(loadCycle(), parseCycle((data as { cycle?: unknown }).cycle)));
+  if (isNew) saveMoney({ ...parseMoney((data as { money?: unknown }).money), ...loadMoney() });
   status.textContent = `${days} Tage und ${importedSessions.length} Zeiteinträge übernommen.`;
   render();
 });

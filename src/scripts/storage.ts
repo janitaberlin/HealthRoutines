@@ -1,3 +1,4 @@
+import { parseMoney, type MoneyGoals } from '../lib/money';
 import { parseUsage, recordUse, type Usage } from '../lib/usage';
 import { parseCycle, type CycleData } from '../lib/cycle';
 import { parseReflections, type Reflections } from '../lib/reflection';
@@ -189,6 +190,24 @@ export function trackUse(area: string): void {
   }
 }
 
+const MONEY_KEY = 'money-goals';
+
+export function loadMoney(): MoneyGoals {
+  try {
+    return parseMoney(JSON.parse(localStorage.getItem(MONEY_KEY) ?? '{}'));
+  } catch {
+    return {};
+  }
+}
+
+export function saveMoney(money: MoneyGoals): void {
+  try {
+    localStorage.setItem(MONEY_KEY, JSON.stringify(money));
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}
+
 const BACKUP_KEY = 'backup-last';
 
 export function loadLastBackup(): string | null {
@@ -218,6 +237,7 @@ export function buildBackup(): string {
     reflections: loadReflections(),
     cycle: loadCycle(),
     usage: loadUsage(),
+    money: loadMoney(),
   };
   return JSON.stringify(backup, null, 2);
 }

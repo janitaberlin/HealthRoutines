@@ -9,10 +9,30 @@ import { levels, goalStates, moneyMindset } from '../../data/compass';
     <h1 class="page-title">Ziele</h1>
   </header>
 
-  <section class="compass-card money-card">
-    <p class="eyebrow">Money-Ziel diese Woche</p>
-    <input class="money-input" id="money-goal" placeholder="1000 €" inputmode="text" aria-label="Mein Money-Ziel diese Woche" />
+  <section class="compass-card money-card" id="money">
+    <div class="money-weeks" role="group" aria-label="Woche">
+      <button type="button" class="focus-btn" data-money-week="0">Diese Woche</button>
+      <button type="button" class="focus-btn" data-money-week="1">Nächste Woche</button>
+    </div>
+    <p class="eyebrow">Money-Ziel · <span id="money-week-label"></span></p>
+    <div id="money-open">
+      <input class="money-input" id="money-goal" placeholder="1000 €" inputmode="decimal" aria-label="Mein Money-Ziel" />
+      <button type="button" class="affirm-start money-lock" id="money-lock">Ziel festlegen</button>
+    </div>
+    <div id="money-locked" hidden>
+      <p class="money-amount"><span id="money-goal-show"></span><button type="button" class="money-unlock" id="money-unlock" aria-label="Ziel ändern">🔒</button></p>
+      <div class="money-bar"><span id="money-bar"></span></div>
+      <div class="money-reached">
+        <label>Erreicht <input id="money-reached" inputmode="decimal" placeholder="0 €" /></label>
+        <button type="button" class="focus-btn" id="money-done" aria-pressed="false">✓ Geschafft</button>
+      </div>
+      <p class="muted money-note" id="money-note"></p>
+    </div>
     <p class="muted">Ich darf total kreativ sein, wie ich es erreiche, und Spaß dabei haben.</p>
+    <details class="money-past" id="money-past" hidden>
+      <summary>Frühere Wochen</summary>
+      <ul id="money-past-list"></ul>
+    </details>
   </section>
 
   <section class="compass-card money-card" id="plan">

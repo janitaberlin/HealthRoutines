@@ -632,6 +632,19 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .money-card { margin: 1rem 0; }
 .money-input { width: 100%; margin: 0.4rem 0 0.6rem; padding: 0.5rem 0; border: 0; border-bottom: 1px solid #d4a437; background: transparent; color: var(--text); font: inherit; font-size: 2rem; font-weight: 500; }
 .money-input:focus { outline: none; }
+.money-weeks { display: flex; gap: 0.5rem; margin-bottom: 0.9rem; }
+.money-lock { margin: 0.4rem 0 0.8rem; }
+.money-amount { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.7rem; font-size: 2rem; font-weight: 500; }
+.money-unlock { border: 0; background: transparent; font-size: 1rem; opacity: 0.6; cursor: pointer; padding: 0.2rem; }
+.money-bar { height: 6px; border-radius: 99px; background: var(--border); overflow: hidden; }
+.money-bar span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #f0d27a, #d4a437); transition: width 0.4s ease; }
+.money-reached { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: 0.9rem; font-size: 0.9rem; color: var(--muted); }
+.money-reached input { width: 7.5rem; margin-left: 0.4rem; padding: 0.45rem 0.6rem; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text); font: inherit; }
+.money-note { margin: 0.6rem 0 0; font-size: 0.88rem; }
+.money-past { margin-top: 0.8rem; font-size: 0.88rem; }
+.money-past summary { cursor: pointer; color: var(--muted); }
+.money-past ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+.money-past li { margin: 0.3rem 0; }
 .money-power { display: flex; justify-content: center; margin-top: 1rem; text-decoration: none; }
 a.money-goal { color: var(--muted); text-decoration: none; }
 .money-goal { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 0.8rem 0 0; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.04em; }

@@ -2,7 +2,9 @@ import { affirmQuestions, defaultAffirmations, femaleVoices, languages, maleVoic
 import { buildPrompt, claudeLink, lines, pickVoice, type Gender } from '../lib/affirm';
 import { Ambient } from './ambient';
 import { dateKey } from '../lib/tracker';
-import { loadCompass, saveCompass } from './storage';
+import { loadCompass, loadMoney, saveCompass } from './storage';
+import { formatEuro } from '../lib/money';
+import { weekStart } from '../lib/reflection';
 import { deleteRecording, loadRecording, saveRecording, startRecording } from './recording';
 
 /** My Affirmations (Morning/Evening) und Power Talk auf Ziele: anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
@@ -35,7 +37,11 @@ const setField = (key: string, value: string) => {
   compass.fields[key] = value;
   saveCompass(compass);
 };
-const moneyGoal = () => field('affirm.money', '1000 €');
+/** Ziel der laufenden Woche aus Ziele; sonst das alte Feld, sonst 1000 €. */
+const moneyGoal = () => {
+  const w = loadMoney()[weekStart(dateKey(new Date()))];
+  return w ? formatEuro(w.goal) : field('affirm.money', '1000 €');
+};
 const current = () => lines(field(`affirm.${mode}`, defaultAffirmations[mode]).replaceAll('{ziel}', moneyGoal()));
 
 const status = document.getElementById('affirm-status')!;
