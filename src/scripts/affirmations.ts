@@ -5,13 +5,17 @@ import { dateKey } from '../lib/tracker';
 import { loadCompass, saveCompass } from './storage';
 import { deleteRecording, loadRecording, saveRecording, startRecording } from './recording';
 
-/** My Affirmations: Morning/Evening anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
-type Mode = 'morning' | 'evening';
+/** My Affirmations: Morning/Power/Evening anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
+type Mode = 'morning' | 'power' | 'evening';
+const MODES: Mode[] = ['morning', 'power', 'evening'];
+const LABEL: Record<Mode, string> = { morning: 'Morning', power: 'Power Talk', evening: 'Evening' };
+const WHY: Record<Mode, string> = { morning: 'Warum morgens', power: 'Warum ein Power Talk', evening: 'Warum abends beim Einschlafen' };
 const TEXT = {
   morning: { title: 'Your morning words', sub: 'Set the frame for your day.', start: 'Start morning session' },
+  power: { title: 'Your power talk', sub: 'Wake up your energy and your money mindset.', start: 'Start power talk' },
   evening: { title: 'Tonight’s reset', sub: 'Let go and fall asleep with your own words.', start: 'Start evening session' },
 };
-const SETTINGS = { morning: { rate: 0.95, pause: 2500, loopMinutes: 0 }, evening: { rate: 0.82, pause: 5000, loopMinutes: 20 } };
+const SETTINGS = { morning: { rate: 0.95, pause: 2500, loopMinutes: 0 }, power: { rate: 1.02, pause: 1400, loopMinutes: 0 }, evening: { rate: 0.82, pause: 5000, loopMinutes: 20 } };
 
 let compass = loadCompass();
 let mode: Mode = new Date().getHours() >= 17 ? 'evening' : 'morning';
@@ -28,7 +32,8 @@ const setField = (key: string, value: string) => {
   compass.fields[key] = value;
   saveCompass(compass);
 };
-const current = () => lines(field(`affirm.${mode}`, defaultAffirmations[mode]));
+const moneyGoal = () => field('affirm.money', '1000 €');
+const current = () => lines(field(`affirm.${mode}`, defaultAffirmations[mode]).replaceAll('{ziel}', moneyGoal()));
 
 const status = document.getElementById('affirm-status')!;
 const playBtn = document.getElementById('affirm-play') as HTMLButtonElement;
@@ -46,7 +51,8 @@ function render(): void {
   document.getElementById('affirm-now')!.textContent = current()[0] ?? '';
   const days = playedDays().length;
   document.getElementById('affirm-days')!.textContent = String(Math.max(days, 1)).padStart(2, '0');
-  document.getElementById('why-title')!.textContent = mode === 'morning' ? 'Warum morgens' : 'Warum abends beim Einschlafen';
+  document.getElementById('why-title')!.textContent = WHY[mode];
+  document.getElementById('money-goal-box')!.hidden = mode !== 'power';
 }
 
 /** Tage, an denen ich zugehört habe: „Day 07“ wie im Vorbild. */
@@ -81,7 +87,7 @@ function stop(text = ''): void {
 function playRecording(): void {
   const src = recUrls[mode];
   if (!src) {
-    status.textContent = `Noch keine eigene Aufnahme für ${mode === 'morning' ? 'Morning' : 'Evening'}. Unten bei „Mit meiner Stimme“ aufnehmen.`;
+    status.textContent = `Noch keine eigene Aufnahme für ${LABEL[mode]}. Unten bei „Mit meiner Stimme“ aufnehmen.`;
     return;
   }
   const until = Date.now() + SETTINGS[mode].loopMinutes * 60000;
@@ -92,7 +98,7 @@ function playRecording(): void {
   render();
   playBtn.classList.add('is-playing');
   document.getElementById('affirm-play-label')!.textContent = 'Stop';
-  if (musicBox.checked) music.start(mode === 'evening' ? 0.12 : 0.16);
+  if (musicBox.checked) music.start(mode === 'evening' ? 0.12 : 0.16, mode === 'power' ? 4500 : 9000);
   status.textContent = 'Deine eigene Stimme';
   if (mode === 'evening') status.textContent += ' · läuft bis zu 20 Min., Bildschirm anlassen';
   a.onended = () => {
@@ -120,7 +126,7 @@ function play(): void {
   render();
   playBtn.classList.add('is-playing');
   document.getElementById('affirm-play-label')!.textContent = 'Stop';
-  if (musicBox.checked) music.start(mode === 'evening' ? 0.14 : 0.18);
+  if (musicBox.checked) music.start(mode === 'evening' ? 0.14 : 0.18, mode === 'power' ? 4500 : 9000);
   status.textContent = v ? `Stimme: ${v.name}` : `Keine ${lang.label}-Stimme auf diesem Gerät gefunden, es liest die Standardstimme.`;
   if (mode === 'evening') status.textContent += ' · läuft bis zu 20 Min., Bildschirm anlassen';
   let i = 0;
@@ -171,6 +177,14 @@ langSel.addEventListener('change', () => {
 genderSel.addEventListener('change', () => setField('affirm.gender', genderSel.value));
 musicBox.addEventListener('change', () => setField('affirm.music', musicBox.checked ? 'an' : 'aus'));
 
+// Money-Ziel der Woche für den Power Talk.
+const goalInput = document.getElementById('money-goal') as HTMLInputElement;
+goalInput.value = field('affirm.money');
+goalInput.addEventListener('input', () => {
+  setField('affirm.money', goalInput.value);
+  render();
+});
+
 // Fragen und eigene Affirmationen (leer gelassen = Startwerte).
 for (const el of document.querySelectorAll<HTMLTextAreaElement>('[data-field]')) {
   const key = el.dataset.field!;
@@ -193,7 +207,7 @@ const recBtn = document.getElementById('rec-btn') as HTMLButtonElement;
 const recDel = document.getElementById('rec-del') as HTMLButtonElement;
 const recStatus = document.getElementById('rec-status')!;
 let recorder: { stop: () => Promise<Blob> } | null = null;
-const modeLabel = () => (mode === 'morning' ? 'Morning' : 'Evening');
+const modeLabel = () => LABEL[mode];
 
 function renderRec(): void {
   const has = !!recUrls[mode];
@@ -204,7 +218,7 @@ function renderRec(): void {
 }
 
 async function loadRecs(): Promise<void> {
-  for (const m of ['morning', 'evening'] as Mode[]) {
+  for (const m of MODES) {
     const blob = await loadRecording(`affirm-${m}`);
     if (recUrls[m]) URL.revokeObjectURL(recUrls[m]!);
     recUrls[m] = blob ? URL.createObjectURL(blob) : undefined;

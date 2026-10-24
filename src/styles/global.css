@@ -612,7 +612,7 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .affirm-hero .eyebrow { letter-spacing: 0.22em; }
 .affirm-day { margin: 0.2rem 0 0; font-size: 2.6rem; font-weight: 300; letter-spacing: -0.01em; }
 .affirm-panel { padding: 0.4rem 1.1rem 1.2rem; border: 1px solid var(--border); border-radius: 22px; background: var(--surface-2); }
-.affirm-tabs { display: grid; grid-template-columns: 1fr 1fr; margin: 0 0 1.1rem; border-bottom: 1px solid var(--border); }
+.affirm-tabs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 1.1rem; border-bottom: 1px solid var(--border); }
 .affirm-tabs button { padding: 0.9rem 0 0.7rem; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: transparent; color: var(--muted); font: inherit; font-size: 1rem; cursor: pointer; }
 .affirm-tabs button[aria-selected='true'] { color: var(--text); border-bottom-color: #d4a437; }
 .affirm-title { margin: 0; font-size: 1.45rem; font-weight: 500; }
@@ -629,6 +629,8 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .affirm-check input { accent-color: #d4a437; }
 .affirm-mine { margin: 1.4rem 0 1rem; }
 .affirm-rec { margin: 0 0 1rem; }
+.money-goal { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 0.8rem 0 0; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.04em; }
+.money-goal input { width: 7rem; padding: 0.4rem 0.6rem; border: 1px solid #d4a437; border-radius: 10px; background: transparent; color: var(--text); font: inherit; font-size: 1rem; text-align: center; }
 .affirm-rec-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
 #rec-btn.is-recording { border-color: #d4a437; color: #d4a437; }
 .affirm-rec-status { margin: 0.5rem 0 0; font-size: 0.85rem; }

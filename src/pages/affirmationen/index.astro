@@ -29,10 +29,14 @@ import { affirmQuestions, defaultAffirmations, languages, science } from '../../
   <section class="affirm-panel">
     <div class="affirm-tabs" role="tablist">
       <button type="button" role="tab" data-mode="morning" aria-selected="true">Morning</button>
+      <button type="button" role="tab" data-mode="power" aria-selected="false">Power</button>
       <button type="button" role="tab" data-mode="evening" aria-selected="false">Evening</button>
     </div>
     <h2 class="affirm-title" id="affirm-title">Your morning words</h2>
     <p class="affirm-sub muted" id="affirm-sub">Set the frame for your day.</p>
+    <label class="money-goal" id="money-goal-box" hidden>Mein Money-Ziel diese Woche
+      <input id="money-goal" placeholder="1000 €" inputmode="text" />
+    </label>
     <p class="affirm-now" id="affirm-now" aria-live="polite"></p>
     <button type="button" class="affirm-start" id="affirm-play">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" /></svg>
@@ -56,6 +60,10 @@ import { affirmQuestions, defaultAffirmations, languages, science } from '../../
     <div data-words="morning">
       <label class="field-label" for="words-morning">Morning</label>
       <textarea class="field" id="words-morning" rows="6" data-field="affirm.morning" data-default={defaultAffirmations.morning}></textarea>
+    </div>
+    <div data-words="power" hidden>
+      <label class="field-label" for="words-power">Power Talk · {'{ziel}'} wird durch dein Money-Ziel ersetzt</label>
+      <textarea class="field" id="words-power" rows="8" data-field="affirm.power" data-default={defaultAffirmations.power}></textarea>
     </div>
     <div data-words="evening" hidden>
       <label class="field-label" for="words-evening">Evening</label>
@@ -88,6 +96,7 @@ import { affirmQuestions, defaultAffirmations, languages, science } from '../../
   <details class="vision affirm-why">
     <summary id="why-title">Warum morgens</summary>
     <div data-why="morning">{science.morning.map((t) => <p>{t}</p>)}</div>
+    <div data-why="power" hidden>{science.power.map((t) => <p>{t}</p>)}</div>
     <div data-why="evening" hidden>{science.evening.map((t) => <p>{t}</p>)}</div>
     <p class="muted">{science.tip}</p>
   </details>

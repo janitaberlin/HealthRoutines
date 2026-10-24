@@ -18,9 +18,10 @@ export function buildPrompt(answers: { label: string; text: string }[], language
     `Erstelle mir aus meinen Antworten persönliche Affirmationen auf ${language}.`,
     '',
     ...filled.flatMap((a) => [`${a.label}`, a.text.trim(), '']),
-    'Bitte zwei Listen:',
+    'Bitte drei Listen:',
     '1. Morning Affirmations (6–8 Sätze): kraftvoll, für den Start in den Tag.',
-    '2. Evening Affirmations (6–8 Sätze): ruhig und weich, zum Einschlafen.',
+    '2. Power Talk (8–10 Sätze): wach machend, mit Money-Mindset, spricht mich mit „du“ an; schreibe für mein Wochenziel genau {ziel}.',
+    '3. Evening Affirmations (6–8 Sätze): ruhig und weich, zum Einschlafen.',
     'Regeln: Ich-Form, Gegenwart, kurz, glaubwürdig (lieber „Ich werde jeden Tag …“ als etwas, das sich noch nicht wahr anfühlt), ein Satz pro Zeile, keine Nummern, keine Emojis.',
   ].join('\n');
 }

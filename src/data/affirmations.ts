@@ -26,6 +26,18 @@ export const defaultAffirmations = {
     'Ich erschaffe mein Leben, ich verwalte es nicht.',
     'Ich darf gesehen werden, genau so, wie ich bin.',
   ].join('\n'),
+  power: [
+    'Guten Morgen, JANITA. Du musst dich nicht energiegeladen fühlen, um loszugehen. Die Energie kommt, wenn du dich bewegst.',
+    'Steh auf, Licht an, Wasser trinken. Mehr braucht es in den ersten fünf Minuten nicht.',
+    'Du baust etwas, das es vorher nicht gab. Das darf müde machen, und du machst trotzdem weiter.',
+    'Mein Ziel diese Woche: {ziel}. Ich darf total kreativ sein, wie ich es erreiche.',
+    'Geld kommt zu mir, wenn ich Wert schaffe und Freude dabei habe.',
+    'Ich darf gut verdienen mit dem, was ich liebe.',
+    'Jede Money-Making Activity heute bringt mich näher an {ziel}.',
+    'Ich zeige mich und mein Angebot. Wer mich sieht, kann bei mir kaufen.',
+    'Erfolg folgt der Freude. Also: Was macht mir heute Spaß und bringt Umsatz?',
+    'Du bist nicht hinterher. Du bist genau in deinem Tempo. Let’s go.',
+  ].join('\n'),
   evening: [
     'Ich habe heute genug getan.',
     'Mein Körper darf jetzt loslassen.',
@@ -45,6 +57,11 @@ export const science = {
   evening: [
     'Was wir kurz vor dem Schlafen aufnehmen, festigt das Gehirn im Schlaf im Gedächtnis (Diekelmann und Born 2010). Die Studien betreffen Lernen allgemein, nicht speziell Affirmationen.',
     'Ruhige Stimme und Musik helfen beim Runterkommen. Dass Sätze im Tiefschlaf „ins Unterbewusstsein“ wandern, ist dagegen nicht belegt: Wirksam ist die Zeit, in der du noch wach zuhörst.',
+  ],
+  power: [
+    'Motivierende Selbstgespräche verbessern messbar die Leistung, vor allem bei Ausdauer und Konzentration (Hatzigeorgiadis u. a. 2011, Übersicht aus 32 Studien im Sport).',
+    'Sich selbst mit „du“ anzusprechen, wie in einem Power Talk, kann die Absicht und Ausdauer stärken (Dolcos und Albarracín 2014).',
+    'Zum Geld ehrlich: Dass Affirmationen allein mehr Einkommen bringen, ist nicht belegt. Gut belegt ist, dass ein konkretes Ziel plus ein Wenn-dann-Plan („Wenn es 9 Uhr ist, schreibe ich drei Kundinnen an“) die Umsetzung deutlich erhöht (Gollwitzer und Sheeran 2006).',
   ],
   tip: 'Wichtig: Affirmationen wirken am besten, wenn sie sich für dich glaubwürdig anfühlen. Sätze, die sich zu weit weg anfühlen, können sogar Zweifel verstärken (Wood u. a. 2009). Lieber „Ich werde jeden Tag …“ als „Ich bin schon …“, wenn es noch nicht stimmt.',
 };

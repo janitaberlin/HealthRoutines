@@ -12,7 +12,7 @@ export class Ambient {
   private timer = 0;
   private voices: { osc: OscillatorNode[]; gain: GainNode }[] = [];
 
-  start(volume = 0.18): void {
+  start(volume = 0.18, chordMs = 9000): void {
     if (this.ctx) return;
     const ctx = new AudioContext();
     this.ctx = ctx;
@@ -31,7 +31,7 @@ export class Ambient {
       i++;
     };
     play();
-    this.timer = window.setInterval(play, 9000);
+    this.timer = window.setInterval(play, chordMs);
   }
 
   private chord(freqs: number[]): void {
