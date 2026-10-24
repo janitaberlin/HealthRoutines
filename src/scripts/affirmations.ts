@@ -5,7 +5,7 @@ import { dateKey } from '../lib/tracker';
 import { loadCompass, saveCompass } from './storage';
 import { deleteRecording, loadRecording, saveRecording, startRecording } from './recording';
 
-/** My Affirmations: Morning/Power/Evening anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
+/** My Affirmations (Morning/Evening) und Power Talk auf Ziele: anhören mit Stimme und Musik, mit Claude aus eigenen Antworten erstellen. */
 type Mode = 'morning' | 'power' | 'evening';
 const MODES: Mode[] = ['morning', 'power', 'evening'];
 const LABEL: Record<Mode, string> = { morning: 'Morning', power: 'Power Talk', evening: 'Evening' };
@@ -18,7 +18,10 @@ const TEXT = {
 const SETTINGS = { morning: { rate: 0.95, pause: 2500, loopMinutes: 0 }, power: { rate: 1.02, pause: 1400, loopMinutes: 0 }, evening: { rate: 0.82, pause: 5000, loopMinutes: 20 } };
 
 let compass = loadCompass();
-let mode: Mode = new Date().getHours() >= 17 ? 'evening' : 'morning';
+// Auf Ziele läuft nur der Power Talk, auf Affirm Morning und Evening.
+const fixed = document.querySelector<HTMLElement>('[data-fixed-mode]')?.dataset.fixedMode as Mode | undefined;
+const asked = new URLSearchParams(location.search).get('mode') as Mode | null;
+let mode: Mode = fixed ?? (asked && asked in TEXT ? asked : new Date().getHours() >= 17 ? 'evening' : 'morning');
 let playing = false;
 let timer = 0;
 let spoken: SpeechSynthesisUtterance | null = null;
@@ -50,9 +53,13 @@ function render(): void {
   document.getElementById('affirm-play-label')!.textContent = TEXT[mode].start;
   document.getElementById('affirm-now')!.textContent = current()[0] ?? '';
   const days = playedDays().length;
-  document.getElementById('affirm-days')!.textContent = String(Math.max(days, 1)).padStart(2, '0');
+  const goalBox = document.getElementById('money-goal-box');
+  if (goalBox) goalBox.hidden = mode !== 'power';
+  const goalShow = document.getElementById('money-goal-show');
+  if (goalShow) goalShow.textContent = moneyGoal();
+  const daysEl = document.getElementById('affirm-days');
+  if (daysEl) daysEl.textContent = String(Math.max(days, 1)).padStart(2, '0');
   document.getElementById('why-title')!.textContent = WHY[mode];
-  document.getElementById('money-goal-box')!.hidden = mode !== 'power';
 }
 
 /** Tage, an denen ich zugehört habe: „Day 07“ wie im Vorbild. */
@@ -178,10 +185,10 @@ genderSel.addEventListener('change', () => setField('affirm.gender', genderSel.v
 musicBox.addEventListener('change', () => setField('affirm.music', musicBox.checked ? 'an' : 'aus'));
 
 // Money-Ziel der Woche für den Power Talk.
-const goalInput = document.getElementById('money-goal') as HTMLInputElement;
-goalInput.value = field('affirm.money');
-goalInput.addEventListener('input', () => {
-  setField('affirm.money', goalInput.value);
+const goalInput = document.getElementById('money-goal') as HTMLInputElement | null;
+if (goalInput) goalInput.value = field('affirm.money');
+goalInput?.addEventListener('input', () => {
+  setField('affirm.money', goalInput!.value);
   render();
 });
 
@@ -196,8 +203,9 @@ for (const el of document.querySelectorAll<HTMLTextAreaElement>('[data-field]'))
   });
 }
 
-const claude = document.getElementById('affirm-claude') as HTMLAnchorElement;
+const claude = document.getElementById('affirm-claude') as HTMLAnchorElement | null;
 function updateLink(): void {
+  if (!claude) return;
   const lang = languages.find((l) => l.id === langSel.value) ?? languages[0];
   claude.href = claudeLink(buildPrompt(affirmQuestions.map((q) => ({ label: q.label, text: field(q.id) })), lang.prompt));
 }

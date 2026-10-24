@@ -142,3 +142,13 @@ export const goalStates = [
   { id: 'committed', label: 'Committed', hint: 'Dafür habe ich mich entschieden.' },
   { id: 'evolving', label: 'Evolving', hint: 'Mein Ziel verändert sich mit mir.' },
 ] as const;
+
+/** Money-Mindset auf Ziele (Janita 24.10.2026); als Reflexion, keine Versprechen. */
+export const moneyMindset = [
+  'Geld kommt zu mir, wenn ich Wert schaffe und Freude dabei habe.',
+  'Ich darf gut verdienen mit dem, was ich liebe.',
+  'Ich darf total kreativ sein, wie ich mein Ziel erreiche.',
+  'Ich zeige mich und mein Angebot. Wer mich sieht, kann bei mir kaufen.',
+  'Jede Money-Making Activity zählt, auch die kleine.',
+  'Erfolg folgt der Freude.',
+].join('\n');

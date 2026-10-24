@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
-import { lifeAreas, lifeIntro, lifeOutro, levels, northStarVision, goalStates, identityDefaults } from '../../data/compass';
+import { lifeAreas, lifeIntro, lifeOutro, identityDefaults, northStarVision } from '../../data/compass';
 import HumanDesign from '../../components/HumanDesign.astro';
 ---
 <Base title="Vision" page="vision">
@@ -38,35 +38,6 @@ import HumanDesign from '../../components/HumanDesign.astro';
     <p class="compass-reflect">{lifeOutro}</p>
   </section>
 
-  <section class="compass-section" id="north-star">
-    <p class="eyebrow">My North Star</p>
-    <div class="levels">
-      {levels.map((l) => (
-        <div class="level">
-          <p class="level-label">{l.label} <span>· {l.hint}</span></p>
-          <textarea class="field" rows="2" data-field={`level.${l.id}`} data-default={l.text}></textarea>
-        </div>
-      ))}
-    </div>
-    <h2 class="compass-h2">Drei Lebensziele</h2>
-    <p class="muted">Einmal bewusst festlegen, dann einmal im Monat überprüfen. Morgens wird nichts neu verhandelt.</p>
-    {[0, 1, 2].map((i) => (
-      <div class="goal" data-goal={i}>
-        <textarea class="field" rows="2" data-goal-text placeholder={`Ziel ${i + 1}`}></textarea>
-        <div class="goal-states" role="group" aria-label="Status">
-          {goalStates.map((s) => (
-            <button type="button" class="focus-btn" data-state={s.id} aria-pressed="false" title={s.hint}>{s.label}</button>
-          ))}
-        </div>
-      </div>
-    ))}
-    <div class="goal-review">
-      <p class="muted" id="goal-review-text"></p>
-      <button type="button" class="menu-btn" id="goal-review-btn">Ziele überprüft ✓</button>
-    </div>
-    <p class="compass-reflect" id="goal-reflect" hidden>Passen meine Ziele noch zu mir, oder haben sie sich verändert?</p>
-    
-  </section>
 
   <section class="compass-section compass-card" id="identity">
     <p class="eyebrow">Remember Who You Are</p>

@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { levels, goalStates, moneyMindset } from '../../data/compass';
+---
+<Base title="Ziele" page="ziele">
+  <header class="vision-head">
+    <p class="eyebrow">My Goals</p>
+    <h1 class="page-title">Ziele</h1>
+  </header>
+
+  <section class="compass-card money-card">
+    <p class="eyebrow">Money-Ziel diese Woche</p>
+    <input class="money-input" id="money-goal" placeholder="1000 €" inputmode="text" aria-label="Mein Money-Ziel diese Woche" />
+    <p class="muted">Ich darf total kreativ sein, wie ich es erreiche, und Spaß dabei haben.</p>
+  </section>
+
+  <section class="compass-card money-card" id="plan">
+    <p class="eyebrow">Plan your week · <span data-week-label></span></p>
+    <label class="field-label" for="reflect-plan">Was sind meine Money-Making Activities diese Woche?</label>
+    <textarea class="field" id="reflect-plan" rows="4" data-reflect="plan" placeholder="Was bringt diese Woche Umsatz?"></textarea>
+  </section>
+
+  <section class="compass-section" id="north-star">
+    <p class="eyebrow">Plan your year</p>
+    <h2 class="compass-h2">My next 3 big goals</h2>
+    <p class="muted">Einmal bewusst festlegen, dann einmal im Monat überprüfen. Morgens wird nichts neu verhandelt.</p>
+    {[0, 1, 2].map((i) => (
+      <div class="goal" data-goal={i}>
+        <textarea class="field" rows="2" data-goal-text placeholder={`Big Goal ${i + 1}`}></textarea>
+        <div class="goal-states" role="group" aria-label="Status">
+          {goalStates.map((s) => (
+            <button type="button" class="focus-btn" data-state={s.id} aria-pressed="false" title={s.hint}>{s.label}</button>
+          ))}
+        </div>
+      </div>
+    ))}
+    <div class="goal-review">
+      <p class="muted" id="goal-review-text"></p>
+      <button type="button" class="menu-btn" id="goal-review-btn">Ziele überprüft ✓</button>
+    </div>
+    <p class="compass-reflect" id="goal-reflect" hidden>Passen meine Ziele noch zu mir, oder haben sie sich verändert?</p>
+    <details class="vision">
+      <summary>Mein Why, What und How</summary>
+      <div class="levels">
+        {levels.map((l) => (
+          <div class="level">
+            <p class="level-label">{l.label} <span>· {l.hint}</span></p>
+            <textarea class="field" rows="2" data-field={`level.${l.id}`} data-default={l.text}></textarea>
+          </div>
+        ))}
+      </div>
+    </details>
+  </section>
+
+  <section class="compass-card money-card">
+    <p class="eyebrow">Mein Money-Mindset</p>
+    <textarea class="field" rows="6" data-field="money.mindset" data-default={moneyMindset} aria-label="Mein Money-Mindset"></textarea>
+    <a class="affirm-start money-power" href={url('affirmationen/?mode=power')}>▶ Power Talk anhören</a>
+  </section>
+
+  <script>
+    import '../../scripts/money-goal';
+    import '../../scripts/compass-page';
+    import '../../scripts/reflection';
+  </script>
+</Base>

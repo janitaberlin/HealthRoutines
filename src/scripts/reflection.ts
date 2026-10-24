@@ -2,9 +2,9 @@ import { weekLabel, weekStart, type WeekEntry } from '../lib/reflection';
 import { dateKey } from '../lib/tracker';
 import { loadReflections, saveReflections } from './storage';
 
-/** Plan your week + Wochenreflexion im Verlauf: drei Fragen für die laufende Woche, frühere Wochen darunter. */
+/** Plan your week (auf Ziele) + Wochenreflexion (My Journey): Felder der laufenden Woche, frühere Wochen in My Journey. */
 const week = weekStart(dateKey(new Date()));
-document.getElementById('reflection-week')!.textContent = weekLabel(week);
+document.querySelectorAll('[data-week-label]').forEach((el) => (el.textContent = weekLabel(week)));
 
 for (const field of document.querySelectorAll<HTMLTextAreaElement>('[data-reflect]')) {
   const key = field.dataset.reflect as keyof WeekEntry;
@@ -21,9 +21,9 @@ for (const field of document.querySelectorAll<HTMLTextAreaElement>('[data-reflec
 const past = Object.entries(loadReflections())
   .filter(([k]) => k < week)
   .sort(([a], [b]) => b.localeCompare(a));
-const list = document.getElementById('reflection-past')!;
-list.hidden = !past.length;
-for (const [k, e] of past) {
+const list = document.getElementById('reflection-past');
+if (list) list.hidden = !past.length;
+for (const [k, e] of list ? past : []) {
   const item = document.createElement('details');
   item.className = 'reflection-old';
   const summary = document.createElement('summary');
@@ -39,5 +39,5 @@ for (const [k, e] of past) {
     p.textContent = text;
     item.append(h, p);
   }
-  list.append(item);
+  list!.append(item);
 }

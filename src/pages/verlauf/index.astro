@@ -6,13 +6,11 @@ import { becomeHerQuestions, libraryTypes, visionAreas } from '../../data/compas
 ---
 <Base title="My Journey" page="verlauf">
   <h1 class="page-title">My Journey</h1>
-  <p class="muted">Meine Woche planen, zurückschauen und sehen, was ich schon geschafft habe.</p>
+  <p class="muted">Zurückschauen und sehen, was ich schon geschafft habe.</p>
 
   <section class="reflection compass-card" id="reflection">
-    <p class="eyebrow">Plan your week · <span id="reflection-week"></span></p>
-    <label class="field-label" for="reflect-plan">Was sind meine Money-Making Activities diese Woche?</label>
-    <textarea class="field" id="reflect-plan" rows="3" data-reflect="plan" placeholder="Was bringt diese Woche Umsatz?"></textarea>
-    <p class="eyebrow reflection-sub">Wochenreflexion</p>
+    <p class="eyebrow">Wochenreflexion · <span data-week-label></span></p>
+    <a class="journey-more" href="../ziele/#plan">Plan your week steht jetzt unter Ziele ›</a>
     <label class="field-label" for="reflect-become">Who did I become this week?</label>
     <textarea class="field" id="reflect-become" rows="3" data-reflect="become" placeholder="Wer bin ich diese Woche geworden?"></textarea>
     <label class="field-label" for="reflect-outcome">What is the outcome?</label>
