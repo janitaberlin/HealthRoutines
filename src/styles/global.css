@@ -463,7 +463,7 @@ button.state.state-evolving { background: var(--surface-2); }
   padding: 0.6rem 0.3rem calc(0.6rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--border);
   border-radius: 24px 24px 0 0; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
-.tab { display: grid; justify-items: center; gap: 0.25rem; padding: 0.3rem 0; color: var(--muted); text-decoration: none; font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
+.tab { display: grid; justify-items: center; gap: 0.25rem; padding: 0.3rem 0; color: var(--muted); text-decoration: none; font-size: 0.56rem; letter-spacing: 0.03em; text-transform: uppercase; opacity: 0.7; }
 .tab svg { width: 1.5rem; height: 1.5rem; }
 .tab[aria-current='page'] { color: var(--text); opacity: 1; }
 .page { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
@@ -632,6 +632,22 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .money-card { margin: 1rem 0; }
 .money-input { width: 100%; margin: 0.4rem 0 0.6rem; padding: 0.5rem 0; border: 0; border-bottom: 1px solid #d4a437; background: transparent; color: var(--text); font: inherit; font-size: 2rem; font-weight: 500; }
 .money-input:focus { outline: none; }
+.challenge { margin: 1rem 0; border-color: rgba(212, 164, 55, 0.45); }
+.challenge-day { margin: 0.2rem 0 0.4rem; color: #d4a437; font-size: 0.85rem; letter-spacing: 0.04em; }
+.challenge-task { margin: 0 0 1rem; font-size: 1.3rem; line-height: 1.35; font-weight: 500; }
+.affirm-start.is-done { background: transparent; color: var(--text); }
+.challenge-earned { justify-content: flex-start; margin: 0.8rem 0 0; }
+.challenge-goal { margin: 1.2rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.challenge-goal .menu-btn { margin-top: 0.3rem; }
+.challenge-sum { display: flex; align-items: baseline; gap: 0.4rem; margin: 0 0 0.6rem; font-size: 1.6rem; font-weight: 500; }
+.challenge-sum .muted { font-size: 0.95rem; font-weight: 400; }
+.challenge-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.4rem; }
+.challenge-cell { aspect-ratio: 1; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text); font: inherit; font-size: 0.85rem; cursor: pointer; }
+.challenge-cell.is-future { color: var(--muted); opacity: 0.6; }
+.challenge-cell.is-done { border-color: transparent; background: linear-gradient(135deg, #f0d27a, #d4a437); color: #141312; opacity: 1; }
+.challenge-cell.is-today { box-shadow: 0 0 0 2px #d4a437 inset; }
+.challenge-cell[aria-current='true'] { outline: 2px solid var(--text); outline-offset: 2px; }
+.challenge-hint { margin: 0.7rem 0 0; font-size: 0.82rem; }
 .money-weeks { display: flex; gap: 0.5rem; margin-bottom: 0.9rem; }
 .money-lock { margin: 0.4rem 0 0.8rem; }
 .money-amount { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.7rem; font-size: 2rem; font-weight: 500; }

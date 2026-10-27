@@ -3,11 +3,34 @@ import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
 import { levels, goalStates, moneyMindset } from '../../data/compass';
 ---
-<Base title="Ziele" page="ziele">
+<Base title="Money" page="ziele">
   <header class="vision-head">
-    <p class="eyebrow">My Goals</p>
-    <h1 class="page-title">Ziele</h1>
+    <p class="eyebrow">Money &amp; Goals</p>
+    <h1 class="page-title">Money</h1>
   </header>
+
+  <section class="compass-card challenge" id="challenge">
+    <p class="eyebrow">30-Day Money Challenge</p>
+    <p class="challenge-day" id="ch-day"></p>
+    <p class="challenge-task" id="ch-task"></p>
+    <button type="button" class="affirm-start" id="ch-done" hidden>✓ Challenge erledigt</button>
+    <label class="money-reached challenge-earned" id="ch-earned-box" hidden>Heute verdient <input id="ch-earned" inputmode="decimal" placeholder="0 €" /></label>
+
+    <div class="challenge-goal">
+      <div id="ch-goal-open">
+        <label class="field-label" for="ch-goal">Mein Ziel für die 30 Tage</label>
+        <input class="money-input" id="ch-goal" placeholder="z. B. 3000 €" inputmode="decimal" />
+        <button type="button" class="menu-btn" id="ch-lock">Ziel festlegen</button>
+      </div>
+      <div id="ch-goal-locked" hidden>
+        <p class="challenge-sum"><span id="ch-total"></span> <span class="muted">von <span id="ch-goal-show"></span></span><button type="button" class="money-unlock" id="ch-unlock" aria-label="Ziel ändern">🔒</button></p>
+        <div class="money-bar"><span id="ch-bar"></span></div>
+      </div>
+    </div>
+
+    <div class="challenge-grid" id="ch-grid" aria-label="30 Tage"></div>
+    <p class="muted challenge-hint" id="ch-hint"></p>
+  </section>
 
   <section class="compass-card money-card" id="money">
     <div class="money-weeks" role="group" aria-label="Woche">
@@ -80,6 +103,7 @@ import { levels, goalStates, moneyMindset } from '../../data/compass';
   </section>
 
   <script>
+    import '../../scripts/challenge';
     import '../../scripts/money-goal';
     import '../../scripts/compass-page';
     import '../../scripts/reflection';

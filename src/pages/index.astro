@@ -75,6 +75,10 @@ import CycleLog from '../components/CycleLog.astro';
     </div>
   </section>
 
+  <a class="home-notice challenge-card" href={url('ziele/#challenge')}>
+    <span class="eyebrow" id="home-ch-day">30-Day Money Challenge</span><strong id="home-ch-task"></strong>
+  </a>
+
   <a class="home-notice" id="sunday-notice" href={url('ziele/#plan')} hidden>
     <span class="eyebrow">Sonntag</span><strong>Plan your week &amp; Reflexion ›</strong>
   </a>
@@ -154,6 +158,7 @@ import CycleLog from '../components/CycleLog.astro';
     import '../scripts/spark';
     import '../scripts/north-star';
     import '../scripts/week-card';
+    import '../scripts/challenge-card';
     import '../scripts/home';
     import '../scripts/cycle';
     import '../scripts/notices';

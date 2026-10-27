@@ -1,3 +1,4 @@
+import { parseChallenge, type Challenge } from '../lib/challenge';
 import { parseMoney, type MoneyGoals } from '../lib/money';
 import { parseUsage, recordUse, type Usage } from '../lib/usage';
 import { parseCycle, type CycleData } from '../lib/cycle';
@@ -208,6 +209,24 @@ export function saveMoney(money: MoneyGoals): void {
   }
 }
 
+const CHALLENGE_KEY = 'money-challenge';
+
+export function loadChallenge(): Challenge {
+  try {
+    return parseChallenge(JSON.parse(localStorage.getItem(CHALLENGE_KEY) ?? '{}'));
+  } catch {
+    return parseChallenge(null);
+  }
+}
+
+export function saveChallenge(challenge: Challenge): void {
+  try {
+    localStorage.setItem(CHALLENGE_KEY, JSON.stringify(challenge));
+  } catch {
+    // Speicher nicht verfügbar.
+  }
+}
+
 const BACKUP_KEY = 'backup-last';
 
 export function loadLastBackup(): string | null {
@@ -238,6 +257,7 @@ export function buildBackup(): string {
     cycle: loadCycle(),
     usage: loadUsage(),
     money: loadMoney(),
+    challenge: loadChallenge(),
   };
   return JSON.stringify(backup, null, 2);
 }
