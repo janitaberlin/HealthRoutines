@@ -32,29 +32,9 @@ export const routines: Routine[] = [
     icon: '☀︎',
     items: [
       { id: 'tee-morgen', text: 'Frischer Tee, z. B. grüner Tee mit Zitrone', hint: 'sanftes Koffein für wache, ruhige Energie, Zitrone für Frische und etwas Vitamin C' },
-      { id: 'dankbar', text: 'Ich bin dankbar für …', note: true },
       { id: 'sport-morgen', text: 'Morning Workout', hint: '15 Min. oder Kurs: MWH Class, Reformer Pilates, Joggen, KINRGY, Pamela Reif Glutes' },
       { id: 'outfit', text: 'Getting ready', hint: 'Outfit an, Make-up, Haare' },
       { id: 'supplements', text: 'Supplements nehmen' },
-    ],
-  },
-  {
-    id: 'fokus',
-    title: 'Daily Intention',
-    subtitle: 'Inspired Action',
-    icon: '✦',
-    items: [
-      { id: 'fokus-welt', text: 'Was möchte heute durch mich entstehen – und wie bringe ich es in die Welt?', note: true, info: [
-        { title: 'Empfangen', text: 'Was inspiriert mich? Was beschäftigt mich? Was möchte ich ausdrücken?' },
-        { title: 'Erschaffen', text: 'Was mache ich daraus? Einen Gedanken, ein Video, eine Geschichte, eine Idee?' },
-        { title: 'Teilen', text: 'Wie lasse ich andere daran teilhaben?' },
-      ] },
-      { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', note: true, hint: 'z. B. Bewegung, Schönheit, Nähe, ein Moment für mich' },
-      { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true, hint: 'den größten Hebel wählen, ein Ergebnis für Mathilde', infoTitle: 'Outcome-Check für jedes To-do', info: [
-        { title: 'Outcome', text: 'Was ist das Ergebnis, wenn es erledigt ist?' },
-        { title: 'Money-Making Activity', text: 'Mache ich dadurch Umsatz? Money-Making Activities zuerst.' },
-      ] },
-      { id: 'fokus-dienen', text: 'Wie und wem kann ich heute mit meinen Talenten dienen?', note: true },
     ],
   },
   {
@@ -75,13 +55,26 @@ export const routines: Routine[] = [
     icon: '☾',
     items: [
       { id: 'abendbeutel', text: 'Self Care: bettfertig machen', hint: 'runterkommen und mich verwöhnen: Pflege, Bademantel, Haare hoch' },
+      { id: 'rewind', text: 'Evening Rewind (Self-Care-Ritual)', hint: 'den ganzen Körper und das Gesicht eincremen' },
       { id: 'tee-abend', text: 'Tee' },
       { id: 'venoprime', text: 'VenoPrime, 2 Kapseln', hint: 'zu einer Mahlzeit' },
       { id: 'handy-weg', text: 'Digital Detox', hint: 'Handy 1 Std. vor dem Schlafen weg' },
       { id: 'lesen', text: 'Lese-Ritual', hint: 'ein paar Seiten, die mich wachsen lassen' },
-      { id: 'energie-plus', text: 'Energy Check: Was hat mir heute Energie gegeben?', note: true },
     ],
   },
+];
+
+/**
+ * Frühere Reflexionsfragen mit Notizfeld (bis 27.10.2026 in den Routinen, Janita: „hat nichts mit Routinen zu tun“).
+ * Nicht mehr zum Abhaken; nur damit alte Antworten in „Meine Antworten“ ihren Titel behalten.
+ */
+export const pastQuestions: RoutineItem[] = [
+  { id: 'dankbar', text: 'Ich bin dankbar für …', note: true },
+  { id: 'fokus-welt', text: 'Was möchte heute durch mich entstehen – und wie bringe ich es in die Welt?', note: true },
+  { id: 'fokus-erleben', text: 'Was möchte ich heute erleben?', note: true },
+  { id: 'fokus-erschaffen', text: 'Was möchte ich heute erschaffen?', note: true },
+  { id: 'fokus-dienen', text: 'Wie und wem kann ich heute mit meinen Talenten dienen?', note: true },
+  { id: 'energie-plus', text: 'Energy Check: Was hat mir heute Energie gegeben?', note: true },
 ];
 
 /** Feste Grundsätze ohne Haken: selbstverständlich, aber wichtig. */

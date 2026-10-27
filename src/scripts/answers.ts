@@ -1,4 +1,4 @@
-import { routines } from '../data/routines';
+import { pastQuestions, routines } from '../data/routines';
 import { journalDays } from '../lib/journal';
 import { weekLabel } from '../lib/reflection';
 import { parseKey } from '../lib/tracker';
@@ -6,7 +6,7 @@ import { loadCompass, loadNotes, loadReflections } from './storage';
 
 /** Meine Antworten: Notizen aus den Routinen, One inspired action und Wochenreflexion, nach Datum. */
 const ACTION = { id: 'inspired-action', text: 'One inspired action' };
-const questions = [...routines.flatMap((r) => r.items.filter((i) => i.note)), ACTION];
+const questions = [...routines.flatMap((r) => r.items.filter((i) => i.note)), ...pastQuestions, ACTION];
 
 const answers: Record<string, Record<string, string>> = structuredClone(loadNotes());
 for (const [day, text] of Object.entries(loadCompass().actions)) (answers[day] ??= {})[ACTION.id] = text;

@@ -17,7 +17,7 @@ Sprache mit dem Nutzer: Deutsch. Design seit 19.10.2026 dunkel und warm wie die 
 
 ## Routinen ändern
 
-Alle Routinen stehen in `src/data/routines.ts`. Jeder Punkt hat eine feste `id`; abgehakte Tage hängen daran. Beim Umformulieren eines Punkts die `id` behalten, sonst verschwindet sein Verlauf. Neue Punkte bekommen eine neue, eindeutige id (Kleinbuchstaben, `-`).
+Alle Routinen stehen in `src/data/routines.ts`. Nur echte Routinen, keine Reflexionsfragen (Janita 27.10.2026: Dankbarkeit, Daily Intention und Energy Check entfernt, alte Antworten bleiben über `pastQuestions` in Meine Antworten); abends „Evening Rewind (Self-Care-Ritual)“ mit Körper und Gesicht eincremen. Jeder Punkt hat eine feste `id`; abgehakte Tage hängen daran. Beim Umformulieren eines Punkts die `id` behalten, sonst verschwindet sein Verlauf. Neue Punkte bekommen eine neue, eindeutige id (Kleinbuchstaben, `-`).
 
 Mindset-Impulse und Affirmationen beruhen auf Janitas Astro-/Human-Design-Deutung (`/mnt/project-files/coaching/mindset-profil.md`); immer als Reflexion formulieren.
 
