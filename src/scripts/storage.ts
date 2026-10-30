@@ -107,6 +107,8 @@ export interface BoardImage {
   id: string;
   src: string;
   text: string;
+  /** Selbst gewählt: als große Kachel (2 × 2) zeigen. */
+  big?: boolean;
 }
 
 const BOARD_KEY = 'vision-board';
@@ -115,7 +117,7 @@ export function parseBoard(raw: unknown): BoardImage[] {
   if (!Array.isArray(raw)) return [];
   return raw
     .filter((b) => b && typeof b.id === 'string' && typeof b.src === 'string' && b.src.startsWith('data:image/'))
-    .map((b) => ({ id: b.id, src: b.src, text: typeof b.text === 'string' ? b.text : '' }));
+    .map((b) => ({ id: b.id, src: b.src, text: typeof b.text === 'string' ? b.text : '', ...(b.big === true ? { big: true } : {}) }));
 }
 
 export function loadBoard(): BoardImage[] {

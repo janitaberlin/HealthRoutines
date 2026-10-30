@@ -1,6 +1,6 @@
 import { loadBoard, saveBoard, type BoardImage } from './storage';
 
-/** Vision Board: eigene Bilder vom Handy als Collage. Bilder werden verkleinert und nur auf diesem Gerät gespeichert. */
+/** Vision Board: eigene Bilder vom Handy als dichtes Raster; Reihenfolge und große Kacheln wählt Janita selbst. Bilder werden verkleinert und nur auf diesem Gerät gespeichert. */
 const grid = document.getElementById('board-grid')!;
 const input = document.getElementById('board-add') as HTMLInputElement;
 const status = document.getElementById('board-status')!;
@@ -23,24 +23,53 @@ function shrink(file: File): Promise<string> {
   });
 }
 
-/** Collage: Kachelgröße nach Bildformat, das erste Bild groß; dichte Anordnung füllt Lücken. */
-function span(fig: HTMLElement, img: HTMLImageElement, i: number): void {
-  const ratio = img.naturalWidth / img.naturalHeight || 1;
-  const kind = ratio > 1.25 ? 'wide' : ratio < 0.8 ? 'tall' : 'square';
-  fig.dataset.kind = i === 0 ? `hero-${kind}` : kind;
-}
-
 const view = document.getElementById('board-view') as HTMLDialogElement;
 const viewImg = document.getElementById('board-view-img') as HTMLImageElement;
 const viewText = document.getElementById('board-view-text') as HTMLInputElement;
 let open: BoardImage | null = null;
 
+function showArrange(): void {
+  if (!open) return;
+  const i = board.findIndex((x) => x.id === open!.id);
+  document.getElementById('board-pos')!.textContent = `${i + 1} von ${board.length}`;
+  (document.getElementById('board-first') as HTMLButtonElement).disabled = i === 0;
+  (document.getElementById('board-prev') as HTMLButtonElement).disabled = i === 0;
+  (document.getElementById('board-next') as HTMLButtonElement).disabled = i === board.length - 1;
+  (document.getElementById('board-last') as HTMLButtonElement).disabled = i === board.length - 1;
+  document.getElementById('board-big')!.setAttribute('aria-pressed', String(!!open.big));
+}
+
 function show(b: BoardImage): void {
   open = b;
   viewImg.src = b.src;
   viewText.value = b.text;
+  showArrange();
   view.showModal();
 }
+
+/** Bild an eine neue Stelle schieben; die Reihenfolge bestimmt Janita selbst. */
+function move(to: (i: number) => number): void {
+  if (!open) return;
+  const i = board.findIndex((x) => x.id === open!.id);
+  const j = Math.max(0, Math.min(board.length - 1, to(i)));
+  if (i === j) return;
+  const [item] = board.splice(i, 1);
+  board.splice(j, 0, item);
+  saveBoard(board);
+  render();
+  showArrange();
+}
+document.getElementById('board-first')!.addEventListener('click', () => move(() => 0));
+document.getElementById('board-prev')!.addEventListener('click', () => move((i) => i - 1));
+document.getElementById('board-next')!.addEventListener('click', () => move((i) => i + 1));
+document.getElementById('board-last')!.addEventListener('click', () => move(() => board.length - 1));
+document.getElementById('board-big')!.addEventListener('click', () => {
+  if (!open) return;
+  open.big = !open.big;
+  saveBoard(board);
+  render();
+  showArrange();
+});
 viewText.addEventListener('change', () => {
   if (!open) return;
   open.text = viewText.value.trim();
@@ -58,13 +87,13 @@ document.getElementById('board-view-remove')!.addEventListener('click', () => {
 function render(): void {
   document.getElementById('board-empty')!.hidden = board.length > 0;
   grid.replaceChildren(
-    ...board.map((b, i) => {
+    ...board.map((b) => {
       const fig = document.createElement('button');
       fig.type = 'button';
       fig.className = 'collage-item';
+      if (b.big) fig.dataset.big = '';
       const img = document.createElement('img');
       img.alt = b.text || 'Vision-Bild';
-      img.addEventListener('load', () => span(fig, img, i));
       img.src = b.src;
       fig.append(img);
       if (b.text) {

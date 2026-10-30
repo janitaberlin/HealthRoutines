@@ -8,7 +8,7 @@ import HumanDesign from '../../components/HumanDesign.astro';
   <header class="vision-head">
     <p class="eyebrow">My Vision</p>
     <h1 class="page-title">Vision Board</h1>
-    <p class="muted">Alle Bilder, die zeigen, wer ich bin und wie ich leben will. Sie ordnen sich von selbst als Collage.</p>
+    <p class="muted">Alle Bilder, die zeigen, wer ich bin und wie ich leben will. Bild antippen, um es zu verschieben, groß zu zeigen oder zu beschriften.</p>
   </header>
   <div class="collage" id="board-grid"></div>
   <p class="collage-empty muted" id="board-empty" hidden>Noch keine Bilder. Lade deine ersten Vision-Bilder hoch.</p>
@@ -19,6 +19,14 @@ import HumanDesign from '../../components/HumanDesign.astro';
     <form method="dialog"><button class="spark-x" aria-label="Schließen">×</button></form>
     <img id="board-view-img" alt="" />
     <input class="board-text" id="board-view-text" placeholder="Was bedeutet dieses Bild?" />
+    <div class="board-arrange" role="group" aria-label="Anordnen">
+      <button type="button" class="menu-btn" id="board-first" aria-label="Ganz nach vorne">⇤</button>
+      <button type="button" class="menu-btn" id="board-prev" aria-label="Eins nach vorne">←</button>
+      <span id="board-pos"></span>
+      <button type="button" class="menu-btn" id="board-next" aria-label="Eins nach hinten">→</button>
+      <button type="button" class="menu-btn" id="board-last" aria-label="Ganz nach hinten">⇥</button>
+    </div>
+    <button type="button" class="focus-btn board-big" id="board-big" aria-pressed="false">Groß zeigen</button>
     <button type="button" class="menu-btn" id="board-view-remove">Bild entfernen</button>
   </dialog>
 
