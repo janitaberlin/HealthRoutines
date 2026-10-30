@@ -1,4 +1,4 @@
-import { loadBoard, saveBoard, type BoardImage } from './storage';
+import { loadBoard, saveBoard, type BoardImage, type TileSize } from './storage';
 
 /** Vision Board: eigene Bilder vom Handy als dichtes Raster; Reihenfolge und große Kacheln wählt Janita selbst. Bilder werden verkleinert und nur auf diesem Gerät gespeichert. */
 const grid = document.getElementById('board-grid')!;
@@ -36,7 +36,8 @@ function showArrange(): void {
   (document.getElementById('board-prev') as HTMLButtonElement).disabled = i === 0;
   (document.getElementById('board-next') as HTMLButtonElement).disabled = i === board.length - 1;
   (document.getElementById('board-last') as HTMLButtonElement).disabled = i === board.length - 1;
-  document.getElementById('board-big')!.setAttribute('aria-pressed', String(!!open.big));
+  const size = sizeOf(open);
+  document.querySelectorAll<HTMLButtonElement>('[data-size]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.size === size)));
 }
 
 function show(b: BoardImage): void {
@@ -63,13 +64,20 @@ document.getElementById('board-first')!.addEventListener('click', () => move(() 
 document.getElementById('board-prev')!.addEventListener('click', () => move((i) => i - 1));
 document.getElementById('board-next')!.addEventListener('click', () => move((i) => i + 1));
 document.getElementById('board-last')!.addEventListener('click', () => move(() => board.length - 1));
-document.getElementById('board-big')!.addEventListener('click', () => {
-  if (!open) return;
-  open.big = !open.big;
-  saveBoard(board);
-  render();
-  showArrange();
-});
+document.querySelectorAll<HTMLButtonElement>('[data-size]').forEach((b) =>
+  b.addEventListener('click', () => {
+    if (!open) return;
+    open.size = b.dataset.size as TileSize;
+    saveBoard(board);
+    render();
+    showArrange();
+  }),
+);
+
+/** Ohne eigene Wahl klein, damit das Raster lückenlos bleibt. */
+function sizeOf(b: BoardImage): TileSize {
+  return b.size ?? 'klein';
+}
 viewText.addEventListener('change', () => {
   if (!open) return;
   open.text = viewText.value.trim();
@@ -91,7 +99,7 @@ function render(): void {
       const fig = document.createElement('button');
       fig.type = 'button';
       fig.className = 'collage-item';
-      if (b.big) fig.dataset.big = '';
+      fig.dataset.tile = sizeOf(b);
       const img = document.createElement('img');
       img.alt = b.text || 'Vision-Bild';
       img.src = b.src;

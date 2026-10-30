@@ -103,12 +103,15 @@ export function saveCompass(compass: Compass): void {
 }
 
 /** Eigenes Vision Board: Bilder (verkleinert als JPG-Data-URL) mit kurzem Text. */
+export type TileSize = 'klein' | 'breit' | 'hoch' | 'gross';
+const SIZES: TileSize[] = ['klein', 'breit', 'hoch', 'gross'];
+
 export interface BoardImage {
   id: string;
   src: string;
   text: string;
-  /** Selbst gewählt: als große Kachel (2 × 2) zeigen. */
-  big?: boolean;
+  /** Selbst gewählte Kachelgröße; ohne Angabe nach Bildformat. */
+  size?: TileSize;
 }
 
 const BOARD_KEY = 'vision-board';
@@ -117,7 +120,11 @@ export function parseBoard(raw: unknown): BoardImage[] {
   if (!Array.isArray(raw)) return [];
   return raw
     .filter((b) => b && typeof b.id === 'string' && typeof b.src === 'string' && b.src.startsWith('data:image/'))
-    .map((b) => ({ id: b.id, src: b.src, text: typeof b.text === 'string' ? b.text : '', ...(b.big === true ? { big: true } : {}) }));
+    .map((b) => {
+      // Früher gab es nur „groß“ (Feld big).
+      const size: TileSize | undefined = SIZES.includes(b.size) ? b.size : b.big === true ? 'gross' : undefined;
+      return { id: b.id, src: b.src, text: typeof b.text === 'string' ? b.text : '', ...(size ? { size } : {}) };
+    });
 }
 
 export function loadBoard(): BoardImage[] {
