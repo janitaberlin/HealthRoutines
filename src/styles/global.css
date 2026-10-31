@@ -721,7 +721,8 @@ a.money-goal { color: var(--muted); text-decoration: none; }
 .pillars svg { display: block; width: 100%; height: auto; max-width: 420px; margin: 0 auto; }
 .pillars-line { stroke: #d4a437; stroke-width: 1.2; opacity: 0.55; }
 .pillars-pillar { fill: color-mix(in srgb, #d4a437 14%, transparent); stroke: #d4a437; stroke-width: 1.2; }
-.pillars-label { fill: var(--text); font: 600 13.5px var(--font-body); letter-spacing: 0.02em; }
+.pillars-label { fill: var(--text); font: 700 12.5px var(--font-body); letter-spacing: 0.04em; text-transform: uppercase; }
+.pillars-words { fill: var(--muted); font: 500 10px var(--font-body); }
 .pillars-result { fill: var(--text); font: 500 12.5px var(--font-body); }
 .pillars-center { fill: #d4a437; font: 600 12px var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; }
 .pillars-star { fill: #141312; font-size: 22px; }
