@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
 import { lifeAreas, lifeIntro, lifeOutro, identityDefaults, northStarVision } from '../../data/compass';
 import HumanDesign from '../../components/HumanDesign.astro';
+import ThreePillars from '../../components/ThreePillars.astro';
 ---
 <Base title="Vision" page="vision">
   <header class="vision-head">
@@ -49,6 +50,13 @@ import HumanDesign from '../../components/HumanDesign.astro';
       ))}
     </div>
     <p class="compass-reflect">{lifeOutro}</p>
+  </section>
+
+  <section class="compass-section compass-card" id="saeulen">
+    <p class="eyebrow">That's Me</p>
+    <h2 class="compass-h2">Wenn ich in meiner Energie bin, weiß ich, was ich will.</h2>
+    <ThreePillars />
+    <p class="compass-reflect">Bin ich gerade in meinen drei Säulen? Wenn ja: Was ist jetzt mein klares Ja?</p>
   </section>
 
 

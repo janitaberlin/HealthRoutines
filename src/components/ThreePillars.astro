@@ -1,0 +1,40 @@
+---
+/** Janitas drei Säulen (31.10.2026): High Energy, That's Me, Power Feminine. Daraus entsteht ihre höchste Präsenz und alles Weitere. */
+const pillars = [
+  { x: 60, label: ['High', 'Energy'] },
+  { x: 170, label: ["That's", 'Me'] },
+  { x: 280, label: ['Power', 'Feminine'] },
+];
+const results = [
+  { x: 60, label: ['Ja oder Nein:', 'sofort klar'] },
+  { x: 170, label: ['Ich komme', 'ins Machen'] },
+  { x: 280, label: ['Alles fühlt', 'sich leicht an'] },
+];
+---
+<figure class="pillars">
+  <svg viewBox="0 0 340 330" role="img" aria-label="Meine drei Säulen High Energy, That's Me und Power Feminine tragen meine höchste Präsenz. Daraus folgt: Ja oder Nein ist sofort klar, ich komme ins Machen, alles fühlt sich leicht an.">
+    <defs>
+      <linearGradient id="pillar-gold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f0d27a" />
+        <stop offset="1" stop-color="#d4a437" />
+      </linearGradient>
+    </defs>
+    {results.map((r) => (
+      <g>
+        <line class="pillars-line" x1="170" y1="146" x2={r.x} y2="62" />
+        <text class="pillars-result" x={r.x} y="34" text-anchor="middle"><tspan x={r.x}>{r.label[0]}</tspan><tspan x={r.x} dy="15">{r.label[1]}</tspan></text>
+      </g>
+    ))}
+    {pillars.map((p) => <line class="pillars-line" x1={p.x} y1="236" x2={p.x + (170 - p.x) * 0.26} y2="222" />)}
+    <circle cx="170" cy="164" r="30" fill="url(#pillar-gold)" />
+    <text class="pillars-star" x="170" y="171" text-anchor="middle">✦</text>
+    <text class="pillars-center" x="170" y="212" text-anchor="middle">Meine höchste Präsenz</text>
+    {pillars.map((p) => (
+      <g>
+        <rect class="pillars-pillar" x={p.x - 44} y="238" width="88" height="66" rx="14" />
+        <text class="pillars-label" x={p.x} y="266" text-anchor="middle"><tspan x={p.x}>{p.label[0]}</tspan><tspan x={p.x} dy="17">{p.label[1]}</tspan></text>
+      </g>
+    ))}
+    <text class="pillars-base" x="170" y="324" text-anchor="middle">Meine drei Säulen</text>
+  </svg>
+</figure>
