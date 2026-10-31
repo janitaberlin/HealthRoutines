@@ -1,5 +1,5 @@
 ---
-/** Eintragen: Periode an/aus und Energie 1–5 für einen Tag. Logik in src/scripts/cycle.ts. */
+/** Eintragen: Periode an/aus, Energie 1–5, Lieblingsmodus und Notiz (tippen oder sprechen) für einen Tag. Logik in src/scripts/cycle.ts. */
 import { ENERGY } from '../lib/cycle';
 ---
 <div class="cycle-log">
@@ -12,5 +12,12 @@ import { ENERGY } from '../lib/cycle';
     {ENERGY.map((label, i) => (
       <button type="button" class="energy-chip" data-energy={i + 1} aria-pressed="false">{label}</button>
     ))}
+  </div>
+  <button class="cycle-flow" type="button" data-cycle-flow aria-pressed="false">✦ Mein Lieblingsmodus</button>
+  <p class="field-label">Wie geht's dir gerade?</p>
+  <div class="cycle-note-wrap">
+    <textarea class="cycle-note" data-cycle-note rows="3" placeholder="Erzähl einfach: was du heute geschafft hast, wie sich deine Energie anfühlt …"></textarea>
+    <button class="cycle-mic" type="button" data-cycle-mic aria-pressed="false">🎙 Erzählen</button>
+    <p class="muted cycle-mic-hint" data-cycle-mic-hint hidden></p>
   </div>
 </div>

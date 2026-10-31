@@ -1,9 +1,13 @@
 import { addDays, parseKey } from './tracker';
 
-/** Zyklus: Periodentage und Energie (1 total low … 5 total high) pro Datum. */
+/** Zyklus: Periodentage, Energie (1 total low … 5 total high), Lieblingsmodus-Tage und Notizen pro Datum. */
 export interface CycleData {
   periods: string[];
   energy: Record<string, number>;
+  /** Tage im Lieblingsmodus („alles geht leicht“). */
+  flow?: string[];
+  /** Freitext pro Tag, getippt oder gesprochen. */
+  notes?: Record<string, string>;
 }
 
 export type Phase = 'periode' | 'follikel' | 'eisprung' | 'luteal';
@@ -23,7 +27,7 @@ const DEFAULT_BLEEDING = 5;
 const KEY = /^\d{4}-\d{2}-\d{2}$/;
 
 export function emptyCycle(): CycleData {
-  return { periods: [], energy: {} };
+  return { periods: [], energy: {}, flow: [], notes: {} };
 }
 
 export function parseCycle(raw: unknown): CycleData {
@@ -36,11 +40,22 @@ export function parseCycle(raw: unknown): CycleData {
       if (KEY.test(d) && typeof v === 'number' && Number.isInteger(v) && v >= 1 && v <= 5) out.energy[d] = v;
     }
   }
+  if (Array.isArray(r.flow)) out.flow = [...new Set(r.flow.filter((d): d is string => typeof d === 'string' && KEY.test(d)))].sort();
+  if (r.notes && typeof r.notes === 'object' && !Array.isArray(r.notes)) {
+    for (const [d, v] of Object.entries(r.notes as Record<string, unknown>)) {
+      if (KEY.test(d) && typeof v === 'string' && v.trim()) out.notes![d] = v;
+    }
+  }
   return out;
 }
 
 export function mergeCycle(a: CycleData, b: CycleData): CycleData {
-  return { periods: [...new Set([...a.periods, ...b.periods])].sort(), energy: { ...b.energy, ...a.energy } };
+  return {
+    periods: [...new Set([...a.periods, ...b.periods])].sort(),
+    energy: { ...b.energy, ...a.energy },
+    flow: [...new Set([...(a.flow ?? []), ...(b.flow ?? [])])].sort(),
+    notes: { ...(b.notes ?? {}), ...(a.notes ?? {}) },
+  };
 }
 
 export function daysBetween(from: string, to: string): number {
@@ -111,4 +126,27 @@ export function setEnergy(data: CycleData, day: string, level: number | null): C
   if (level === null || energy[day] === level) delete energy[day];
   else energy[day] = level;
   return { ...data, energy };
+}
+
+export function toggleFlow(data: CycleData, day: string): CycleData {
+  const flow = data.flow ?? [];
+  return { ...data, flow: flow.includes(day) ? flow.filter((d) => d !== day) : [...flow, day].sort() };
+}
+
+export function setNote(data: CycleData, day: string, text: string): CycleData {
+  const notes = { ...(data.notes ?? {}) };
+  if (text.trim()) notes[day] = text;
+  else delete notes[day];
+  return { ...data, notes };
+}
+
+export interface FlowDay {
+  day: string;
+  info: DayInfo | null;
+  note: string;
+}
+
+/** Lieblingsmodus-Tage, neueste zuerst, mit Zyklustag und Phase (soweit eine Periode davor eingetragen ist). */
+export function flowDays(data: CycleData): FlowDay[] {
+  return [...(data.flow ?? [])].sort().reverse().map((day) => ({ day, info: dayInfo(data, day), note: data.notes?.[day] ?? '' }));
 }

@@ -565,6 +565,18 @@ img[src$='learn-inspire.jpg'] { object-position: 50% 0; }
 .energy-chips { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.35rem; }
 .energy-chip { padding: 0.55rem 0.1rem; border: 1px solid var(--border); border-radius: 12px; background: transparent; color: var(--muted); font: inherit; font-size: 0.72rem; line-height: 1.2; cursor: pointer; }
 .energy-chip[aria-pressed='true'] { color: #141312; border-color: #d4a437; background: linear-gradient(135deg, #f0d27a, #d4a437); font-weight: 600; }
+.cycle-flow { display: block; width: 100%; margin-top: 0.7rem; padding: 0.6rem 0.9rem; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--text); font: inherit; font-size: 0.88rem; cursor: pointer; }
+.cycle-flow[aria-pressed='true'] { color: #141312; border-color: #d4a437; background: linear-gradient(135deg, #f0d27a, #d4a437); font-weight: 600; }
+.cycle-note-wrap { display: grid; gap: 0.45rem; }
+.cycle-note { width: 100%; box-sizing: border-box; padding: 0.7rem 0.8rem; border: 1px solid var(--border); border-radius: 12px; background: transparent; color: var(--text); font: inherit; font-size: 0.92rem; resize: vertical; }
+.cycle-mic { justify-self: start; padding: 0.5rem 1rem; border: 1px solid #d4a437; border-radius: 999px; background: transparent; color: var(--text); font: inherit; font-size: 0.85rem; cursor: pointer; }
+.cycle-mic[aria-pressed='true'] { color: #141312; background: linear-gradient(135deg, #f0d27a, #d4a437); }
+.cycle-mic-hint { margin: 0; font-size: 0.8rem; }
+.cycle-chart .flow-star { fill: #d4a437; font-size: 8px; }
+.flow-list { display: grid; gap: 0.6rem; margin-top: 0.6rem; }
+.flow-item { padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: 14px; }
+.flow-head { margin: 0; font-weight: 600; font-size: 0.9rem; }
+.flow-note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.88rem; white-space: pre-wrap; }
 .cycle-card { margin-bottom: 1.4rem; }
 .cycle-head { display: flex; justify-content: space-between; gap: 0.8rem; align-items: flex-start; }
 .cycle-phase { margin: 0.25rem 0 0; font-size: 1.35rem; font-weight: 500; }

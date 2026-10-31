@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { addDays } from './tracker';
-import { cycleLength, dayInfo, energyByPhase, mergeCycle, parseCycle, periodStarts, setEnergy, togglePeriod } from './cycle';
+import { cycleLength, dayInfo, energyByPhase, flowDays, mergeCycle, parseCycle, periodStarts, setEnergy, setNote, toggleFlow, togglePeriod } from './cycle';
 
 const run = (start: string, days: number) => Array.from({ length: days }, (_, i) => addDays(start, i));
 
@@ -9,7 +9,7 @@ describe('cycle', () => {
     const c = parseCycle({ periods: ['2026-10-01', 'x', '2026-10-01'], energy: { '2026-10-02': 3, '2026-10-03': 9, bad: 2 } });
     expect(c.periods).toEqual(['2026-10-01']);
     expect(c.energy).toEqual({ '2026-10-02': 3 });
-    expect(parseCycle('kaputt')).toEqual({ periods: [], energy: {} });
+    expect(parseCycle('kaputt')).toEqual({ periods: [], energy: {}, flow: [], notes: {} });
   });
 
   it('findet Periodenstarts und Zykluslänge', () => {
@@ -45,5 +45,22 @@ describe('cycle', () => {
     expect(setEnergy(data, '2026-10-20', 5).energy['2026-10-20']).toBeUndefined();
     expect(togglePeriod(data, '2026-10-01').periods).toEqual([]);
     expect(mergeCycle(data, { periods: ['2026-11-01'], energy: { '2026-10-02': 4 } }).energy['2026-10-02']).toBe(1);
+  });
+
+  it('merkt Lieblingsmodus und Notizen mit Zyklustag', () => {
+    let data = parseCycle({ periods: run('2026-10-10', 4), energy: {}, flow: ['2026-10-31', 'x'], notes: { '2026-10-31': 'Garten, Paket, Müll', '2026-10-30': '  ' } });
+    expect(data.flow).toEqual(['2026-10-31']);
+    expect(data.notes).toEqual({ '2026-10-31': 'Garten, Paket, Müll' });
+    data = toggleFlow(data, '2026-10-20');
+    expect(flowDays(data).map((f) => [f.day, f.info?.cycleDay, f.note])).toEqual([
+      ['2026-10-31', 22, 'Garten, Paket, Müll'],
+      ['2026-10-20', 11, ''],
+    ]);
+    data = toggleFlow(setNote(data, '2026-10-31', ''), '2026-10-31');
+    expect(data.flow).toEqual(['2026-10-20']);
+    expect(data.notes).toEqual({});
+    const merged = mergeCycle({ periods: [], energy: {} }, { periods: [], energy: {}, flow: ['2026-10-01'], notes: { '2026-10-01': 'a' } });
+    expect(merged.flow).toEqual(['2026-10-01']);
+    expect(merged.notes).toEqual({ '2026-10-01': 'a' });
   });
 });
