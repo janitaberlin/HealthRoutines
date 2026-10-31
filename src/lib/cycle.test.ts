@@ -9,7 +9,7 @@ describe('cycle', () => {
     const c = parseCycle({ periods: ['2026-10-01', 'x', '2026-10-01'], energy: { '2026-10-02': 3, '2026-10-03': 9, bad: 2 } });
     expect(c.periods).toEqual(['2026-10-01']);
     expect(c.energy).toEqual({ '2026-10-02': 3 });
-    expect(parseCycle('kaputt')).toEqual({ periods: [], energy: {}, flow: [], notes: {} });
+    expect(parseCycle('kaputt')).toEqual({ periods: [], energy: {}, flow: [], flowAt: {}, notes: {} });
   });
 
   it('findet Periodenstarts und Zykluslänge', () => {
@@ -51,11 +51,12 @@ describe('cycle', () => {
     let data = parseCycle({ periods: run('2026-10-10', 4), energy: {}, flow: ['2026-10-31', 'x'], notes: { '2026-10-31': 'Garten, Paket, Müll', '2026-10-30': '  ' } });
     expect(data.flow).toEqual(['2026-10-31']);
     expect(data.notes).toEqual({ '2026-10-31': 'Garten, Paket, Müll' });
-    data = toggleFlow(data, '2026-10-20');
-    expect(flowDays(data).map((f) => [f.day, f.info?.cycleDay, f.note])).toEqual([
-      ['2026-10-31', 22, 'Garten, Paket, Müll'],
-      ['2026-10-20', 11, ''],
+    data = toggleFlow(data, '2026-10-20', '18:36');
+    expect(flowDays(data).map((f) => [f.day, f.info?.cycleDay, f.note, f.time])).toEqual([
+      ['2026-10-31', 22, 'Garten, Paket, Müll', ''],
+      ['2026-10-20', 11, '', '18:36'],
     ]);
+    expect(toggleFlow(data, '2026-10-20').flowAt).toEqual({});
     data = toggleFlow(setNote(data, '2026-10-31', ''), '2026-10-31');
     expect(data.flow).toEqual(['2026-10-20']);
     expect(data.notes).toEqual({});

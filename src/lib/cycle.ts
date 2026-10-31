@@ -6,6 +6,8 @@ export interface CycleData {
   energy: Record<string, number>;
   /** Tage im Lieblingsmodus („alles geht leicht“). */
   flow?: string[];
+  /** Uhrzeit (HH:MM), zu der der Lieblingsmodus markiert wurde. */
+  flowAt?: Record<string, string>;
   /** Freitext pro Tag, getippt oder gesprochen. */
   notes?: Record<string, string>;
 }
@@ -27,7 +29,7 @@ const DEFAULT_BLEEDING = 5;
 const KEY = /^\d{4}-\d{2}-\d{2}$/;
 
 export function emptyCycle(): CycleData {
-  return { periods: [], energy: {}, flow: [], notes: {} };
+  return { periods: [], energy: {}, flow: [], flowAt: {}, notes: {} };
 }
 
 export function parseCycle(raw: unknown): CycleData {
@@ -41,6 +43,11 @@ export function parseCycle(raw: unknown): CycleData {
     }
   }
   if (Array.isArray(r.flow)) out.flow = [...new Set(r.flow.filter((d): d is string => typeof d === 'string' && KEY.test(d)))].sort();
+  if (r.flowAt && typeof r.flowAt === 'object' && !Array.isArray(r.flowAt)) {
+    for (const [d, v] of Object.entries(r.flowAt as Record<string, unknown>)) {
+      if (KEY.test(d) && typeof v === 'string' && /^\d{2}:\d{2}$/.test(v)) out.flowAt![d] = v;
+    }
+  }
   if (r.notes && typeof r.notes === 'object' && !Array.isArray(r.notes)) {
     for (const [d, v] of Object.entries(r.notes as Record<string, unknown>)) {
       if (KEY.test(d) && typeof v === 'string' && v.trim()) out.notes![d] = v;
@@ -54,6 +61,7 @@ export function mergeCycle(a: CycleData, b: CycleData): CycleData {
     periods: [...new Set([...a.periods, ...b.periods])].sort(),
     energy: { ...b.energy, ...a.energy },
     flow: [...new Set([...(a.flow ?? []), ...(b.flow ?? [])])].sort(),
+    flowAt: { ...(b.flowAt ?? {}), ...(a.flowAt ?? {}) },
     notes: { ...(b.notes ?? {}), ...(a.notes ?? {}) },
   };
 }
@@ -128,9 +136,16 @@ export function setEnergy(data: CycleData, day: string, level: number | null): C
   return { ...data, energy };
 }
 
-export function toggleFlow(data: CycleData, day: string): CycleData {
+/** Lieblingsmodus an/aus; `time` (HH:MM) wird beim Einschalten mitgespeichert. */
+export function toggleFlow(data: CycleData, day: string, time?: string): CycleData {
   const flow = data.flow ?? [];
-  return { ...data, flow: flow.includes(day) ? flow.filter((d) => d !== day) : [...flow, day].sort() };
+  const flowAt = { ...(data.flowAt ?? {}) };
+  if (flow.includes(day)) {
+    delete flowAt[day];
+    return { ...data, flow: flow.filter((d) => d !== day), flowAt };
+  }
+  if (time) flowAt[day] = time;
+  return { ...data, flow: [...flow, day].sort(), flowAt };
 }
 
 export function setNote(data: CycleData, day: string, text: string): CycleData {
@@ -144,9 +159,10 @@ export interface FlowDay {
   day: string;
   info: DayInfo | null;
   note: string;
+  time: string;
 }
 
 /** Lieblingsmodus-Tage, neueste zuerst, mit Zyklustag und Phase (soweit eine Periode davor eingetragen ist). */
 export function flowDays(data: CycleData): FlowDay[] {
-  return [...(data.flow ?? [])].sort().reverse().map((day) => ({ day, info: dayInfo(data, day), note: data.notes?.[day] ?? '' }));
+  return [...(data.flow ?? [])].sort().reverse().map((day) => ({ day, info: dayInfo(data, day), note: data.notes?.[day] ?? '', time: data.flowAt?.[day] ?? '' }));
 }

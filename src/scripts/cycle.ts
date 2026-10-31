@@ -56,7 +56,7 @@ function drawFlow(): void {
       const head = document.createElement('p');
       head.className = 'flow-head';
       const date = parseKey(f.day).toLocaleDateString('de-DE', { weekday: 'short', day: 'numeric', month: 'short' });
-      head.textContent = `✦ ${date}${f.info ? ` · Zyklustag ${f.info.cycleDay} · ${PHASE_LABEL[f.info.phase]}` : ''}`;
+      head.textContent = `✦ ${date}${f.time ? ` · ab ${f.time} Uhr` : ''}${f.info ? ` · Zyklustag ${f.info.cycleDay} · ${PHASE_LABEL[f.info.phase]}` : ''}`;
       item.append(head);
       if (f.note) {
         const note = document.createElement('p');
@@ -237,7 +237,9 @@ document.addEventListener('click', (e) => {
     return;
   }
   if (target.closest('[data-cycle-flow]')) {
-    saveCycle(toggleFlow(loadCycle(), day));
+    const now = new Date();
+    const time = day === today ? `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}` : undefined;
+    saveCycle(toggleFlow(loadCycle(), day, time));
     render();
     return;
   }
