@@ -7,6 +7,13 @@
 export const northStarVision =
   'Ich erschaffe mein 10/10-Leben, in dem ich durch mein Sein, meine unternehmerischen Talente und meine Fähigkeit, Menschen zu inspirieren, vollständig wirke.';
 
+/** My Life Vision (Janita 02.11.2026), oben auf der Vision-Seite und im Morgenritual. */
+export const lifeVision = {
+  headline: 'I want to feel alive, feminine & free.',
+  text: 'Ich möchte ein Leben gestalten, in dem ich voller Energie bin, meine Weiblichkeit und Stärke lebe und eigene Unternehmen aufbaue, die mir finanzielle Freiheit ermöglichen.',
+  remember: 'Ich muss nicht jeden Morgen neu entscheiden, wer ich sein möchte. Ich darf mich daran erinnern.',
+};
+
 /** Tägliche Frage: Ziele werden nicht jeden Morgen neu verhandelt (Janita 18.10.2026). */
 export const dailyQuestion = 'Was kann ich heute tun, um das Leben, für das ich mich entschieden habe, tatsächlich zu leben?';
 

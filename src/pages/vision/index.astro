@@ -1,14 +1,21 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { url } from '../../lib/url';
-import { lifeAreas, lifeIntro, lifeOutro, identityDefaults, northStarVision } from '../../data/compass';
+import { lifeAreas, lifeIntro, lifeOutro, identityDefaults, northStarVision, lifeVision } from '../../data/compass';
 import HumanDesign from '../../components/HumanDesign.astro';
 import ThreePillars from '../../components/ThreePillars.astro';
 ---
 <Base title="Vision" page="vision">
+  <section class="life-vision">
+    <p class="eyebrow">My Life Vision</p>
+    <h1 class="life-vision-head">{lifeVision.headline}</h1>
+    <p class="life-vision-text">{lifeVision.text}</p>
+    <p class="life-vision-remember">{lifeVision.remember}</p>
+  </section>
+
   <header class="vision-head">
     <p class="eyebrow">My Vision</p>
-    <h1 class="page-title">Vision Board</h1>
+    <h2 class="page-title">Vision Board</h2>
     <p class="muted">Alle Bilder, die zeigen, wer ich bin und wie ich leben will. Bild antippen, um es zu verschieben, die Größe zu wählen oder es zu beschriften.</p>
   </header>
   <div class="collage-wrap"><div class="collage" id="board-grid"></div></div>

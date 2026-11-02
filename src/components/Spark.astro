@@ -1,6 +1,6 @@
 ---
 /** Morgenritual „Remember Who You Are“: Remember → Feel → Create. Inhalt füllt src/scripts/spark.ts. */
-import { dailyQuestion, lifeAreas } from '../data/compass';
+import { dailyQuestion, lifeAreas, lifeVision } from '../data/compass';
 import { url } from '../lib/url';
 ---
 <dialog class="spark" id="spark" aria-labelledby="spark-title">
@@ -9,6 +9,8 @@ import { url } from '../lib/url';
 
   <section class="spark-step" data-step="1">
     <h2 id="spark-title" class="spark-title">Wer bin ich wirklich?</h2>
+    <p class="spark-vision">{lifeVision.headline}</p>
+    <p class="muted spark-vision-remember">{lifeVision.remember}</p>
     <p class="spark-signature" id="spark-signature"></p>
     <p class="spark-design" id="spark-design"></p>
     <div class="spark-life">

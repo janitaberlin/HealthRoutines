@@ -727,3 +727,11 @@ a.money-goal { color: var(--muted); text-decoration: none; }
 .pillars-center { fill: #d4a437; font: 600 12px var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; }
 .pillars-star { fill: #141312; font-size: 22px; }
 .pillars-base { fill: var(--muted); font: 500 10.5px var(--font-body); letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* My Life Vision (Vision-Seite oben, Morgenritual) */
+.life-vision { padding: 1.4rem 1.2rem; margin-bottom: 1.6rem; border: 1px solid rgba(212, 164, 55, 0.55); border-radius: 18px; background: radial-gradient(120% 90% at 50% 0%, rgba(240, 210, 122, 0.14), transparent 70%); text-align: center; }
+.life-vision-head { margin: 0.4rem 0 0.8rem; font-size: clamp(1.45rem, 6vw, 1.9rem); font-weight: 700; line-height: 1.2; letter-spacing: 0.01em; text-transform: uppercase; background: linear-gradient(170deg, #b8862b, #f7dc8a 35%, #fff3c4 45%, #e2b649 60%, #b8862b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.life-vision-text { margin: 0 0 0.9rem; font-size: 0.98rem; line-height: 1.55; }
+.life-vision-remember { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+.spark-vision { margin: 0.2rem 0 0.3rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: #d4a437; }
+.spark-vision-remember { margin: 0 0 0.8rem; }
